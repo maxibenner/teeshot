@@ -71,7 +71,7 @@ const Viewer = () => {
                 />
                 <Suspense fallback={null}>
                     <Model
-                        url="/tshirtNew.glb"
+                        url="/tshirtVeryLow.glb"
                         rotation={flipModelAnimation.rotation}
                         activeDecalPath={activeDecalPath}
                         decalSize={decalSize}

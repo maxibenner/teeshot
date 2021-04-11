@@ -1,4 +1,4 @@
-import { useLoader } from "@react-three/fiber";
+import { useLoader, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState, useMemo } from "react";
 import { a } from "react-spring/three";
 import * as THREE from "three";
@@ -17,6 +17,11 @@ const Model = ({
     console.log("model");
     // REF
     const modelRef = useRef();
+    const { renderer } = useThree();
+    useEffect(()=>{
+        console.log(renderer)
+    },[renderer])
+    
 
     // STATE
     const [decals, setDecals] = useState([]);
@@ -26,9 +31,9 @@ const Model = ({
     // LOAD MODEL
     const gltf = useLoader(GLTFLoader, url);
 
-    useEffect(()=>{
-        console.log(gltf)
-    },[gltf])
+    useEffect(() => {
+        console.log(gltf);
+    }, [gltf]);
 
     // LOAD DECAL TEXTURE
     useEffect(() => {
@@ -83,23 +88,20 @@ const Model = ({
     };
 
     return (
-        <a.group
-            rotation={rotation}
-            onPointerMove={(e) => passRaycast(e, modelRef)}
-            onPointerOut={() => passRaycast(null)}
-            onPointerDown={(e) =>
-                addDecal(e, modelRef, decalTexture, decalSize)
-            }
-            castShadow
-        >
+        <a.group rotation={rotation} castShadow>
             <mesh
                 ref={modelRef}
+                onPointerMove={(e) => passRaycast(e, modelRef)}
+                onPointerOut={() => passRaycast(null)}
+                onPointerDown={(e) =>
+                    addDecal(e, modelRef, decalTexture, decalSize)
+                }
                 name="model"
                 geometry={gltf.scene.children[0].geometry}
                 //geometry={new THREE.SphereBufferGeometry(0.3, 20, 20)}
                 castShadow
             >
-                <meshStandardMaterial color="orange" />
+                <meshStandardMaterial color="white" />
             </mesh>
             <Decals decals={decals} />
         </a.group>

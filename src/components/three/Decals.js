@@ -55,13 +55,13 @@ export const createDecal = (mesh, position, normal, activeDecal, maxSize) => {
                     mesh,
                     position,
                     helper.rotation,
-                    new THREE.Vector3(dimensions[0], dimensions[1], 0.025),
+                    new THREE.Vector3(dimensions[0], dimensions[1], 0.3),
                 ]}
             />
             <meshPhongMaterial
                 attach="material"
                 side={THREE.DoubleSide}
-                shininess={10}
+                shininess={3}
                 map={activeDecal}
                 transparent={true}
                 anisotropy={16}
