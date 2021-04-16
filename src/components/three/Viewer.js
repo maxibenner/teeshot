@@ -11,6 +11,7 @@ import DecalHelper from "./DecalHelper"
 import Lights from "./Lights"
 import Model from "./Model"
 import DecalManager from "../DecalManager"
+import PhotoButton from "../PhotoButton"
 
 softShadows({
     near: 0.03,
@@ -20,6 +21,7 @@ softShadows({
 const Viewer = () => {
     const [modelFlipped, setModelFlipped] = useState(false)
     const [modelRayData, setModelRayData] = useState(null)
+    const [gl, setGl] = useState(null)
     const {
         backgroundColor,
         decals,
@@ -53,8 +55,12 @@ const Viewer = () => {
         <>
             <Fps />
             <Canvas
+                onCreated={({ gl }) => setGl(gl)}
                 style={decalPath && { cursor: "none" }}
-                //gl={{ pixelratio: window.devicePixelRatio }}
+                gl={{
+                    //pixelratio: window.devicePixelRatio,
+                    preserveDrawingBuffer: true,
+                }}
                 camera={{ position: [0, 0, 1.2] }}
                 //frameloop="demand"
                 shadows
@@ -70,8 +76,9 @@ const Viewer = () => {
                 <Back color={backgroundColor} />
                 <Lights />
             </Canvas>
+            <PhotoButton gl={gl} />
             <ControlPanel />
-            {decals.length > 0  && <DecalManager />}
+            {decals.length > 0 && <DecalManager />}
         </>
     )
 }
