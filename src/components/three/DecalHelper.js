@@ -1,51 +1,48 @@
-import { invalidate, useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useRef, useState, useMemo } from "react";
-import * as THREE from "three";
-import { changeDimensions } from "../../helpers/math";
+import { invalidate, useFrame, useThree } from "@react-three/fiber"
+import { useEffect, useRef, useState, useMemo } from "react"
+import * as THREE from "three"
+import { changeDimensions } from "../../helpers/math"
+import useStore from "../../states/modelState"
 
 var quaternion = new THREE.Quaternion(),
-    vector = new THREE.Vector3(0, 0, 1);
+    vector = new THREE.Vector3(0, 0, 1)
 
-const DecalHelper = ({ modelRayData, activeDecalPath, size, rotation }) => {
-    const [decalTexture, setDecalTexture] = useState(null);
-    const [decalDimensions, setdecalDimensions] = useState([0, 0]);
-    const [decalScale, setDecalScale] = useState(1);
-    const initialDecalSize = useMemo(() => size, []);
-    console.log("DecalHelper")
+const DecalHelper = ({ modelRayData, size }) => {
+    const [decalTexture, setDecalTexture] = useState(null)
+    const [decalDimensions, setdecalDimensions] = useState([0, 0])
+    const [decalScale, setDecalScale] = useState(1)
+    const initialDecalSize = useMemo(() => size, [])
 
-    const meshRef = useRef();
+    // Global state
+    const { decalPath } = useStore()
+
+    const meshRef = useRef()
 
     // Match decal scale to new dimensions
     useEffect(() => {
-        const newScale = size / initialDecalSize;
-        setDecalScale(newScale);
-    }, [size]);
-
-    // Change rotation
-    useEffect(() => {
-        // Trigger render
-        invalidate();
-    }, [rotation]);
+        const newScale = size / initialDecalSize
+        setDecalScale(newScale)
+    }, [size])
 
     // LOAD TEXTURE + SET DIMENSIONS
     useEffect(() => {
-        if (activeDecalPath) {
+        if (decalPath) {
             const decalTexture = new THREE.TextureLoader().load(
-                activeDecalPath,
+                decalPath,
                 () => {
-                    setDecalTexture(decalTexture);
+                    setDecalTexture(decalTexture)
                     const newDimensions = changeDimensions(
                         decalTexture.image.width,
                         decalTexture.image.height,
                         size
-                    );
-                    setdecalDimensions(newDimensions);
+                    )
+                    setdecalDimensions(newDimensions)
                 }
-            );
+            )
         } else {
-            setDecalTexture(null);
+            setDecalTexture(null)
         }
-    }, [activeDecalPath]);
+    }, [decalPath])
 
     // SET HEIGHT + ORIENTATION
     useEffect(() => {
@@ -54,29 +51,29 @@ const DecalHelper = ({ modelRayData, activeDecalPath, size, rotation }) => {
                 modelRayData.position.x,
                 modelRayData.position.y,
                 modelRayData.position.z
-            );
-            quaternion.setFromUnitVectors(vector, modelRayData.normalWorld);
-            meshRef.current.setRotationFromQuaternion(quaternion);
-            meshRef.current.rotation.z = rotation;
+            )
+            quaternion.setFromUnitVectors(vector, modelRayData.normalWorld)
+            meshRef.current.setRotationFromQuaternion(quaternion)
+            meshRef.current.rotation.z = 0
 
             // Trigger render
-            invalidate();
+            //invalidate()
         }
-    }, [modelRayData]);
+    }, [modelRayData])
 
     // SET POSITION
-    const { viewport } = useThree();
+    const { viewport } = useThree()
     useFrame(({ mouse }) => {
         if (meshRef.current && !modelRayData) {
-            const x = (mouse.x * viewport.width) / 2;
-            const y = (mouse.y * viewport.height) / 2;
-            meshRef.current.position.set(x, y, 0);
-            meshRef.current.rotation.set(0, 0, rotation);
+            const x = (mouse.x * viewport.width) / 2
+            const y = (mouse.y * viewport.height) / 2
+            meshRef.current.position.set(x, y, 0)
+            meshRef.current.rotation.set(0, 0, 0)
 
             // Trigger render
-            invalidate();
+            //invalidate()
         }
-    });
+    })
 
     return decalTexture ? (
         <mesh ref={meshRef} castShadow scale={decalScale}>
@@ -88,7 +85,7 @@ const DecalHelper = ({ modelRayData, activeDecalPath, size, rotation }) => {
                 anisotropy={16}
             />
         </mesh>
-    ) : null;
-};
+    ) : null
+}
 
-export default DecalHelper;
+export default DecalHelper

@@ -13,7 +13,7 @@ const styles = {
     wrapper: {
         width: "100%",
         height: "100vh",
-        padding: "7px",
+        padding: "15px",
         boxSizing: "border-box",
     },
 };
