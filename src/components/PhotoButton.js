@@ -6,9 +6,10 @@ const PhotoButton = ({ gl }) => {
 
     // Take screenshot
     const screenshot = () => {
-        var strMime = "image/jpeg"
-        const imgData = gl.domElement.toDataURL(strMime)
+        var strMime = "image/png"
+        const imgData = gl.domElement.toDataURL(strMime, { pixelRatio: 4 })
         var a = document.createElement("a")
+
         a.setAttribute("download", "fotura.png")
         a.setAttribute("href", imgData)
         a.click()

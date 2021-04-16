@@ -10,6 +10,7 @@ const useStore = create((set) => ({
     initialDecalSize: initialDecalSize,
     decalSize: initialDecalSize,
     modelColor: "#ffffff",
+    set: "ShapesBg",
     setBackgroundColor: (color) =>
         set((state) => (state.backgroundColor = color)),
     addDecal: (decalObject) =>
@@ -29,6 +30,7 @@ const useStore = create((set) => ({
         set((state) => (state.decalSize = state.decalSize - value)),
     setDecalSize: (size) => set((state) => (state.decalSize = size)),
     setModelColor: (color) => set((state) => (state.modelColor = color)),
+    setSet: (componentName) => set((state) => (state.set = componentName)),
 }))
 
 export default useStore

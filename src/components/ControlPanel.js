@@ -17,6 +17,7 @@ export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
         setBackgroundColor,
         setDecalPath,
         setModelColor,
+        setSet,
     } = useStore()
 
     // SET ACTIVE DECAL PATH
@@ -72,6 +73,22 @@ export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
                         color={backgroundColor}
                         setColor={setBackgroundColor}
                     />
+                </Card>
+                <Card title="Backgrounds">
+                    <button
+                        onClick={() => {
+                            setSet("PlainBg")
+                        }}
+                    >
+                        Plain
+                    </button>
+                    <button
+                        onClick={() => {
+                            setSet("ShapesBg")
+                        }}
+                    >
+                        Shapes
+                    </button>
                 </Card>
 
                 {decalPath && (

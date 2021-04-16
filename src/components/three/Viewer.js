@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber"
 import { Suspense, useEffect, useState } from "react"
 import { useSpring } from "react-spring/three"
 import Fps from "../../helpers/Fps"
+import { RayTracingRenderer } from 'ray-tracing-renderer'
 
 import useStore from "../../states/modelState"
 import ControlPanel from "../ControlPanel"
@@ -53,11 +54,12 @@ const Viewer = () => {
         <>
             <Fps />
             <Canvas
+                pixelRatio={window.devicePixelRatio}
                 onCreated={({ gl }) => setGl(gl)}
                 style={decalPath && { cursor: "none" }}
                 gl={{
-                    pixelratio: window.devicePixelRatio,
                     preserveDrawingBuffer: true,
+                    antialias: false,
                 }}
                 camera={{ position: [0, 0, 2.2], fov: 50 }}
                 //frameloop="demand"
