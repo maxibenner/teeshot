@@ -6,12 +6,11 @@ import Fps from "../../helpers/Fps"
 
 import useStore from "../../states/modelState"
 import ControlPanel from "../ControlPanel"
-import Back from "./Back"
 import DecalHelper from "./DecalHelper"
-import Lights from "./Lights"
 import Model from "./Model"
 import DecalManager from "../DecalManager"
 import PhotoButton from "../PhotoButton"
+import Scenes from "./Scenes"
 
 softShadows({
     near: 0.03,
@@ -23,7 +22,6 @@ const Viewer = () => {
     const [modelRayData, setModelRayData] = useState(null)
     const [gl, setGl] = useState(null)
     const {
-        backgroundColor,
         decals,
         decalPath,
         decalSize,
@@ -58,10 +56,10 @@ const Viewer = () => {
                 onCreated={({ gl }) => setGl(gl)}
                 style={decalPath && { cursor: "none" }}
                 gl={{
-                    //pixelratio: window.devicePixelRatio,
+                    pixelratio: window.devicePixelRatio,
                     preserveDrawingBuffer: true,
                 }}
-                camera={{ position: [0, 0, 1.2] }}
+                camera={{ position: [0, 0, 2.2], fov: 50 }}
                 //frameloop="demand"
                 shadows
             >
@@ -73,8 +71,7 @@ const Viewer = () => {
                         setModelRayData={setModelRayData}
                     />
                 </Suspense>
-                <Back color={backgroundColor} />
-                <Lights />
+                <Scenes />
             </Canvas>
             <PhotoButton gl={gl} />
             <ControlPanel />
