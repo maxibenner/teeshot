@@ -44,9 +44,18 @@ const DecalHelper = ({ modelRayData, size }) => {
         }
     }, [decalPath])
 
-    // SET HEIGHT + ORIENTATION
-    useEffect(() => {
-        if (meshRef.current && modelRayData) {
+    // SET POSITION & ORIENTATION
+    const { viewport } = useThree()
+    useFrame(({ mouse }) => {
+        if (!meshRef.current) return
+        else if (!modelRayData) {
+            // Move outside of mesh
+            const x = (mouse.x * viewport.width) / 2
+            const y = (mouse.y * viewport.height) / 2
+            meshRef.current.position.set(x, y, 0)
+            meshRef.current.rotation.set(0, 0, 0)
+        } else if (modelRayData) {
+            // Move over mesh
             meshRef.current.position.set(
                 modelRayData.position.x,
                 modelRayData.position.y,
@@ -55,23 +64,6 @@ const DecalHelper = ({ modelRayData, size }) => {
             quaternion.setFromUnitVectors(vector, modelRayData.normalWorld)
             meshRef.current.setRotationFromQuaternion(quaternion)
             meshRef.current.rotation.z = 0
-
-            // Trigger render
-            //invalidate()
-        }
-    }, [modelRayData])
-
-    // SET POSITION
-    const { viewport } = useThree()
-    useFrame(({ mouse }) => {
-        if (meshRef.current && !modelRayData) {
-            const x = (mouse.x * viewport.width) / 2
-            const y = (mouse.y * viewport.height) / 2
-            meshRef.current.position.set(x, y, 0)
-            meshRef.current.rotation.set(0, 0, 0)
-
-            // Trigger render
-            //invalidate()
         }
     })
 
@@ -79,7 +71,7 @@ const DecalHelper = ({ modelRayData, size }) => {
         <mesh ref={meshRef} castShadow scale={decalScale}>
             <planeBufferGeometry args={decalDimensions} />
             <meshStandardMaterial
-                depthTest={modelRayData ? false : true}
+                depthTest={/*modelRayData ?*/ false /*: true*/}
                 map={decalTexture}
                 transparent={true}
                 anisotropy={16}

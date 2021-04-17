@@ -7,12 +7,21 @@ const PhotoButton = ({ gl }) => {
     // Take screenshot
     const screenshot = () => {
         var strMime = "image/png"
-        const imgData = gl.domElement.toDataURL(strMime, { pixelRatio: 4 })
-        var a = document.createElement("a")
 
-        a.setAttribute("download", "fotura.png")
-        a.setAttribute("href", imgData)
-        a.click()
+        // Increase resolution for export
+        //gl.setPixelRatio(2)
+
+        setTimeout(() => {
+            const imgData = gl.domElement.toDataURL(strMime)
+            var a = document.createElement("a")
+
+            a.setAttribute("download", "fotura.png")
+            a.setAttribute("href", imgData)
+            a.click()
+
+            // Reset resolution for performance
+            //gl.setPixelRatio(1)
+        }, 300)
     }
 
     // Style additions

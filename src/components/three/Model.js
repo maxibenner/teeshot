@@ -1,4 +1,4 @@
-import { useLoader } from "@react-three/fiber"
+import { invalidate, useLoader } from "@react-three/fiber"
 import { useEffect, useRef, useState, useCallback } from "react"
 import { a } from "react-spring/three"
 import * as THREE from "three"
@@ -24,7 +24,7 @@ const Model = ({ url, rotation, setModelRayData }) => {
     } = useStore()
 
     // STATE
-    //const raycaster = useCallback(() => new THREE.Raycaster(), [])
+    const timestamp = useRef(window.performance.now())
 
     // LOAD MODEL
     const gltf = useLoader(GLTFLoader, url)
@@ -57,30 +57,35 @@ const Model = ({ url, rotation, setModelRayData }) => {
     }
 
     // PASS RAYCAST
-    const passRaycast = (e, modelRef) => {
-        // Check if pointer is on top of mesh
-        if (e) {
-            // Get position
-            const posV = e.point.clone()
+    const passRaycast = (e) => {
+        // Only submit while decal is active
+        if (decalPath) {
+            if (timestamp.current + 16 <= window.performance.now()) {
+                // DEBOUNCE: Update timestamp for new interval
+                timestamp.current = window.performance.now()
 
-            // Get world normal
-            const n = e.face.normal.clone()
-            const nWorld = modelRef.current.localToWorld(n)
+                // Get position
+                const posV = e.point.clone()
 
-            // Set pos and normal
-            setModelRayData({ position: posV, normalWorld: nWorld })
-        } else {
-            // Reset pos and normal
-            setModelRayData(null)
+                // Get world normal
+                const n = e.face.normal.clone()
+                const nWorld = modelRef.current.localToWorld(n)
+
+                // Set pos and normal
+                setModelRayData({ position: posV, normalWorld: nWorld })
+            }
         }
     }
+
+    // RESET RAYCAST POS AND NORMAL
+    const removeRaycast = () => setModelRayData(null)
 
     return (
         <a.group rotation={rotation} castShadow>
             <mesh
                 ref={modelRef}
-                onPointerMove={(e) => passRaycast(e, modelRef)}
-                onPointerOut={() => passRaycast(null)}
+                onPointerMove={passRaycast}
+                onPointerOut={removeRaycast}
                 onPointerDown={handleDecal}
                 geometry={gltf.scene.children[0].geometry}
                 castShadow
