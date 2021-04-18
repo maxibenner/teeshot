@@ -1,48 +1,47 @@
-import { useEffect, useRef, useState } from "react"
+import React, { useState, useEffect } from "react";
 
-const Fps = () => {
-    const [frames, setFrames] = useState([])
-    const [prevStamp, setPrevStamp] = useState(0)
-    const [fps, setFps] = useState(0)
-    const requestRef = useRef()
+export default function() {
 
-    useEffect(() => {
-        function loop() {
-            setFrames((frames) => {
-                // Update fps in intervals
-                setPrevStamp((prevStamp) => {
-                    if (performance.now() - prevStamp >= 200) {
+  let [frameTimeState, setFrameTimeState] = useState({
+    fps: 0,
+    // better use performance.now()
+    // but some static generators like gatsby
+    // might have problems with that
+    lastStamp: Date.now(),
+    framesCount: 0
+  });
 
-                        // Update timestamp
-                        setFps(frames.length)
-                        return performance.now()
-                    } else {
+  useEffect(() => {
+    // NOTE: timeout is here
+    // cuz requestAnimationFrame is deferred
+    // and to prevent setStates on unmounted
+    let timeout = null;
 
-                        // Don't update timestamp
-                        return prevStamp
-                    }
-                })
+    requestAnimationFrame(() => timeout = setTimeout(()=>{
 
-                // Remove frames older than 1 second
-                while (performance.now() - frames[0] >= 1010) {
-                    frames.shift()
-                }
+      const currentStamp = Date.now();
+      const shouldSetState = currentStamp - frameTimeState.lastStamp > 1000;
 
-                // Push new frame
-                return [...frames, performance.now()]
-            })
+      const newFramesCount = frameTimeState.framesCount + 1;
 
-            requestRef.current = requestAnimationFrame(loop)
-        }
-        loop()
+      if (shouldSetState) {
+        setFrameTimeState({
+          fps: frameTimeState.framesCount,
+          lastStamp: currentStamp,
+          framesCount: 0,
+        });
+      } else {
+        setFrameTimeState({
+          ...frameTimeState,
+          framesCount: newFramesCount,
+        });
+      }
+    },0));
+    return () => timeout && clearTimeout(timeout);
+  }, [frameTimeState])
 
-        return () => cancelAnimationFrame(requestRef.current)
-    }, [])
-
-    return <h3 style={styles}>{fps} fps</h3>
+  return <h3 style={styles}>{frameTimeState.fps} fps</h3>
 }
-
-export default Fps
 
 const styles = {
     fontSize: "1.2rem",

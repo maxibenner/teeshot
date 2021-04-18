@@ -49,13 +49,13 @@ const DecalHelper = ({ modelRayData, size }) => {
     useFrame(({ mouse }) => {
         if (!meshRef.current) return
         else if (!modelRayData) {
-            // Move outside of mesh
+            // Movement outside of mesh
             const x = (mouse.x * viewport.width) / 2
             const y = (mouse.y * viewport.height) / 2
             meshRef.current.position.set(x, y, 0)
             meshRef.current.rotation.set(0, 0, 0)
         } else if (modelRayData) {
-            // Move over mesh
+            // Movement over mesh
             meshRef.current.position.set(
                 modelRayData.position.x,
                 modelRayData.position.y,
@@ -65,10 +65,11 @@ const DecalHelper = ({ modelRayData, size }) => {
             meshRef.current.setRotationFromQuaternion(quaternion)
             meshRef.current.rotation.z = 0
         }
+        invalidate()
     })
 
     return decalTexture ? (
-        <mesh ref={meshRef} castShadow scale={decalScale}>
+        <mesh ref={meshRef} /*castShadow*/ scale={decalScale}>
             <planeBufferGeometry args={decalDimensions} />
             <meshStandardMaterial
                 depthTest={/*modelRayData ?*/ false /*: true*/}

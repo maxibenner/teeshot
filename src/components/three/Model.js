@@ -1,10 +1,10 @@
-import { invalidate, useLoader } from "@react-three/fiber"
-import { useEffect, useRef, useState, useCallback } from "react"
+import { useLoader } from "@react-three/fiber"
+import { useRef } from "react"
 import { a } from "react-spring/three"
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import Decals, { createDecal } from "./Decals"
 import useStore from "../../states/modelState"
+import Decals, { createDecal } from "./Decals"
 
 const Model = ({ url, rotation, setModelRayData }) => {
     // REF
@@ -29,7 +29,7 @@ const Model = ({ url, rotation, setModelRayData }) => {
     // LOAD MODEL
     const gltf = useLoader(GLTFLoader, url)
 
-    // ADD DECAL TO ARRAY
+    // ADD DECAL
     const handleDecal = (e) => {
         // Get texture
         new THREE.TextureLoader().load(decalPath, (decalTexture) => {

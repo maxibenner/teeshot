@@ -8,6 +8,10 @@ const Decals = ({ decals }) => {
 }
 export default Decals
 
+// INIT
+var helper = new THREE.Object3D(),
+    eulerHelper = new THREE.Euler(0, 0, 0)
+
 export const createDecal = (mesh, position, normal, activeDecal, maxSize) => {
     // INFO: This component works with a state array in the parent that holds the decal meshes.
     extend({ DecalGeometry })
@@ -17,10 +21,6 @@ export const createDecal = (mesh, position, normal, activeDecal, maxSize) => {
         window.alert("Choose a design to apply to the product.")
         return { decal: null, key: null }
     }
-
-    // INIT
-    var helper = new THREE.Object3D(),
-        eulerHelper = new THREE.Euler(0, 0, 0)
 
     // Texture settings
     activeDecal.anisotropy = 16

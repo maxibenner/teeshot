@@ -1,16 +1,14 @@
 import { softShadows } from "@react-three/drei"
-import { Canvas } from "@react-three/fiber"
+import { Canvas, invalidate } from "@react-three/fiber"
 import { Suspense, useEffect, useState } from "react"
 import { useSpring } from "react-spring/three"
 import Fps from "../../helpers/Fps"
-import { RayTracingRenderer } from "ray-tracing-renderer"
-
 import useStore from "../../states/modelState"
 import ControlPanel from "../ControlPanel"
-import DecalHelper from "./DecalHelper"
-import Model from "./Model"
 import DecalManager from "../DecalManager"
 import PhotoButton from "../PhotoButton"
+import DecalHelper from "./DecalHelper"
+import Model from "./Model"
 import Scenes from "./Scenes"
 
 softShadows({
@@ -44,10 +42,22 @@ const Viewer = () => {
         }
     }, [])
 
+    // Set device pixel ratio
+    /*useEffect(() => {
+        if (gl) {
+            if (window.devicePixelRatio >= 2) {
+                gl.setPixelRatio(1.5)
+            } else {
+                gl.setPixelRatio(window.devicePixelRatio)
+            }
+        }
+    }, [gl])*/
+
     // ANIMATION
     const flipModelAnimation = useSpring({
         config: { tension: 300, mass: 1.3 },
         rotation: modelFlipped ? [0, Math.PI / 1, 0] : [0, 0, 0],
+        onChange: () => invalidate(),
     })
 
     return (
@@ -57,13 +67,13 @@ const Viewer = () => {
                 onCreated={({ gl }) => setGl(gl)}
                 style={decalPath && { cursor: "none" }}
                 camera={{ position: [0, 0, 2.2], fov: 50 }}
-                //frameloop="demand"
+                frameloop="demand"
                 shadows
             >
                 <DecalHelper modelRayData={modelRayData} size={decalSize} />
                 <Suspense fallback={null}>
                     <Model
-                        url="/tshirt.glb"
+                        url="/tshirtLow.glb"
                         rotation={flipModelAnimation.rotation}
                         setModelRayData={setModelRayData}
                     />
