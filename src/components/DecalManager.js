@@ -13,7 +13,7 @@ const DecalManager = () => {
 
         // Remove decal image
         const newArry = [...decalImages]
-        const i = newArry.findIndex((el) => el.key === key)
+        const i = newArry.findIndex((el) => el.key == key)
         newArry.splice(i, 1)
         setDecalImages(newArry)
 
