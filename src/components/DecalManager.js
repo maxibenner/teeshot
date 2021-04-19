@@ -1,25 +1,31 @@
-import React from "react"
+import React, {useEffect} from "react"
 import Card from "./Card"
 import useStore from "../states/modelState"
 import { MdClose } from "react-icons/md"
 
 const DecalManager = () => {
-    const { decalImages, setDecalImages, removeDecal } = useStore()
+    const { decalImages, setDecalImages, removeDecal, decals } = useStore()
 
     // REMOVE DECAL
     const handleRemove = (event) => {
         const key = event.target.dataset.key
-        console.log(event)
+        //console.log(event)
 
         // Remove decal image
         const newArry = [...decalImages]
         const i = newArry.findIndex((el) => el.key == key)
+        console.log(i)
         newArry.splice(i, 1)
         setDecalImages(newArry)
 
         // Remove decal Mesh
         removeDecal(key)
+        console.log(key)
     }
+
+    useEffect(()=>{
+        console.log(decals)
+    },[decals])
 
     return (
         <div style={styles.wrapper}>
