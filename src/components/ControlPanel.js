@@ -9,9 +9,9 @@ import ColorPicker from "./ColorPicker"
 import useStore from "../states/modelState"
 import Icon from "../components/Icon"
 import transparentBgThumb from "../assets/thumbs/transparentBg.svg"
-import shapesBgThumb from "../assets/thumbs/shapesBg.svg"
+import shapesBgThumb from "../assets/thumbs/shapesBg.png"
 import plainBgThumb from "../assets/thumbs/plainBg.svg"
-import environmentBgThumb from "../assets/thumbs/environmentBg.svg"
+import environmentBgThumb from "../assets/thumbs/environmentBg.png"
 
 export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
     const inputRef = useRef()
