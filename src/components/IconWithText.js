@@ -1,8 +1,8 @@
-export default function IconWithText({ imgSrc, imgAlt, textContent }) {
+export default function IconWithText({ imgSrc, imgAlt, textContent, onClick }) {
     return (
-        <div style={styles.wrapper}>
+        <div style={styles.wrapper} onClick={onClick}>
             <img style={styles.img} src={imgSrc} alt={imgAlt} />
-            <p style={styles.text}>{textContent}</p>
+            {textContent && <p style={styles.text}>{textContent}</p>}
         </div>
     )
 }

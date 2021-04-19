@@ -66,7 +66,8 @@ const styles = {
         display: "flex",
         flexDirection: "row",
         margin: "0 -5px",
-        overflow: "scroll"
+        overflow: "scroll",
+        paddingTop: "5px"
     },
     imgContainer: {
         position: "relative",

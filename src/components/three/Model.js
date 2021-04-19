@@ -29,7 +29,7 @@ const Model = ({ url, rotation, setModelRayData }) => {
     // LOAD MODEL
     const gltf = useLoader(GLTFLoader, url)
 
-    // ADD DECAL
+    // ADD DECAL TO ARRAY
     const handleDecal = (e) => {
         // Get texture
         new THREE.TextureLoader().load(decalPath, (decalTexture) => {

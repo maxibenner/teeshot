@@ -7,6 +7,11 @@ import IconWithText from "./IconWithText"
 import Card from "./Card"
 import ColorPicker from "./ColorPicker"
 import useStore from "../states/modelState"
+import Icon from "../components/Icon"
+import transparentBgThumb from "../assets/thumbs/transparentBg.svg"
+import shapesBgThumb from "../assets/thumbs/shapesBg.svg"
+import plainBgThumb from "../assets/thumbs/plainBg.svg"
+import environmentBgThumb from "../assets/thumbs/environmentBg.svg"
 
 export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
     const inputRef = useRef()
@@ -74,21 +79,31 @@ export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
                         setColor={setBackgroundColor}
                     />
                 </Card>
-                <Card title="Backgrounds">
-                    <button
+                <Card title="Backgrounds" flex>
+                    <Icon
+                        imgSrc={transparentBgThumb}
+                        onClick={() => {
+                            setSet("TransparentBg")
+                        }}
+                    />
+                    <Icon
+                        imgSrc={plainBgThumb}
                         onClick={() => {
                             setSet("PlainBg")
                         }}
-                    >
-                        Plain
-                    </button>
-                    <button
+                    />
+                    <Icon
+                        imgSrc={shapesBgThumb}
                         onClick={() => {
                             setSet("ShapesBg")
                         }}
-                    >
-                        Shapes
-                    </button>
+                    />
+                    <Icon
+                        imgSrc={environmentBgThumb}
+                        onClick={() => {
+                            setSet("EnvironmentBg")
+                        }}
+                    />
                 </Card>
 
                 {decalPath && (

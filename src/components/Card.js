@@ -1,8 +1,8 @@
-const Card = ({ title, children }) => {
+const Card = ({ title, flex, children }) => {
     return (
         <div style={styles.card}>
             {title && <h3 style={styles.h3}>{title}</h3>}
-            {children}
+            <div style={{ display: flex ? "flex" : "block", boxSizing: "border-box", }}>{children}</div>
         </div>
     )
 }

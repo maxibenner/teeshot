@@ -58,7 +58,6 @@ export const createDecal = (mesh, position, normal, activeDecal, maxSize) => {
                 ]}
             >
                 <decalGeometry
-                    attach="geometry"
                     args={[
                         mesh,
                         position,
@@ -66,8 +65,7 @@ export const createDecal = (mesh, position, normal, activeDecal, maxSize) => {
                         new THREE.Vector3(dimensions[0], dimensions[1], 0.3),
                     ]}
                 />
-                <meshPhongMaterial
-                    attach="material"
+                <meshStandardMaterial
                     side={THREE.DoubleSide}
                     shininess={3}
                     map={activeDecal}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 76 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-17,-22)">
+        <g transform="matrix(0.68,0,0,0.583333,0,0)">
+            <g id="transparent">
+                <g transform="matrix(5.88235,0,0,6.85714,-163.235,-113.143)">
+                    <rect x="32" y="22" width="19" height="19" style="fill:rgb(235,235,235);"/>
+                </g>
+                <g transform="matrix(1.47059,0,0,1.71429,-22.0588,0)">
+                    <rect x="32" y="22" width="19" height="19" style="fill:white;"/>
+                </g>
+                <g transform="matrix(1.47059,0,0,1.71429,33.8235,0)">
+                    <rect x="32" y="22" width="19" height="19" style="fill:white;"/>
+                </g>
+                <g transform="matrix(1.47059,0,0,1.71429,61.7647,32.5714)">
+                    <rect x="32" y="22" width="19" height="19" style="fill:white;"/>
+                </g>
+                <g transform="matrix(1.47059,0,0,1.71429,61.7647,97.7143)">
+                    <rect x="32" y="22" width="19" height="19" style="fill:white;"/>
+                </g>
+                <g transform="matrix(1.47059,0,0,1.71429,5.88235,97.7143)">
+                    <rect x="32" y="22" width="19" height="19" style="fill:white;"/>
+                </g>
+                <g transform="matrix(1.47059,0,0,1.71429,-22.0588,65.1429)">
+                    <rect x="32" y="22" width="19" height="19" style="fill:white;"/>
+                </g>
+                <g transform="matrix(1.47059,0,0,1.71429,33.8235,65.1429)">
+                    <rect x="32" y="22" width="19" height="19" style="fill:white;"/>
+                </g>
+                <g transform="matrix(1.47059,0,0,1.71429,5.88235,32.5714)">
+                    <rect x="32" y="22" width="19" height="19" style="fill:white;"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
