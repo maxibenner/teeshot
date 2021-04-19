@@ -18,7 +18,7 @@ const useStore = create((set) => ({
     removeDecal: (decalKey) =>
         set(
             (state) =>
-                (state.decals = state.decals.filter((el) => el.key != decalKey))
+                (state.decals = state.decals.filter((el) => el.key !== decalKey))
         ),
     setDecalPath: (decalPath) => set((state) => (state.decalPath = decalPath)),
     addDecalImages: (decal) =>

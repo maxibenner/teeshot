@@ -35,7 +35,7 @@ export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
     useEffect(() => {
         function handlekeydownEvent(event) {
             const { key } = event
-            key === "Escape" && setDecalPath(null)
+            key == "Escape" && setDecalPath(null)
         }
         document.addEventListener("keydown", handlekeydownEvent)
         return () => {

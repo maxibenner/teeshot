@@ -9,24 +9,24 @@ const Scenes = () => {
     const { backgroundColor, set } = useStore()
     return (
         <>
-            {set == "TransparentBg" && (
+            {set === "TransparentBg" && (
                 <group>
                     <Lights />
                 </group>
             )}
-            {set == "PlainBg" && (
+            {set === "PlainBg" && (
                 <group>
                     <PlainBg backgroundColor={backgroundColor} />
                     <Lights />
                 </group>
             )}
-            {set == "ShapesBg" && (
+            {set === "ShapesBg" && (
                 <group>
                     <ShapesBg backgroundColor={backgroundColor} />
                     <Lights />
                 </group>
             )}
-            {set == "EnvironmentBg" && (
+            {set === "EnvironmentBg" && (
                 <Suspense
                     fallback={
                         <>

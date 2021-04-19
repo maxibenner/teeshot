@@ -13,7 +13,7 @@ const DecalManager = () => {
 
         // Remove decal image
         const newArry = [...decalImages]
-        const i = newArry.findIndex((el) => el.key == key)
+        const i = newArry.findIndex((el) => el.key === key)
         newArry.splice(i, 1)
         setDecalImages(newArry)
 
@@ -36,7 +36,7 @@ const DecalManager = () => {
                                 }}
                             >
                                 <div style={styles.imgContainer}>
-                                    <img style={styles.img} src={decal.path} />
+                                    <img style={styles.img} src={decal.path} alt={"decal thumbnail"} />
                                 </div>
                                 <div
                                     style={styles.closeBtn}
