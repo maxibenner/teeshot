@@ -13,13 +13,12 @@ import shapesBgThumb from "../assets/thumbs/shapesBg.png"
 import plainBgThumb from "../assets/thumbs/plainBg.svg"
 import environmentBgThumb from "../assets/thumbs/environmentBg.png"
 
-export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
+export default function ControlPanel() {
     const inputRef = useRef()
     const {
         backgroundColor,
         decalPath,
         modelColor,
-        setCanvasBackground,
         setBackgroundColor,
         setDecalPath,
         setModelColor,
@@ -48,12 +47,6 @@ export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
     // BUTTON CLICK
     const handleButtonClick = () => {
         inputRef.current.click()
-    }
-
-    // HANDLE BACKGROUND CHANGE
-    const handleBackgroundChange = (name, path) => {
-        setSet(name)
-        setCanvasBackground(path ? path : null)
     }
 
     return (
@@ -91,28 +84,25 @@ export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
                     <Icon
                         imgSrc={transparentBgThumb}
                         onClick={() => {
-                            handleBackgroundChange("TransparentBg")
+                            setSet("TransparentBg")
                         }}
                     />
                     <Icon
                         imgSrc={plainBgThumb}
                         onClick={() => {
-                            handleBackgroundChange("PlainBg")
+                            setSet("PlainBg")
                         }}
                     />
                     <Icon
                         imgSrc={shapesBgThumb}
                         onClick={() => {
-                            handleBackgroundChange("ShapesBg")
+                            setSet("ShapesBg")
                         }}
                     />
                     <Icon
                         imgSrc={environmentBgThumb}
                         onClick={() => {
-                            handleBackgroundChange(
-                                "EnvironmentBg",
-                                "/envBg4.jpg"
-                            )
+                            setSet("EnvironmentBg")
                         }}
                     />
                 </Card>

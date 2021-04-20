@@ -4,7 +4,6 @@ const initialDecalSize = 0.2
 
 const useStore = create((set) => ({
     backgroundColor: "#ffffff",
-    canvasBackground: null,
     decals: [],
     decalImages: [],
     decalPath: null,
@@ -14,8 +13,6 @@ const useStore = create((set) => ({
     set: "ShapesBg",
     setBackgroundColor: (color) =>
         set((state) => (state.backgroundColor = color)),
-    setCanvasBackground: (path) =>
-        set((state) => (state.canvasBackground = path)),
     addDecal: (decalObject) =>
         set((state) => (state.decals = [...state.decals, decalObject])),
     removeDecal: (decalKey) =>
