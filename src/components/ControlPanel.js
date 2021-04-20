@@ -19,6 +19,7 @@ export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
         backgroundColor,
         decalPath,
         modelColor,
+        setCanvasBackground,
         setBackgroundColor,
         setDecalPath,
         setModelColor,
@@ -28,6 +29,7 @@ export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
     // SET ACTIVE DECAL PATH
     const loadDecal = () => {
         const path = URL.createObjectURL(inputRef.current.files[0])
+        console.log(path)
         setDecalPath(path)
     }
 
@@ -46,6 +48,12 @@ export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
     // BUTTON CLICK
     const handleButtonClick = () => {
         inputRef.current.click()
+    }
+
+    // HANDLE BACKGROUND CHANGE
+    const handleBackgroundChange = (name, path) => {
+        setSet(name)
+        setCanvasBackground(path ? path : null)
     }
 
     return (
@@ -83,25 +91,28 @@ export default function ControlPanel({ activeDecalPath, setActiveDecalPath }) {
                     <Icon
                         imgSrc={transparentBgThumb}
                         onClick={() => {
-                            setSet("TransparentBg")
+                            handleBackgroundChange("TransparentBg")
                         }}
                     />
                     <Icon
                         imgSrc={plainBgThumb}
                         onClick={() => {
-                            setSet("PlainBg")
+                            handleBackgroundChange("PlainBg")
                         }}
                     />
                     <Icon
                         imgSrc={shapesBgThumb}
                         onClick={() => {
-                            setSet("ShapesBg")
+                            handleBackgroundChange("ShapesBg")
                         }}
                     />
                     <Icon
                         imgSrc={environmentBgThumb}
                         onClick={() => {
-                            setSet("EnvironmentBg")
+                            handleBackgroundChange(
+                                "EnvironmentBg",
+                                "/envBg4.jpg"
+                            )
                         }}
                     />
                 </Card>

@@ -10,6 +10,7 @@ import PhotoButton from "../PhotoButton"
 import DecalHelper from "./DecalHelper"
 import Model from "./Model"
 import Scenes from "./Scenes"
+import CanvasBackground from "./CanvasBackground"
 
 softShadows({
     near: 0.04,
@@ -52,7 +53,7 @@ const Viewer = () => {
     return (
         <>
             <Fps />
-            <div style={styles.board}>
+            <CanvasBackground>
                 <Canvas
                     style={decalPath && { cursor: "none" }}
                     gl={{ preserveDrawingBuffer: true }}
@@ -72,7 +73,7 @@ const Viewer = () => {
                     <Scenes />
                 </Canvas>
                 <div />
-            </div>
+            </CanvasBackground>
             <PhotoButton gl={gl} />
             <ControlPanel />
             {decals.length > 0 && <DecalManager />}

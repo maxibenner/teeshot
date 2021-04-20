@@ -27,9 +27,9 @@ const DecalHelper = ({ modelRayData, size }) => {
     // LOAD TEXTURE + SET DIMENSIONS
     useEffect(() => {
         if (decalPath) {
-            const decalTexture = new THREE.TextureLoader().load(
+            new THREE.TextureLoader().load(
                 decalPath,
-                () => {
+                (decalTexture) => {
                     setDecalTexture(decalTexture)
                     const newDimensions = changeDimensions(
                         decalTexture.image.width,
