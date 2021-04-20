@@ -1,10 +1,10 @@
 import { Environment, useTexture } from "@react-three/drei"
 
 const EnvironmentBg = () => {
-    const texture = useTexture("/envBg4.jpg")
+    const texture = useTexture("/envBg.jpg")
     return (
         <>
-            <Environment preset="dawn" background={false} />
+            <Environment background={false} path="/" files="env.hdr" />
             <mesh position={[0, 0, -0.5]}>
                 <planeBufferGeometry args={[5, 3]} />
                 <meshBasicMaterial map={texture} />

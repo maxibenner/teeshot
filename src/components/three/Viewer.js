@@ -11,6 +11,7 @@ import DecalHelper from "./DecalHelper"
 import Model from "./Model"
 import Scenes from "./Scenes"
 import CanvasBackground from "./CanvasBackground"
+//import {CCapture} from "ccapture.js"
 
 softShadows({
     near: 0.04,
@@ -18,6 +19,7 @@ softShadows({
 })
 
 const Viewer = () => {
+    //var capturer = new CCapture( { format: 'webm' } );
     const [modelFlipped, setModelFlipped] = useState(false)
     const [modelRayData, setModelRayData] = useState(null)
     const [gl, setGl] = useState(null)
@@ -56,7 +58,7 @@ const Viewer = () => {
             <CanvasBackground>
                 <Canvas
                     style={decalPath && { cursor: "none" }}
-                    gl={{ preserveDrawingBuffer: true }}
+                    gl={{ preserveDrawingBuffer: true /*, antialias: false*/ }}
                     camera={{ position: [0, 0, 2.2], fov: 50 }}
                     frameloop="demand"
                     shadows
@@ -72,7 +74,6 @@ const Viewer = () => {
                     </Suspense>
                     <Scenes />
                 </Canvas>
-                <div />
             </CanvasBackground>
             <PhotoButton gl={gl} />
             <ControlPanel />
