@@ -65,7 +65,7 @@ const Viewer = () => {
                     <DecalHelper modelRayData={modelRayData} size={decalSize} />
                     <Suspense fallback={null}>
                         <Model
-                            url="/tshirtLow.glb"
+                            url="/tshirt.glb"
                             rotation={flipModelAnimation.rotation}
                             setModelRayData={setModelRayData}
                         />
