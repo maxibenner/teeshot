@@ -12,6 +12,7 @@ import transparentBgThumb from "../assets/thumbs/transparentBg.svg"
 import shapesBgThumb from "../assets/thumbs/shapesBg.png"
 import plainBgThumb from "../assets/thumbs/plainBg.svg"
 import environmentBgThumb from "../assets/thumbs/environmentBg.png"
+import Button from "./Button"
 
 export default function ControlPanel() {
     const inputRef = useRef()
@@ -53,31 +54,12 @@ export default function ControlPanel() {
         <>
             <div style={styles.wrapper}>
                 <Card>
-                    <button onClick={handleButtonClick}>Choose Design</button>
+                    <Button onClick={handleButtonClick}>Upload Design</Button>
                     <input
                         style={{ display: "none" }}
                         onInput={() => loadDecal()}
                         ref={inputRef}
                         type="file"
-                    />
-                </Card>
-                <Card title="Product">
-                    <IconWithText
-                        imgSrc={keyR}
-                        imgAlt="rotate"
-                        textContent="Rotate"
-                    />
-                </Card>
-                <Card title="Color">
-                    <ColorPicker
-                        title="Model"
-                        color={modelColor}
-                        setColor={setModelColor}
-                    />
-                    <ColorPicker
-                        title="Background"
-                        color={backgroundColor}
-                        setColor={setBackgroundColor}
                     />
                 </Card>
                 <Card title="Backgrounds" flex>
@@ -106,29 +88,44 @@ export default function ControlPanel() {
                         }}
                     />
                 </Card>
-
-                {decalPath && (
-                    <Card title="Design">
-                        <p style={{ color: "grey", margin: "0 5px 15px 0" }}>
-                            Place your design anywhere on the product
-                        </p>
-                        <IconWithText
-                            imgSrc={keyUp}
-                            imgAlt="up"
-                            textContent="Scale up"
-                        />
-                        <IconWithText
-                            imgSrc={keyDown}
-                            imgAlt="down"
-                            textContent="Scale down"
-                        />
-                        <IconWithText
-                            imgSrc={keyEscRed}
-                            imgAlt="Esc"
-                            textContent="Cancel"
-                        />
-                    </Card>
-                )}
+                <Card title="Colors">
+                    <ColorPicker
+                        title="Model"
+                        color={modelColor}
+                        setColor={setModelColor}
+                    />
+                    <ColorPicker
+                        title="Background"
+                        color={backgroundColor}
+                        setColor={setBackgroundColor}
+                    />
+                </Card>
+                <Card title="Hotkeys">
+                    <IconWithText
+                        imgSrc={keyR}
+                        imgAlt="rotate"
+                        textContent="Rotate"
+                    />
+                    {decalPath && (
+                        <>
+                            <IconWithText
+                                imgSrc={keyUp}
+                                imgAlt="up"
+                                textContent="Scale up"
+                            />
+                            <IconWithText
+                                imgSrc={keyDown}
+                                imgAlt="down"
+                                textContent="Scale down"
+                            />
+                            <IconWithText
+                                imgSrc={keyEscRed}
+                                imgAlt="Esc"
+                                textContent="Cancel"
+                            />
+                        </>
+                    )}
+                </Card>
             </div>
         </>
     )

@@ -1,6 +1,6 @@
 import { softShadows } from "@react-three/drei"
 import { Canvas, invalidate } from "@react-three/fiber"
-import { Suspense, useEffect, useState } from "react"
+import { Suspense, useEffect, useState, useMemo } from "react"
 import { useSpring } from "react-spring/three"
 import Fps from "../../helpers/Fps"
 import useStore from "../../states/modelState"
@@ -11,7 +11,6 @@ import DecalHelper from "./DecalHelper"
 import Model from "./Model"
 import Scenes from "./Scenes"
 import CanvasBackground from "./CanvasBackground"
-//import {CCapture} from "ccapture.js"
 
 softShadows({
     near: 0.04,
@@ -19,7 +18,6 @@ softShadows({
 })
 
 const Viewer = () => {
-    //var capturer = new CCapture( { format: 'webm' } );
     const [modelFlipped, setModelFlipped] = useState(false)
     const [modelRayData, setModelRayData] = useState(null)
     const [gl, setGl] = useState(null)
