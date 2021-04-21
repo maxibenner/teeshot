@@ -14,10 +14,10 @@ const TextBg = ({ backgroundColor }) => {
     const textOptions = {
         font,
         size: 0.7,
-        height: 0.05,
+        height: 0.01,
         bevelEnabled: true,
         bevelThickness: 0.05,
-        bevelSize: 0.01,
+        bevelSize: 0.005,
     }
 
 
