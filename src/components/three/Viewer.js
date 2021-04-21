@@ -52,7 +52,6 @@ const Viewer = () => {
 
     return (
         <>
-            <Fps />
             <CanvasBackground>
                 <Canvas
                     style={decalPath && { cursor: "none" }}
