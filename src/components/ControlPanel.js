@@ -22,6 +22,7 @@ export default function ControlPanel() {
         backgroundColor,
         decalPath,
         modelColor,
+        text,
         setBackgroundColor,
         setDecalPath,
         setModelColor,
@@ -106,7 +107,7 @@ export default function ControlPanel() {
                 {set === "TextBg" && (
                     <Card title="Text">
                         <InputText
-                            placeholder="PLACEHOLDER"
+                            placeholder={text}
                             onChange={handleText}
                             maxLength={14}
                         />
