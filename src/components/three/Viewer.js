@@ -34,8 +34,8 @@ const Viewer = () => {
         function handlekeydownEvent(event) {
             const { key } = event
             key === "r" && setModelFlipped((prev) => (prev ? false : true))
-            key === "ArrowUp" && incrementDecalSize(0.05)
-            key === "ArrowDown" && decrementDecalSize(0.05)
+            key === "ArrowUp" && incrementDecalSize(0.01)
+            key === "ArrowDown" && decrementDecalSize(0.01)
         }
         document.addEventListener("keydown", handlekeydownEvent)
         return () => {
