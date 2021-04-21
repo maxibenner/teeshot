@@ -10,7 +10,7 @@ const style = {
     width: "100%",
     height: "40px",
     fontWeight: "bold",
-    background: "linear-gradient(to right, #7474BF 0%, #348AC7 100%",
+    background: "black",
     color: "white",
     display:"flex",
     justifyContent: "center",

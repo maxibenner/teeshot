@@ -9,6 +9,7 @@ const EnvironmentBg = () => {
                 <planeBufferGeometry args={[5, 3]} />
                 <meshBasicMaterial map={texture} />
             </mesh>
+
         </>
     )
 }

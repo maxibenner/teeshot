@@ -3,16 +3,18 @@ import keyDown from "../assets/keys/keyDown.svg"
 import keyEscRed from "../assets/keys/keyEscRed.svg"
 import keyR from "../assets/keys/keyR.svg"
 import keyUp from "../assets/keys/keyUp.svg"
-import IconWithText from "./IconWithText"
+import environmentBgThumb from "../assets/thumbs/environmentBg.png"
+import plainBgThumb from "../assets/thumbs/plainBg.svg"
+import shapesBgThumb from "../assets/thumbs/shapesBg.png"
+import textBgThumb from "../assets/thumbs/textBg.png"
+import transparentBgThumb from "../assets/thumbs/transparentBg.svg"
+import Icon from "../components/Icon"
+import useStore from "../states/modelState"
+import Button from "./Button"
 import Card from "./Card"
 import ColorPicker from "./ColorPicker"
-import useStore from "../states/modelState"
-import Icon from "../components/Icon"
-import transparentBgThumb from "../assets/thumbs/transparentBg.svg"
-import shapesBgThumb from "../assets/thumbs/shapesBg.png"
-import plainBgThumb from "../assets/thumbs/plainBg.svg"
-import environmentBgThumb from "../assets/thumbs/environmentBg.png"
-import Button from "./Button"
+import IconWithText from "./IconWithText"
+import InputText from "./InputText"
 
 export default function ControlPanel() {
     const inputRef = useRef()
@@ -23,7 +25,9 @@ export default function ControlPanel() {
         setBackgroundColor,
         setDecalPath,
         setModelColor,
+        set,
         setSet,
+        setText,
     } = useStore()
 
     // SET ACTIVE DECAL PATH
@@ -50,10 +54,15 @@ export default function ControlPanel() {
         inputRef.current.click()
     }
 
+    // TEXT INPUT
+    const handleText = (fieldValue) => {
+        setText(fieldValue)
+    }
+
     return (
         <>
             <div style={styles.wrapper}>
-                <Card>
+                <Card invisible>
                     <Button onClick={handleButtonClick}>Upload Design</Button>
                     <input
                         style={{ display: "none" }}
@@ -87,7 +96,23 @@ export default function ControlPanel() {
                             setSet("EnvironmentBg")
                         }}
                     />
+                    <Icon
+                        imgSrc={textBgThumb}
+                        onClick={() => {
+                            setSet("TextBg")
+                        }}
+                    />
                 </Card>
+                {set === "TextBg" && (
+                    <Card title="Text">
+                        <InputText
+                            placeholder="PLACEHOLDER"
+                            onChange={handleText}
+                            maxLength={14}
+                        />
+                    </Card>
+                )}
+
                 <Card title="Colors">
                     <ColorPicker
                         title="Model"
@@ -100,6 +125,7 @@ export default function ControlPanel() {
                         setColor={setBackgroundColor}
                     />
                 </Card>
+
                 <Card title="Hotkeys">
                     <IconWithText
                         imgSrc={keyR}

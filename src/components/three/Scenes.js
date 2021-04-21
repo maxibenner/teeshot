@@ -3,6 +3,7 @@ import PlainBg from "./sets/PlainBg"
 import Lights from "./Lights"
 import ShapesBg from "./sets/ShapesBg"
 import EnvironmentBg from "./sets/EnvironmentBg"
+import TextBg from "./sets/TextBg"
 import useStore from "../../states/modelState"
 
 const Scenes = () => {
@@ -37,6 +38,12 @@ const Scenes = () => {
                 >
                     <EnvironmentBg />
                 </Suspense>
+            )}
+            {set === "TextBg" && (
+                <group>
+                    <TextBg backgroundColor={backgroundColor} />
+                    <Lights />
+                </group>
             )}
         </>
     )

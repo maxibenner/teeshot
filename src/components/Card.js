@@ -1,8 +1,15 @@
-const Card = ({ title, flex, children }) => {
+const Card = ({ title, flex, children, invisible }) => {
     return (
-        <div style={styles.card}>
+        <div style={!invisible ? styles.card : styles.cardInvisible}>
             {title && <h3 style={styles.h3}>{title}</h3>}
-            <div style={{ display: flex ? "flex" : "block", boxSizing: "border-box", }}>{children}</div>
+            <div
+                style={{
+                    display: flex ? "flex" : "block",
+                    boxSizing: "border-box",
+                }}
+            >
+                {children}
+            </div>
         </div>
     )
 }
@@ -13,8 +20,14 @@ const styles = {
     card: {
         overflow: "hidden",
         background: "white",
-        boxShadow: "0 2px 5px rgba(0, 0, 0, 0.17)",
         padding: "10px",
+        borderRadius: "7px",
+        margin: "14px",
+        width: "100%",
+        boxSizing: "border-box",
+    },
+    cardInvisible: {
+        overflow: "hidden",
         borderRadius: "7px",
         margin: "14px",
         width: "100%",
