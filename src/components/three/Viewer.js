@@ -9,6 +9,7 @@ import CanvasBackground from "./CanvasBackground"
 import DecalHelper from "./DecalHelper"
 import Model from "./Model"
 import Scenes from "./Scenes"
+import logo from "../../assets/images/logo.png"
 
 softShadows({
     near: 0.04,
@@ -69,10 +70,19 @@ const Viewer = () => {
                     <Scenes />
                 </Canvas>
             </CanvasBackground>
-            <PhotoButton gl={gl} />
+            <PhotoButton gl={gl} style={styles.logo}/>
             <ControlPanel />
+            <img src={logo} alt="Logo" style={styles.logo} />
         </>
     )
+}
+const styles = {
+    logo: {
+        position: "absolute",
+        top: 0,
+        width: "120px",
+        margin: "30px"
+    }
 }
 
 export default Viewer

@@ -17,7 +17,7 @@ const styles = {
         backgroundPosition: "0 0, 0 10px, 10px -10px, -10px 0px",
     },
     bg: {
-        height: "80vh",
+        height: "85vh",
         overflow: "hidden",
         background: "white"
     },

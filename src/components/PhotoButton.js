@@ -40,7 +40,7 @@ export default PhotoButton
 
 const styles = {
     wrapper: {
-        height: "20vh",
+        height: "15vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center"
