@@ -12,11 +12,7 @@ const EnvironmentBg = () => {
             <mesh position={[0, 0, -0.5]}>
                 <planeBufferGeometry args={[5, 3]} />
                 {/*<meshBasicMaterial map={texture} />*/}
-                <MeshWobbleMaterial
-                    map={texture}
-                    factor={.1} // Strength, 0 disables the effect (default=1)
-                    speed={1} // Speed (default=1)
-                />
+                <MeshWobbleMaterial map={texture} factor={0.1} speed={.3} />
             </mesh>
         </>
     )

@@ -1,11 +1,11 @@
-import { useLoader } from "@react-three/fiber"
+import { useTexture } from "@react-three/drei"
+import { useLoader, useFrame } from "@react-three/fiber"
 import { useEffect, useRef } from "react"
 import { a } from "react-spring/three"
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import useStore from "../../states/modelState"
 import Decals, { createDecal } from "./Decals"
-import { useTexture } from "@react-three/drei"
 
 const Model = ({ url, rotation, setModelRayData }) => {
     // REF
