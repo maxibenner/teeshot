@@ -57,7 +57,7 @@ export default function ControlPanel() {
     const handleButtonClick = () => {
         if (window.innerWidth < window.innerHeight) {
             window.alert(
-                "Placing designs doesn't yet work well on a phone. Switch to a computer and head to www.fotura.co to try it out!"
+                "Placing designs doesn't yet work well on a phone. Switch to a computer and head to fotura.co to try it out!"
             )
         } else {
             inputRef.current.click()
