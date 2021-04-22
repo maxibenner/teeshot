@@ -6,7 +6,6 @@ const PhotoButton = ({ gl }) => {
 
     // Take screenshot
     const screenshot = () => {
-
         const imgData = gl.domElement.toDataURL("image/png")
         var a = document.createElement("a")
 
@@ -22,14 +21,16 @@ const PhotoButton = ({ gl }) => {
     }
 
     return (
-        <div
-            onPointerOver={() => setHovered(true)}
-            onPointerLeave={() => setHovered(false)}
-            onClick={screenshot}
-            style={styles.wrapper}
-        >
-            <div style={innerMod}>
-                <MdCameraAlt />
+        <div style={styles.wrapper}>
+            <div
+                onPointerOver={() => setHovered(true)}
+                onPointerLeave={() => setHovered(false)}
+                onClick={screenshot}
+                style={styles.container}
+            >
+                <div style={innerMod}>
+                    <MdCameraAlt />
+                </div>
             </div>
         </div>
     )
@@ -39,10 +40,12 @@ export default PhotoButton
 
 const styles = {
     wrapper: {
-        position: "absolute",
-        bottom: "30px",
-        left: "50%",
-        transform: "translateX(-50%)",
+        height: "20vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    container: {
         width: "60px",
         height: "60px",
         borderRadius: "32px",
