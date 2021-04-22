@@ -70,9 +70,9 @@ const Viewer = () => {
                     <Scenes />
                 </Canvas>
             </CanvasBackground>
-            <PhotoButton gl={gl} style={styles.logo}/>
-            <ControlPanel />
             <img src={logo} alt="Logo" style={styles.logo} />
+            <PhotoButton gl={gl} style={styles.logo} />
+            <ControlPanel />
         </>
     )
 }
@@ -81,8 +81,8 @@ const styles = {
         position: "absolute",
         top: 0,
         width: "120px",
-        margin: "30px"
-    }
+        margin: "30px",
+    },
 }
 
 export default Viewer
