@@ -55,7 +55,13 @@ export default function ControlPanel() {
 
     // BUTTON CLICK
     const handleButtonClick = () => {
-        inputRef.current.click()
+        if (window.innerWidth < window.innerHeight) {
+            window.alert(
+                "Placing designs doesn't yet work well on a phone. Switch to a computer and head to www.fotura.co to try it out!"
+            )
+        } else {
+            inputRef.current.click()
+        }
     }
 
     // TEXT INPUT
