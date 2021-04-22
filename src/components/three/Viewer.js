@@ -1,16 +1,15 @@
 import { softShadows } from "@react-three/drei"
 import { Canvas, invalidate } from "@react-three/fiber"
-import { Suspense, useEffect, useState, useMemo } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { useSpring } from "react-spring/three"
-import Fps from "../../helpers/Fps"
 import useStore from "../../states/modelState"
 import ControlPanel from "../ControlPanel"
 import DecalManager from "../DecalManager"
 import PhotoButton from "../PhotoButton"
+import CanvasBackground from "./CanvasBackground"
 import DecalHelper from "./DecalHelper"
 import Model from "./Model"
 import Scenes from "./Scenes"
-import CanvasBackground from "./CanvasBackground"
 
 softShadows({
     near: 0.04,

@@ -23,15 +23,11 @@ const styles = {
         padding: "10px",
         borderRadius: "7px",
         margin: "14px",
-        width: "100%",
-        boxSizing: "border-box",
     },
     cardInvisible: {
         overflow: "hidden",
         borderRadius: "7px",
         margin: "14px",
-        width: "100%",
-        boxSizing: "border-box",
     },
     h3: {
         margin: "5px 0",

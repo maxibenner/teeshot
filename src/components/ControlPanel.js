@@ -62,16 +62,23 @@ export default function ControlPanel() {
     }
 
     // EXPAND PANEL
-    const [open, setOpen] = useState()
+    const [open, setOpen] = useState(true)
+    useEffect(()=>{
+        console.log(open)
+    },[open])
     const styles = {
         wrapper: {
             position: "absolute",
+            boxSizing: "border-box",
             top: 0,
             right: 0,
-            transform: open ? "translateX(270px)" : "translateX(0)",
-            width: "230px",
-            margin: "20px 50px",
+            transform: open ? "translateX(0)" : "translateX(280px)",
+            margin: "15px 15px",
             transition: ".3s",
+        },
+        containerInner: {
+            maxHeight: "calc(100vh - 30px)",
+            overflow: "scroll",
         },
         handle: {
             width: "25px",
@@ -86,7 +93,7 @@ export default function ControlPanel() {
             position: "absolute",
             left: "-20px",
             top: "50%",
-            transform: open ? "rotate(0deg)" : "rotate(180deg)"
+            transform: open ? "rotate(0deg)" : "rotate(180deg)",
         },
     }
     const togglePanel = () => {
@@ -99,115 +106,101 @@ export default function ControlPanel() {
                 <div style={styles.handle} onClick={togglePanel}>
                     <RiArrowDropLeftLine />
                 </div>
-                <Card invisible>
-                    <Button onClick={handleButtonClick}>Upload Design</Button>
-                    <input
-                        style={{ display: "none" }}
-                        onInput={() => loadDecal()}
-                        ref={inputRef}
-                        type="file"
-                    />
-                </Card>
-                <Card title="Backgrounds" flex>
-                    <Icon
-                        imgSrc={transparentBgThumb}
-                        onClick={() => {
-                            setSet("TransparentBg")
-                        }}
-                    />
-                    <Icon
-                        imgSrc={plainBgThumb}
-                        onClick={() => {
-                            setSet("PlainBg")
-                        }}
-                    />
-                    <Icon
-                        imgSrc={shapesBgThumb}
-                        onClick={() => {
-                            setSet("ShapesBg")
-                        }}
-                    />
-                    <Icon
-                        imgSrc={environmentBgThumb}
-                        onClick={() => {
-                            setSet("EnvironmentBg")
-                        }}
-                    />
-                    <Icon
-                        imgSrc={textBgThumb}
-                        onClick={() => {
-                            setSet("TextBg")
-                        }}
-                    />
-                </Card>
-                {set === "TextBg" && (
-                    <Card title="Text">
-                        <InputText
-                            placeholder={text}
-                            onChange={handleText}
-                            maxLength={14}
+                <div style={styles.containerInner}>
+                    <Card invisible>
+                        <Button onClick={handleButtonClick}>
+                            Upload Design
+                        </Button>
+                        <input
+                            style={{ display: "none" }}
+                            onInput={() => loadDecal()}
+                            ref={inputRef}
+                            type="file"
                         />
                     </Card>
-                )}
-
-                <Card title="Colors">
-                    <ColorPicker
-                        title="Model"
-                        color={modelColor}
-                        setColor={setModelColor}
-                    />
-                    <ColorPicker
-                        title="Background"
-                        color={backgroundColor}
-                        setColor={setBackgroundColor}
-                    />
-                </Card>
-
-                <Card title="Hotkeys">
-                    <IconWithText
-                        imgSrc={keyR}
-                        imgAlt="rotate"
-                        textContent="Rotate"
-                    />
-                    {decalPath && (
-                        <>
-                            <IconWithText
-                                imgSrc={keyUp}
-                                imgAlt="up"
-                                textContent="Scale up"
+                    <Card title="Backgrounds" flex>
+                        <Icon
+                            imgSrc={transparentBgThumb}
+                            onClick={() => {
+                                setSet("TransparentBg")
+                            }}
+                        />
+                        <Icon
+                            imgSrc={plainBgThumb}
+                            onClick={() => {
+                                setSet("PlainBg")
+                            }}
+                        />
+                        <Icon
+                            imgSrc={shapesBgThumb}
+                            onClick={() => {
+                                setSet("ShapesBg")
+                            }}
+                        />
+                        <Icon
+                            imgSrc={environmentBgThumb}
+                            onClick={() => {
+                                setSet("EnvironmentBg")
+                            }}
+                        />
+                        <Icon
+                            imgSrc={textBgThumb}
+                            onClick={() => {
+                                setSet("TextBg")
+                            }}
+                        />
+                    </Card>
+                    {set === "TextBg" && (
+                        <Card title="Text">
+                            <InputText
+                                placeholder={text}
+                                onChange={handleText}
+                                maxLength={14}
                             />
-                            <IconWithText
-                                imgSrc={keyDown}
-                                imgAlt="down"
-                                textContent="Scale down"
-                            />
-                            <IconWithText
-                                imgSrc={keyEscRed}
-                                imgAlt="Esc"
-                                textContent="Cancel"
-                            />
-                        </>
+                        </Card>
                     )}
-                </Card>
+
+                    <Card title="Colors">
+                        <ColorPicker
+                            title="Model"
+                            color={modelColor}
+                            setColor={setModelColor}
+                        />
+                        <ColorPicker
+                            title="Background"
+                            color={backgroundColor}
+                            setColor={setBackgroundColor}
+                        />
+                    </Card>
+
+                    <Card title="Hotkeys">
+                        <IconWithText
+                            imgSrc={keyR}
+                            imgAlt="rotate"
+                            textContent="Rotate"
+                        />
+                        {decalPath && (
+                            <>
+                                <IconWithText
+                                    imgSrc={keyUp}
+                                    imgAlt="up"
+                                    textContent="Scale up"
+                                />
+                                <IconWithText
+                                    imgSrc={keyDown}
+                                    imgAlt="down"
+                                    textContent="Scale down"
+                                />
+                                <IconWithText
+                                    imgSrc={keyEscRed}
+                                    imgAlt="Esc"
+                                    textContent="Cancel"
+                                />
+                            </>
+                        )}
+                    </Card>
+                </div>
             </div>
         </>
     )
-}
-
-const styles = {
-    handle: {
-        width: "25px",
-        height: "40px",
-        background: "black",
-        borderRadius: "5px",
-        color: "white",
-        fontSize: "1.5rem",
-        display: "flex",
-        alignItems: "center",
-        cursor: "pointer",
-        position: "absolute",
-        left: "-20px",
-        top: "50%",
-        transform: "translateY(-50%)",
-    },
 }

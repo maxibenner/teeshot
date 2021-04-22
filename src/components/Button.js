@@ -7,7 +7,6 @@ const Button = ({ onClick, children }) => {
 }
 
 const style = {
-    width: "100%",
     height: "40px",
     fontWeight: "bold",
     background: "black",
