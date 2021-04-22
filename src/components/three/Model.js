@@ -1,10 +1,11 @@
 import { useLoader } from "@react-three/fiber"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { a } from "react-spring/three"
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import useStore from "../../states/modelState"
 import Decals, { createDecal } from "./Decals"
+import { useTexture } from "@react-three/drei"
 
 const Model = ({ url, rotation, setModelRayData }) => {
     // REF
@@ -28,6 +29,14 @@ const Model = ({ url, rotation, setModelRayData }) => {
 
     // LOAD MODEL
     const gltf = useLoader(GLTFLoader, url)
+
+    // LOAD MORMAL MAP
+    const normalTexture = useTexture("/normal.jpg")
+    useEffect(() => {
+        normalTexture.wrapS = normalTexture.wrapT = THREE.RepeatWrapping
+        normalTexture.repeat = new THREE.Vector2(8, 8)
+        normalTexture.anisotropy = 16
+    }, [])
 
     // ADD DECAL TO ARRAY
     const handleDecal = (e) => {
@@ -90,7 +99,10 @@ const Model = ({ url, rotation, setModelRayData }) => {
                 geometry={gltf.scene.children[0].geometry}
                 castShadow
             >
-                <meshStandardMaterial color={modelColor} />
+                <meshStandardMaterial
+                    normalMap={normalTexture}
+                    color={modelColor}
+                />
             </mesh>
             <Decals decals={decals} />
         </a.group>
