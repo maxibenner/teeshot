@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import keyDown from "../assets/keys/keyDown.svg"
 import keyEscRed from "../assets/keys/keyEscRed.svg"
 import keyR from "../assets/keys/keyR.svg"
@@ -15,6 +15,7 @@ import Card from "./Card"
 import ColorPicker from "./ColorPicker"
 import IconWithText from "./IconWithText"
 import InputText from "./InputText"
+import { RiArrowDropLeftLine } from "react-icons/ri"
 
 export default function ControlPanel() {
     const inputRef = useRef()
@@ -60,9 +61,44 @@ export default function ControlPanel() {
         setText(fieldValue)
     }
 
+    // EXPAND PANEL
+    const [open, setOpen] = useState()
+    const styles = {
+        wrapper: {
+            position: "absolute",
+            top: 0,
+            right: 0,
+            transform: open ? "translateX(270px)" : "translateX(0)",
+            width: "230px",
+            margin: "20px 50px",
+            transition: ".3s",
+        },
+        handle: {
+            width: "25px",
+            height: "40px",
+            background: "black",
+            borderRadius: "5px",
+            color: "white",
+            fontSize: "1.5rem",
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer",
+            position: "absolute",
+            left: "-20px",
+            top: "50%",
+            transform: open ? "rotate(0deg)" : "rotate(180deg)"
+        },
+    }
+    const togglePanel = () => {
+        setOpen((state) => !state)
+    }
+
     return (
         <>
             <div style={styles.wrapper}>
+                <div style={styles.handle} onClick={togglePanel}>
+                    <RiArrowDropLeftLine />
+                </div>
                 <Card invisible>
                     <Button onClick={handleButtonClick}>Upload Design</Button>
                     <input
@@ -159,11 +195,19 @@ export default function ControlPanel() {
 }
 
 const styles = {
-    wrapper: {
+    handle: {
+        width: "25px",
+        height: "40px",
+        background: "black",
+        borderRadius: "5px",
+        color: "white",
+        fontSize: "1.5rem",
+        display: "flex",
+        alignItems: "center",
+        cursor: "pointer",
         position: "absolute",
-        top: 0,
-        left: 0,
-        width: "230px",
-        margin: "20px",
+        left: "-20px",
+        top: "50%",
+        transform: "translateY(-50%)",
     },
 }
