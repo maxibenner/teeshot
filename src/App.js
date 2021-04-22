@@ -13,7 +13,8 @@ const styles = {
     wrapper: {
         width: "100%",
         height: "100vh",
-        padding: "15px",
+        padding: "0 0 15px 0",
         boxSizing: "border-box",
+        background: "black"
     },
 };

@@ -16,11 +16,13 @@ import ColorPicker from "./ColorPicker"
 import IconWithText from "./IconWithText"
 import InputText from "./InputText"
 import { RiArrowDropLeftLine } from "react-icons/ri"
+import DecalManager from "../components/DecalManager"
 
 export default function ControlPanel() {
     const inputRef = useRef()
     const {
         backgroundColor,
+        decals,
         decalPath,
         modelColor,
         text,
@@ -63,9 +65,9 @@ export default function ControlPanel() {
 
     // EXPAND PANEL
     const [open, setOpen] = useState(true)
-    useEffect(()=>{
+    useEffect(() => {
         console.log(open)
-    },[open])
+    }, [open])
     const styles = {
         wrapper: {
             position: "absolute",
@@ -75,25 +77,26 @@ export default function ControlPanel() {
             transform: open ? "translateX(0)" : "translateX(280px)",
             margin: "15px 15px",
             transition: ".3s",
+            maxWidth: "270px",
         },
         containerInner: {
             maxHeight: "calc(100vh - 30px)",
             overflow: "scroll",
         },
         handle: {
-            width: "25px",
-            height: "40px",
+            width: "30px",
+            height: "50px",
             background: "black",
             borderRadius: "5px",
             color: "white",
-            fontSize: "1.5rem",
+            fontSize: "1.8rem",
             display: "flex",
             alignItems: "center",
             cursor: "pointer",
             position: "absolute",
-            left: "-20px",
+            left: "-30px",
             top: "50%",
-            transform: open ? "rotate(0deg)" : "rotate(180deg)",
+            transform: open ? "rotate(180deg)" : "rotate(0deg)",
         },
     }
     const togglePanel = () => {
@@ -199,6 +202,11 @@ export default function ControlPanel() {
                             </>
                         )}
                     </Card>
+                    {decals.length > 0 && (
+                        <Card title="Decals">
+                            <DecalManager />
+                        </Card>
+                    )}
                 </div>
             </div>
         </>

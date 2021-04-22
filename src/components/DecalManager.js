@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React, { useEffect } from "react"
 import Card from "./Card"
 import useStore from "../states/modelState"
 import { MdClose } from "react-icons/md"
@@ -23,57 +23,50 @@ const DecalManager = () => {
         console.log(key)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(decals)
-    },[decals])
+    }, [decals])
 
     return (
-        <div style={styles.wrapper}>
-            <Card title="Decals">
-                <div style={styles.imagesWrapper}>
-                    {decalImages.map((decal, i) => {
-                        return (
-                            <div
-                                key={decal.key}
-                                style={{
-                                    position: "relative",
-                                    boxSizing: "border-box",
-                                    zIndex: decalImages.length - i,
-                                }}
-                            >
-                                <div style={styles.imgContainer}>
-                                    <img style={styles.img} src={decal.path} alt={"decal thumbnail"} />
-                                </div>
-                                <div
-                                    style={styles.closeBtn}
-                                    onClick={handleRemove}
-                                    data-key={decal.key}
-                                >
-                                    <MdClose style={{pointerEvents: "none"}} />
-                                </div>
-                            </div>
-                        )
-                    })}
-                </div>
-            </Card>
+        <div style={styles.imagesWrapper}>
+            {decalImages.map((decal, i) => {
+                return (
+                    <div
+                        key={decal.key}
+                        style={{
+                            position: "relative",
+                            boxSizing: "border-box",
+                            zIndex: decalImages.length - i,
+                        }}
+                    >
+                        <div style={styles.imgContainer}>
+                            <img
+                                style={styles.img}
+                                src={decal.path}
+                                alt={"decal thumbnail"}
+                            />
+                        </div>
+                        <div
+                            style={styles.closeBtn}
+                            onClick={handleRemove}
+                            data-key={decal.key}
+                        >
+                            <MdClose style={{ pointerEvents: "none" }} />
+                        </div>
+                    </div>
+                )
+            })}
         </div>
     )
 }
 
 const styles = {
-    wrapper: {
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        width: "230px",
-        margin: "20px",
-    },
     imagesWrapper: {
         display: "flex",
         flexDirection: "row",
         margin: "0 -5px",
         overflow: "scroll",
-        paddingTop: "5px"
+        paddingTop: "5px",
     },
     imgContainer: {
         position: "relative",

@@ -21,7 +21,6 @@ const Viewer = () => {
     const [modelRayData, setModelRayData] = useState(null)
     const [gl, setGl] = useState(null)
     const {
-        decals,
         decalPath,
         decalSize,
         incrementDecalSize,
@@ -73,7 +72,6 @@ const Viewer = () => {
             </CanvasBackground>
             <PhotoButton gl={gl} />
             <ControlPanel />
-            {decals.length > 0 && <DecalManager />}
         </>
     )
 }
