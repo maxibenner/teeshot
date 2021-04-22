@@ -81,13 +81,14 @@ export default function ControlPanel() {
             top: 0,
             right: 0,
             transform: open ? "translateX(0)" : "translateX(280px)",
-            margin: "15px 15px",
+            margin: "0 15px 15px 15px",
             transition: ".3s",
             maxWidth: "270px",
         },
         containerInner: {
-            maxHeight: "calc(100vh - 30px)",
+            maxHeight: "calc(85vh - 15px)",
             overflow: "scroll",
+            paddingTop: "15px"
         },
         handle: {
             width: "30px",
