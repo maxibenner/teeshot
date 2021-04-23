@@ -4,16 +4,12 @@ import Viewer from "./components/three/Viewer"
 import logo from "./assets/images/logo.png"
 import "./globalStyles.css"
 import useStore from "./states/modelState"
-import TagManager from "react-gtm-module"
+import { Mixpanel } from './helpers/Mixpanel';
 
-const tagManagerArgs = {
-    gtmId: "GTM-M4HNGJT",
-}
-
-TagManager.initialize(tagManagerArgs)
 
 export default function App() {
     const { gl } = useStore()
+
     return (
         <div style={styles.wrapper}>
             <Viewer />
