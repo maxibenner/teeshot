@@ -71,9 +71,6 @@ export default function ControlPanel() {
 
     // EXPAND PANEL
     const [open, setOpen] = useState(true)
-    useEffect(() => {
-        console.log(open)
-    }, [open])
     const styles = {
         wrapper: {
             position: "absolute",

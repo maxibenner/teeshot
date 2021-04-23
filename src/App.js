@@ -4,7 +4,6 @@ import Viewer from "./components/three/Viewer"
 import logo from "./assets/images/logo.png"
 import "./globalStyles.css"
 import useStore from "./states/modelState"
-import { Mixpanel } from './helpers/Mixpanel';
 
 
 export default function App() {
