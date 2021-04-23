@@ -12,6 +12,7 @@
     "ray-tracing-renderer": "^0.10.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-gtm-module": "^2.0.11",
     "react-icons": "^4.2.0",
     "react-scripts": "4.0.3",
     "react-spring": "^9.0.0",

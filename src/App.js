@@ -4,7 +4,13 @@ import Viewer from "./components/three/Viewer"
 import logo from "./assets/images/logo.png"
 import "./globalStyles.css"
 import useStore from "./states/modelState"
-import Banner from "./components/Banner"
+import TagManager from "react-gtm-module"
+
+const tagManagerArgs = {
+    gtmId: "GTM-M4HNGJT",
+}
+
+TagManager.initialize(tagManagerArgs)
 
 export default function App() {
     const { gl } = useStore()
