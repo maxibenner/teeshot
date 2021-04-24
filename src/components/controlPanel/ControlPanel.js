@@ -17,7 +17,6 @@ import DecalManager from "../decalManager/DecalManager"
 import Icon from "../icon/Icon"
 import IconWithText from "../iconWithText/IconWithText"
 import InputText from "../inputText/InputText"
-import ErrorBoundary from "../errorBoundary/ErrorBoundary"
 import s from "./controlPanel.module.css"
 
 export default function ControlPanel() {
