@@ -17,6 +17,7 @@ import DecalManager from "../decalManager/DecalManager"
 import Icon from "../icon/Icon"
 import IconWithText from "../iconWithText/IconWithText"
 import InputText from "../inputText/InputText"
+import ErrorBoundary from "../errorBoundary/ErrorBoundary"
 import s from "./controlPanel.module.css"
 
 export default function ControlPanel() {
@@ -38,7 +39,6 @@ export default function ControlPanel() {
     // SET ACTIVE DECAL PATH
     const loadDecal = () => {
         const path = URL.createObjectURL(inputRef.current.files[0])
-        console.log(path)
         setDecalPath(path)
     }
 

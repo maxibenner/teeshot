@@ -5,6 +5,10 @@
     overflow: scroll;
     padding-top: 5px;
 }
+.imgContainerWrapper {
+    position: relative;
+    box-sizing: border-box;
+}
 .imgContainer {
     position: relative;
     display: flex;
@@ -25,7 +29,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: .8rem;
+    font-size: 0.8rem;
     background: white;
     border-radius: 8px;
     width: 15px;
