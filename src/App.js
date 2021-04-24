@@ -1,5 +1,5 @@
 import ControlPanel from "./components/ControlPanel"
-import PhotoButton from "./components/PhotoButton"
+import PhotoButton from "./components/photoButton/PhotoButton"
 import Viewer from "./components/three/Viewer"
 import logo from "./assets/images/logo.png"
 import "./globalStyles.css"
