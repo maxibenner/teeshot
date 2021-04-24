@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { MdCameraAlt } from "react-icons/md"
-import { Mixpanel } from "../helpers/Mixpanel"
 
 const PhotoButton = ({ gl }) => {
     const [hovered, setHovered] = useState(false)
@@ -13,9 +12,6 @@ const PhotoButton = ({ gl }) => {
         a.setAttribute("download", "fotura.png")
         a.setAttribute("href", imgData)
         a.click()
-
-        // Analytics
-        Mixpanel.track("Photo taken")
     }
 
     // Style additions
