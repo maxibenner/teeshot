@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { MdCameraAlt } from "react-icons/md"
-import styles from "./photoButton.module.css"
+import styles from "./buttonPhoto.module.css"
 
-const PhotoButton = ({ gl }) => {
+const ButtonPhoto = ({ gl }) => {
     const [hovered, setHovered] = useState(false)
 
     // Take screenshot
@@ -32,4 +32,4 @@ const PhotoButton = ({ gl }) => {
     )
 }
 
-export default PhotoButton
+export default ButtonPhoto

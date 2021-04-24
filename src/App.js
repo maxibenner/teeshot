@@ -1,5 +1,5 @@
 import ControlPanel from "./components/ControlPanel"
-import PhotoButton from "./components/photoButton/PhotoButton"
+import ButtonPhoto from "./components/buttonPhoto/ButtonPhoto"
 import Viewer from "./components/three/Viewer"
 import logo from "./assets/images/logo.png"
 import "./globalStyles.css"
@@ -13,7 +13,7 @@ export default function App() {
         <div style={styles.wrapper}>
             <Viewer />
             <img src={logo} alt="Logo" style={styles.logo} />
-            <PhotoButton gl={gl} style={styles.logo} />
+            <ButtonPhoto gl={gl} style={styles.logo} />
             <ControlPanel />
         </div>
     )
