@@ -16,8 +16,9 @@ const PhotoButton = ({ gl }) => {
     }
 
     return (
-        <div className={styles.wrapper} id="take-photo-button">
+        <div className={styles.wrapper}>
             <div
+                id="take-photo-button"
                 onPointerOver={() => setHovered(true)}
                 onPointerLeave={() => setHovered(false)}
                 onClick={screenshot}
@@ -32,5 +33,3 @@ const PhotoButton = ({ gl }) => {
 }
 
 export default PhotoButton
-
-
