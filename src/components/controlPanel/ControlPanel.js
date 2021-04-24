@@ -1,22 +1,23 @@
 import { useEffect, useRef, useState } from "react"
-import keyDown from "../assets/keys/keyDown.svg"
-import keyEscRed from "../assets/keys/keyEscRed.svg"
-import keyR from "../assets/keys/keyR.svg"
-import keyUp from "../assets/keys/keyUp.svg"
-import environmentBgThumb from "../assets/thumbs/environmentBg.png"
-import plainBgThumb from "../assets/thumbs/plainBg.svg"
-import shapesBgThumb from "../assets/thumbs/shapesBg.png"
-import textBgThumb from "../assets/thumbs/textBg.png"
-import transparentBgThumb from "../assets/thumbs/transparentBg.svg"
-import Icon from "../components/Icon"
-import useStore from "../states/modelState"
-import Button from "./button/Button"
-import Card from "./Card"
-import ColorPicker from "./ColorPicker"
-import IconWithText from "./IconWithText"
-import InputText from "./InputText"
 import { RiArrowDropLeftLine } from "react-icons/ri"
-import DecalManager from "../components/DecalManager"
+import keyDown from "../../assets/keys/keyDown.svg"
+import keyEscRed from "../../assets/keys/keyEscRed.svg"
+import keyR from "../../assets/keys/keyR.svg"
+import keyUp from "../../assets/keys/keyUp.svg"
+import environmentBgThumb from "../../assets/thumbs/environmentBg.png"
+import plainBgThumb from "../../assets/thumbs/plainBg.svg"
+import shapesBgThumb from "../../assets/thumbs/shapesBg.png"
+import textBgThumb from "../../assets/thumbs/textBg.png"
+import transparentBgThumb from "../../assets/thumbs/transparentBg.svg"
+import useStore from "../../states/modelState"
+import Button from "../button/Button"
+import Card from "../card/Card"
+import ColorPicker from "../colorPicker/ColorPicker"
+import DecalManager from "../decalManager/DecalManager"
+import Icon from "../icon/Icon"
+import IconWithText from "../iconWithText/IconWithText"
+import InputText from "../inputText/InputText"
+import s from "./controlPanel.module.css"
 
 export default function ControlPanel() {
     const inputRef = useRef()
@@ -71,55 +72,26 @@ export default function ControlPanel() {
 
     // EXPAND PANEL
     const [open, setOpen] = useState(true)
-    const styles = {
-        wrapper: {
-            position: "absolute",
-            boxSizing: "border-box",
-            top: 0,
-            right: 0,
-            transform: open ? "translateX(0)" : "translateX(280px)",
-            margin: "0 15px 15px 15px",
-            transition: ".3s",
-            maxWidth: "270px",
-        },
-        containerInner: {
-            maxHeight: "calc(85vh - 15px)",
-            overflow: "scroll",
-            paddingTop: "15px"
-        },
-        handle: {
-            width: "30px",
-            height: "50px",
-            background: "black",
-            borderRadius: "5px",
-            color: "white",
-            fontSize: "1.8rem",
-            display: "flex",
-            alignItems: "center",
-            cursor: "pointer",
-            position: "absolute",
-            left: "-30px",
-            top: "50%",
-            transform: open ? "rotate(180deg)" : "rotate(0deg)",
-        },
-    }
     const togglePanel = () => {
         setOpen((state) => !state)
     }
 
     return (
         <>
-            <div style={styles.wrapper}>
-                <div style={styles.handle} onClick={togglePanel}>
+            <div className={open ? s.wrapper_open : s.wrapper_closed}>
+                <div
+                    className={open ? s.handle_open : s.handle_closed}
+                    onClick={togglePanel}
+                >
                     <RiArrowDropLeftLine />
                 </div>
-                <div style={styles.containerInner}>
+                <div className={s.containerInner}>
                     <Card invisible>
                         <Button onClick={handleButtonClick}>
                             Upload Design
                         </Button>
                         <input
-                            style={{ display: "none" }}
+                            className={s.input}
                             onInput={() => loadDecal()}
                             ref={inputRef}
                             type="file"
@@ -131,30 +103,35 @@ export default function ControlPanel() {
                             onClick={() => {
                                 setSet("TransparentBg")
                             }}
+                            id="bg_transparent"
                         />
                         <Icon
                             imgSrc={plainBgThumb}
                             onClick={() => {
                                 setSet("PlainBg")
                             }}
+                            id="bg_plain"
                         />
                         <Icon
                             imgSrc={shapesBgThumb}
                             onClick={() => {
                                 setSet("ShapesBg")
                             }}
+                            id="bg_shapes"
                         />
                         <Icon
                             imgSrc={environmentBgThumb}
                             onClick={() => {
                                 setSet("EnvironmentBg")
                             }}
+                            id="bg_environment"
                         />
                         <Icon
                             imgSrc={textBgThumb}
                             onClick={() => {
                                 setSet("TextBg")
                             }}
+                            id="bg_text"
                         />
                     </Card>
                     {set === "TextBg" && (

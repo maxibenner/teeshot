@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
-import Card from "./Card"
-import useStore from "../states/modelState"
+import useStore from "../../states/modelState"
 import { MdClose } from "react-icons/md"
+import s from "./decalManager.module.css"
 
 const DecalManager = () => {
     const { decalImages, setDecalImages, removeDecal, decals } = useStore()
@@ -28,7 +28,7 @@ const DecalManager = () => {
     }, [decals])
 
     return (
-        <div style={styles.imagesWrapper}>
+        <div style={s.imagesWrapper}>
             {decalImages.map((decal, i) => {
                 return (
                     <div
@@ -39,15 +39,15 @@ const DecalManager = () => {
                             zIndex: decalImages.length - i,
                         }}
                     >
-                        <div style={styles.imgContainer}>
+                        <div style={s.imgContainer}>
                             <img
-                                style={styles.img}
+                                style={s.img}
                                 src={decal.path}
                                 alt={"decal thumbnail"}
                             />
                         </div>
                         <div
-                            style={styles.closeBtn}
+                            style={s.closeBtn}
                             onClick={handleRemove}
                             data-key={decal.key}
                         >
@@ -58,46 +58,6 @@ const DecalManager = () => {
             })}
         </div>
     )
-}
-
-const styles = {
-    imagesWrapper: {
-        display: "flex",
-        flexDirection: "row",
-        margin: "0 -5px",
-        overflow: "scroll",
-        paddingTop: "5px",
-    },
-    imgContainer: {
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        maxWidth: "40px",
-        maxHeight: "40px",
-        boxShadow: "0 1px 2px rgba(0, 0, 0, 0.17)",
-        overflow: "hidden",
-        margin: "5px",
-        borderRadius: "5px",
-    },
-    img: {
-        maxHeight: "40px",
-        margin: "0 auto",
-    },
-    closeBtn: {
-        position: "absolute",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        fontSize: ".8rem",
-        background: "white",
-        borderRadius: "8px",
-        width: "15px",
-        height: "15px",
-        boxShadow: "0 1px 2px rgba(0, 0, 0, 0.17)",
-        top: "-5px",
-        right: "-5px",
-        cursor: "pointer",
-    },
 }
 
 export default DecalManager

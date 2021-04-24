@@ -1,0 +1,12 @@
+.img {
+    max-width: 40px;
+}
+.text {
+    color: grey;
+    margin: 0 10px;
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}

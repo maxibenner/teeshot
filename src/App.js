@@ -1,4 +1,4 @@
-import ControlPanel from "./components/ControlPanel"
+import ControlPanel from "./components/controlPanel/ControlPanel"
 import ButtonPhoto from "./components/buttonPhoto/ButtonPhoto"
 import Viewer from "./components/three/Viewer"
 import logo from "./assets/images/logo.png"
@@ -22,7 +22,7 @@ export default function App() {
 const styles = {
     wrapper: {
         width: "100%",
-        height: "100vh",
+        minHeight: "100vh",
         boxSizing: "border-box",
         background: "black",
         top: 0,

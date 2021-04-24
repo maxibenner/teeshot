@@ -1,0 +1,24 @@
+.visible {
+    overflow: hidden;
+    background: white;
+    padding: 10px;
+    border-radius: 7px;
+    margin: 14px;
+}
+.invisible {
+    overflow: hidden;
+    border-radius: 7px;
+    margin: 14px;
+}
+.inner_flex {
+    box-sizing: border-box;
+    display: flex;
+}
+.inner_block {
+    box-sizing: border-box;
+    display: block;
+}
+.h3 {
+    margin: 5px 0;
+    color: grey;
+}
