@@ -18,7 +18,7 @@ export default function App() {
             <img src={logo} alt="Logo" style={styles.logo} />
             <ButtonPhoto gl={gl} style={styles.logo} />
             <ControlPanel />
-            <div
+            {/*<div
                 style={{
                     position: "absolute",
                     top: 0,
@@ -31,7 +31,7 @@ export default function App() {
                 }}
             >
                 <button onClick={handleStart}>Start</button>
-            </div>
+            </div>*/}
         </div>
     )
 }
