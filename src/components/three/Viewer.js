@@ -38,12 +38,13 @@ const Viewer = () => {
         }
     }, [])
 
-    // ANIMATION
+    // FLIP ANIMATION
     const flipModelAnimation = useSpring({
         config: { tension: 300, mass: 1.3 },
         rotation: modelFlipped ? [0, Math.PI / 1, 0] : [0, 0, 0],
         onChange: () => invalidate(),
     })
+
 
     return (
         <CanvasBackground>

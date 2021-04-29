@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 export default function useRecorder(element) {
-    //var mediaRecorder
+    var stream, webSocket
     const [mediaRecorder, setMediaRecorder] = useState()
     const [isRecording, setIsRecording] = useState(false)
 
@@ -9,24 +9,42 @@ export default function useRecorder(element) {
     useEffect(() => {
         if (element) {
             // Get stream from element
-            const stream = element.captureStream(30)
+            stream = element.captureStream(30)
 
             // Create media recorder with stream
-            const mediaRecorder = new MediaRecorder(stream)
+            const recorder = new MediaRecorder(stream)
 
-            // Save to file
-            mediaRecorder.ondataavailable = (blob) => {
-                saveFile(blob)
+            //TES
+            const formData = new FormData()
+            //formData.append("file", blob)
+
+            const options = {
+                method: "POST",
+                body: formData,
             }
 
+            fetch("http://localhost:8090?action=convert", options)
+
+            // Save to file
+            /*recorder.ondataavailable = (blob) => {
+                
+                const request = new Request("http://localhost:8090", {
+                    method: "POST",
+                    body: blob,
+                })
+                fetch("http://localhost:8090").then((res) => {
+                    console.log(res)
+                })
+            }*/
+
             // Set state
-            setMediaRecorder(mediaRecorder)
+            setMediaRecorder(recorder)
         }
     }, [element])
 
     function capture(durationInSeconds = 1) {
-        console.log(mediaRecorder)
         mediaRecorder.start()
+
         setIsRecording(true)
 
         setTimeout(() => {
@@ -39,7 +57,7 @@ export default function useRecorder(element) {
         var blobUrl = URL.createObjectURL(blob.data)
         var link = document.createElement("a")
         link.href = blobUrl
-        link.download = "aDefaultFileName.mp4"
+        link.download = "aDefaultFileName.webm"
         link.click()
     }
 

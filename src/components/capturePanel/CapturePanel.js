@@ -2,13 +2,13 @@ import { useState } from "react"
 import { MdPhotoCamera } from "react-icons/md"
 import { FaVideo } from "react-icons/fa"
 import styles from "./capturePanel.module.css"
-import useRecorder from "../../helpers/useRecorder"
+//import useRecorder from "../../helpers/useRecorder"
 import useStore from "../../states/modelState"
 
 const CapturePanel = () => {
     const [mode, setMode] = useState("photo")
     const { gl } = useStore()
-    const { capture, isRecording } = useRecorder(gl?.domElement)
+    //const { capture, isRecording } = useRecorder(gl?.domElement)
 
     // Take screenshot
     const screenshot = () => {
@@ -22,7 +22,7 @@ const CapturePanel = () => {
 
     // Record video
     const video = () => {
-        capture(5)
+        //capture(5)
     }
 
     // Change capture mode
@@ -50,9 +50,9 @@ const CapturePanel = () => {
                         cy="34"
                         r="32.5"
                         className={
-                            isRecording
-                                ? styles.capture_indicator_animate
-                                : styles.capture_indicator
+                            //isRecording
+                                //? styles.capture_indicator_animate
+                                /*:*/ styles.capture_indicator
                         }
                     />
                     <circle
@@ -63,9 +63,9 @@ const CapturePanel = () => {
                         fill={mode === "photo" ? "white" : "rgb(255, 61, 61)"}
                     />
                 </svg>
-                <div className={styles.mode_switch} onClick={handleMode}>
+                {/*<div className={styles.mode_switch} onClick={handleMode}>
                     {mode !== "photo" ? <MdPhotoCamera /> : <FaVideo />}
-                </div>
+                    </div>*/}
             </div>
         </div>
     )

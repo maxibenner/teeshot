@@ -10,7 +10,8 @@ export default Decals
 
 // INIT
 var helper = new THREE.Object3D(),
-    eulerHelper = new THREE.Euler(0, 0, 0)
+    eulerHelper = new THREE.Euler(0, 0, 0),
+    posHelper = new THREE.Euler(0, 0, 0)
 
 export const createDecal = (mesh, position, normal, activeDecal, maxSize) => {
     // INFO: This component works with a state array in the parent that holds the decal meshes.
@@ -42,6 +43,10 @@ export const createDecal = (mesh, position, normal, activeDecal, maxSize) => {
     // COUNTERACT ROTATION
     eulerHelper.setFromRotationMatrix(mesh.matrixWorld)
 
+    // COUNTER POSITION
+    posHelper.setFromVector3(mesh.localToWorld(mesh.position))
+    console.log(posHelper)
+
     // KEY
     const key = Math.floor(Math.random() * 999999)
 
@@ -55,6 +60,11 @@ export const createDecal = (mesh, position, normal, activeDecal, maxSize) => {
                     eulerHelper.x * -1,
                     eulerHelper.y * -1,
                     eulerHelper.z * -1,
+                ]}
+                position={[
+                    posHelper.x * -1,
+                    posHelper.y * -1,
+                    posHelper.z * -1,
                 ]}
             >
                 <decalGeometry

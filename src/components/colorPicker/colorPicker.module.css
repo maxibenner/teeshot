@@ -7,7 +7,7 @@
     color: grey;
     margin: 0 10px;
 }
-.input {
+.color {
     width: 40px;
     height: 40px;
     border: 1px solid lightGrey;
@@ -15,4 +15,7 @@
     background: color;
     box-sizing: border-box;
     cursor: pointer;
+}
+.input {
+    display: none;
 }

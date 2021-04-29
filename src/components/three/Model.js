@@ -1,5 +1,5 @@
 import { useTexture } from "@react-three/drei"
-import { useLoader, useFrame, useThree } from "@react-three/fiber"
+import { useLoader, useFrame, invalidate } from "@react-three/fiber"
 import { useEffect, useRef } from "react"
 import { a } from "react-spring/three"
 import * as THREE from "three"
@@ -10,8 +10,7 @@ import Decals, { createDecal } from "./Decals"
 const Model = ({ url, rotation, setModelRayData }) => {
     // REF
     const modelRef = useRef()
-
-    const { gl } = useThree()
+    const groupRef = useRef()
 
     // GLOBAL STATE
     const {
@@ -42,7 +41,6 @@ const Model = ({ url, rotation, setModelRayData }) => {
 
     // ADD DECAL TO ARRAY
     const handleDecal = (e) => {
-        console.log(gl.getPixelRatio())
         // Get texture
         new THREE.TextureLoader().load(decalPath, (decalTexture) => {
             // Check for active decal
@@ -92,8 +90,18 @@ const Model = ({ url, rotation, setModelRayData }) => {
     // RESET RAYCAST POS AND NORMAL
     const removeRaycast = () => setModelRayData(null)
 
+    // Animate
+    /*useFrame(({clock}) => {
+        groupRef.current.position.y = Math.sin(clock.getElapsedTime()) * 0.05
+        groupRef.current.position.x = Math.sin(clock.getElapsedTime()) * 0.01
+        groupRef.current.position.z = Math.sin(clock.getElapsedTime()) * 0.01
+        groupRef.current.rotation.y = Math.sin(clock.getElapsedTime()) * 0.1
+        groupRef.current.rotation.x = Math.sin(clock.getElapsedTime()) * 0.1
+        invalidate()
+    })*/
+
     return (
-        <a.group rotation={rotation} castShadow>
+        <a.group ref={groupRef} rotation={rotation} castShadow>
             <mesh
                 ref={modelRef}
                 onPointerMove={passRaycast}

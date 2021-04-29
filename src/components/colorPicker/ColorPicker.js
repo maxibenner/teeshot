@@ -1,20 +1,23 @@
-import { useRef } from "react"
+import { useState } from "react"
 import s from "./colorPicker.module.css"
+import { HexColorPicker } from "react-colorful"
 
 const ColorPicker = ({ title, color, setColor }) => {
-    const inputRef = useRef()
+    const [active, setActive] = useState(false)
+    const handleClick = () => {
+        setActive((state) => !state)
+    }
     return (
         <>
             <div className={s.wrapper}>
-                <input
-                    ref={inputRef}
-                    type="color"
-                    value={color}
-                    onInput={() => setColor(inputRef.current.value)}
-                    className={s.input}
+                <div
+                    className={s.color}
+                    style={{ background: color }}
+                    onClick={handleClick}
                 />
                 <p className={s.text}>{title}</p>
             </div>
+            {active && <HexColorPicker style={{width: "100%"}} color={color} onChange={setColor} />}
         </>
     )
 }
