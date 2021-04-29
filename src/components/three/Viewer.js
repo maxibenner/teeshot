@@ -49,7 +49,14 @@ const Viewer = () => {
         <CanvasBackground>
             <Canvas
                 style={decalPath && { cursor: "none" }}
-                gl={{ preserveDrawingBuffer: true /*, antialias: false*/ }}
+                gl={{
+                    preserveDrawingBuffer: true,
+                }}
+                dpr={
+                    window.devicePixelRatio >= 1.5
+                        ? 1.5
+                        : window.devicePixelRatio
+                }
                 camera={{ position: [0, 0, 2.2], fov: 50 }}
                 frameloop="demand"
                 shadows
