@@ -45,7 +45,7 @@
     stroke-dashoffset: 0;
     transform-origin: 50% 50%;
     fill: transparent;
-    animation: fill-animation 5s linear;
+    animation: fill-animation 1s linear;
     pointer-events: none;
 }
 .capture_fill {

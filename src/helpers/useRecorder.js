@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 export default function useRecorder(element) {
-    var stream, webSocket
+    var stream
     const [mediaRecorder, setMediaRecorder] = useState()
     const [isRecording, setIsRecording] = useState(false)
 
@@ -14,28 +14,23 @@ export default function useRecorder(element) {
             // Create media recorder with stream
             const recorder = new MediaRecorder(stream)
 
-            //TES
-            const formData = new FormData()
-            //formData.append("file", blob)
-
-            const options = {
-                method: "POST",
-                body: formData,
-            }
-
-            fetch("http://localhost:8090?action=convert", options)
-
             // Save to file
-            /*recorder.ondataavailable = (blob) => {
+            recorder.ondataavailable = ({ data }) => {
                 
-                const request = new Request("http://localhost:8090", {
+                const formData = new FormData()
+                formData.append("file", data)
+
+                const options = {
                     method: "POST",
-                    body: blob,
-                })
-                fetch("http://localhost:8090").then((res) => {
-                    console.log(res)
-                })
-            }*/
+                    body: formData,
+                }
+
+                fetch("http://localhost:3001/api/blob_to_mp4", options).then(
+                    (res) => {
+                        console.log(res)
+                    }
+                )
+            }
 
             // Set state
             setMediaRecorder(recorder)
