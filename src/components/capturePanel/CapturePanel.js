@@ -1,14 +1,23 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { MdPhotoCamera } from "react-icons/md"
 import { FaVideo } from "react-icons/fa"
 import styles from "./capturePanel.module.css"
-import useRecorder from "../../helpers/useRecorder"
+//import useRecorder from "../../helpers/useRecorder"
 import useStore from "../../states/modelState"
+import useRecorderStore from "../../states/recorderState"
 
 const CapturePanel = () => {
-    const [mode, setMode] = useState("photo")
+    //const [mode, setMode] = useState("photo")
     const { gl } = useStore()
-    const { capture, isRecording } = useRecorder(gl)
+    //const { capture, isRecording } = useRecorder(gl)
+    const {
+        active,
+        mode,
+        setActive,
+        setFps,
+        setMode,
+        setDuration,
+    } = useRecorderStore()
 
     // Take screenshot
     const screenshot = () => {
@@ -22,7 +31,8 @@ const CapturePanel = () => {
 
     // Record video
     const video = () => {
-        capture(1, 30)
+        setFps(10)
+        setActive(true)
     }
 
     // Change capture mode
@@ -50,7 +60,7 @@ const CapturePanel = () => {
                         cy="34"
                         r="32.5"
                         className={
-                            isRecording
+                            active
                                 ? styles.capture_indicator_animate
                                 : styles.capture_indicator
                         }

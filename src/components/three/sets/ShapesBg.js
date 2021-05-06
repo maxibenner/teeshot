@@ -11,11 +11,11 @@ const ShapesBg = ({ backgroundColor }) => {
     // One degree in radians
     const oneDeg = useMemo(() => Math.PI / 180, [])
     // Shape rotation
-    useFrame(({ clock }) => {
-        const clockedRotation = oneDeg * 72 * clock.elapsedTime
-        box.current.rotation.y = clockedRotation
-        donut.current.rotation.y = clockedRotation
-        donutLarge.current.rotation.y = clockedRotation * -1
+    useFrame((state, delta) => {
+        //const clockedRotation = oneDeg * 72 * state.clock.elapsedTime
+        box.current.rotation.y += delta * (oneDeg * (360 / 5))
+        //donut.current.rotation.y += delta
+        //donutLarge.current.rotation.y += delta
         invalidate()
     })
 

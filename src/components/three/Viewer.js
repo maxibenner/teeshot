@@ -7,6 +7,7 @@ import CanvasBackground from "./CanvasBackground"
 import DecalHelper from "./DecalHelper"
 import Model from "./Model"
 import Scenes from "./Scenes"
+import Recorder from "./Recorder"
 
 softShadows({
     near: 0.04,
@@ -90,6 +91,7 @@ const Viewer = () => {
                     />
                 </Suspense>
                 <Scenes />
+                <Recorder />
             </Canvas>
         </CanvasBackground>
     )
