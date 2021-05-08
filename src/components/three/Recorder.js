@@ -4,38 +4,52 @@ import useRecorderStore from "../../states/recorderState"
 
 // Websocket
 var ws,
-    userId = Math.floor(Math.random() * 999999999),
+    userId = "u" + Math.floor(Math.random() * 999999999),
+    sessionId = "s" + Math.floor(Math.random() * 999999999),
     socketUrl = "localhost:3001"
 
 const Recorder = () => {
     // Get recorder store data
     const { duration, fps, active, setActive } = useRecorderStore()
 
-    const [recording, setRecording] = useState(false)
+    const recording = useRef(false)
+    const frameCounter = useRef(0)
 
-    const frameCounter = useRef()
-    frameCounter.current = 0
-
-    // Take over render loop
+    // Get scene and camera
     const { scene, camera } = useThree()
 
     // Websocket init
     useEffect(() => {
-        if (active) {
-            ws = new WebSocket(`ws://${socketUrl}?id=${userId}`)
+        ws = new WebSocket(`ws://${socketUrl}?id=${userId}`)
 
-            // Star recording
-            ws.onopen = () => {
-                setRecording(true)
+        // Message handling
+        ws.onmessage = (message) => {
+            const res = JSON.parse(message.data)
+            if (res.action === "download") {
+                var a = document.createElement("a")
+
+                a.setAttribute("download", "fotura.mp4")
+                a.setAttribute("href", "http://localhost:3001/clip.mp4")
+                a.click()
+
             }
-        } else {
-            setRecording(false)
+        }
+    }, [])
+
+    // Start recording
+    useEffect(() => {
+        if (active) {
+            recording.current = true
+
+            // Refresh session id
+            sessionId = "s" + Math.floor(Math.random() * 999999999)
         }
     }, [active])
 
+    // Recording process
     useFrame(
         ({ gl }) => {
-            if (recording) {
+            if (recording.current) {
                 // Capture and send
                 const f = gl.domElement.toDataURL()
                 send_frame_to_server(f)
@@ -50,12 +64,13 @@ const Recorder = () => {
                     frameCounter.current += 1
                 } else {
                     // Done
+                    recording.current = false
                     setActive(false)
                     start_processing(fps)
                 }
             }
         },
-        recording ? 10 : 0
+        recording.current ? 10 : 0
     )
 
     function send_frame_to_server(dataUrl) {
@@ -63,6 +78,7 @@ const Recorder = () => {
         const object = JSON.stringify({
             action: "add_frame",
             data: dataUrl,
+            sessionId: sessionId,
         })
         ws.send(object)
     }
@@ -74,6 +90,7 @@ const Recorder = () => {
             data: null,
             duration: duration,
             fps: framerate,
+            sessionId: sessionId,
         })
         ws.send(object)
     }
