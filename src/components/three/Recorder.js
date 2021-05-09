@@ -1,12 +1,11 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useRef } from "react"
 import { useFrame, useThree } from "@react-three/fiber"
 import useRecorderStore from "../../states/recorderState"
 
 // Websocket
-var ws,
-    userId = "u" + Math.floor(Math.random() * 999999999),
+var userId = "u" + Math.floor(Math.random() * 999999999),
     sessionId = "s" + Math.floor(Math.random() * 999999999),
-    socketUrl = "localhost:3001"
+    serverUrl = "localhost:3001"
 
 const Recorder = () => {
     // Get recorder store data
@@ -18,31 +17,18 @@ const Recorder = () => {
     // Get scene and camera
     const { scene, camera } = useThree()
 
-    // Websocket init
-    useEffect(() => {
-        ws = new WebSocket(`ws://${socketUrl}?id=${userId}`)
-
-        // Message handling
-        ws.onmessage = (message) => {
-            const res = JSON.parse(message.data)
-            if (res.action === "download") {
-                var a = document.createElement("a")
-
-                a.setAttribute("download", "fotura.mp4")
-                a.setAttribute("href", "http://localhost:3001/clip.mp4")
-                a.click()
-
-            }
-        }
-    }, [])
-
     // Start recording
     useEffect(() => {
-        if (active) {
+        if (active === true) {
             recording.current = true
 
             // Refresh session id
             sessionId = "s" + Math.floor(Math.random() * 999999999)
+        } else if (active === false) {
+            // Process frames
+            start_processing(sessionId, duration, fps).then((url) => {
+                downloadResource(`http://${serverUrl}/${url}`, "foturaClip.mp4")
+            })
         }
     }, [active])
 
@@ -50,49 +36,97 @@ const Recorder = () => {
     useFrame(
         ({ gl }) => {
             if (recording.current) {
-                // Capture and send
-                const f = gl.domElement.toDataURL()
-                send_frame_to_server(f)
-
                 // Progress
-                if (frameCounter.current !== duration * fps) {
-                    // Continue
-                    gl.clearDepth()
-                    gl.render(scene, camera)
+                if (frameCounter.current <= 1 /*duration * fps*/) {
+                    // Capture and send every other frame
+                    if (
+                        frameCounter.current % 2 == 0 ||
+                        frameCounter.current == 0
+                    ) {
+                        const frame = gl.domElement.toDataURL()
+                        send_frame_to_server(
+                            frame,
+                            frameCounter.current + 1,
+                            sessionId
+                        ).then(() => {
+                            // Render next frame
+                            gl.clearDepth()
+                            gl.render(scene, camera)
+                        })
+                    } else {
+                        // Render next frame
+                        gl.clearDepth()
+                        gl.render(scene, camera)
+                    }
 
                     // Advance counter
                     frameCounter.current += 1
                 } else {
                     // Done
                     recording.current = false
+                    frameCounter.current = 0
                     setActive(false)
-                    start_processing(fps)
                 }
             }
         },
         recording.current ? 10 : 0
     )
 
-    function send_frame_to_server(dataUrl) {
+    async function send_frame_to_server(dataUrl, frameNumber, sessionId) {
         // Send to server
         const object = JSON.stringify({
             action: "add_frame",
             data: dataUrl,
             sessionId: sessionId,
+            frameNumber: frameNumber,
         })
-        ws.send(object)
+        fetch(`http://${serverUrl}/add_frame`, {
+            method: "POST",
+            headers: new Headers({
+                Origin: window.origin,
+                Accept: "image/png",
+                "Content-Type": "image/png",
+            }),
+            mode: "cors",
+            body: object,
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
     }
 
-    function start_processing(framerate) {
-        // Send to server
-        const object = JSON.stringify({
-            action: "process",
-            data: null,
-            duration: duration,
-            fps: framerate,
-            sessionId: sessionId,
+    async function start_processing(sessionId, duration, fps) {
+        const url = fetch(
+            `http://${serverUrl}/process?duration=${duration}&fps=${fps}&sessionId=${sessionId}`
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                return data.url
+            })
+        return url
+    }
+
+    function forceDownload(blob, filename) {
+        var a = document.createElement("a")
+        a.download = filename
+        a.href = blob
+        document.body.appendChild(a)
+        a.click()
+        a.remove()
+    }
+
+    function downloadResource(url, filename) {
+        fetch(url, {
+            headers: new Headers({
+                Origin: window.origin,
+            }),
+            mode: "cors",
         })
-        ws.send(object)
+            .then((response) => response.blob())
+            .then((blob) => {
+                let blobUrl = window.URL.createObjectURL(blob)
+                forceDownload(blobUrl, filename)
+            })
+            .catch((e) => console.error(e))
     }
 
     return null

@@ -13,9 +13,9 @@ const ShapesBg = ({ backgroundColor }) => {
     // Shape rotation
     useFrame((state, delta) => {
         //const clockedRotation = oneDeg * 72 * state.clock.elapsedTime
-        box.current.rotation.y += delta * (oneDeg * (360 / 5))
-        //donut.current.rotation.y += delta
-        //donutLarge.current.rotation.y += delta
+        box.current.rotation.y += oneDeg * (360 / 300)
+        donut.current.rotation.y += oneDeg * (360 / 300)
+        donutLarge.current.rotation.y += oneDeg * (360 / 300)
         invalidate()
     })
 
