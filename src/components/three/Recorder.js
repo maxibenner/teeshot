@@ -1,10 +1,9 @@
-import { useEffect, useRef } from "react"
 import { useFrame, useThree } from "@react-three/fiber"
+import { useEffect, useRef } from "react"
 import useRecorderStore from "../../states/recorderState"
 
 // Websocket
-var userId = "u" + Math.floor(Math.random() * 999999999),
-    sessionId = "s" + Math.floor(Math.random() * 999999999),
+var sessionId = "s" + Math.floor(Math.random() * 999999999),
     serverUrl = "localhost:3001"
 
 const Recorder = () => {
@@ -13,6 +12,7 @@ const Recorder = () => {
 
     const recording = useRef(false)
     const frameCounter = useRef(0)
+    const nameCounter = useRef(0)
 
     // Get scene and camera
     const { scene, camera } = useThree()
@@ -24,11 +24,6 @@ const Recorder = () => {
 
             // Refresh session id
             sessionId = "s" + Math.floor(Math.random() * 999999999)
-        } else if (active === false) {
-            // Process frames
-            start_processing(sessionId, duration, fps).then((url) => {
-                downloadResource(`http://${serverUrl}/${url}`, "foturaClip.mp4")
-            })
         }
     }, [active])
 
@@ -37,7 +32,7 @@ const Recorder = () => {
         ({ gl }) => {
             if (recording.current) {
                 // Progress
-                if (frameCounter.current <= 1 /*duration * fps*/) {
+                if (nameCounter.current <= duration * fps) {
                     // Capture and send every other frame
                     if (
                         frameCounter.current % 2 == 0 ||
@@ -46,9 +41,12 @@ const Recorder = () => {
                         const frame = gl.domElement.toDataURL()
                         send_frame_to_server(
                             frame,
-                            frameCounter.current + 1,
+                            nameCounter.current + 1,
                             sessionId
                         ).then(() => {
+                            // Advance name counter
+                            nameCounter.current += 1
+
                             // Render next frame
                             gl.clearDepth()
                             gl.render(scene, camera)
@@ -66,6 +64,14 @@ const Recorder = () => {
                     recording.current = false
                     frameCounter.current = 0
                     setActive(false)
+
+                    // Process frames
+                    start_processing(sessionId, duration, fps).then((url) => {
+                        downloadResource(
+                            `http://${serverUrl}/${url}`,
+                            "foturaClip.mp4"
+                        )
+                    })
                 }
             }
         },
@@ -91,7 +97,11 @@ const Recorder = () => {
             body: object,
         })
             .then((response) => response.json())
-            .then((data) => console.log(data))
+            .then((data) => {
+                return data
+            })
+
+        return
     }
 
     async function start_processing(sessionId, duration, fps) {
