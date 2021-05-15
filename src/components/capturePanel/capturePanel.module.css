@@ -37,28 +37,10 @@
     transform-origin: 50% 50%;
     fill: transparent;
     pointer-events: none;
-}
-.capture_indicator_animate {
-    stroke: red;
-    stroke-width: 2.5;
-    stroke-dasharray: 204;
-    stroke-dashoffset: 0;
-    transform-origin: 50% 50%;
-    fill: transparent;
-    animation: fill-animation 1s linear;
-    pointer-events: none;
+    transition: .2s;
 }
 .capture_fill {
     stroke: black;
     stroke-width: 2.5;
     pointer-events: none;
-}
-
-@keyframes fill-animation {
-    0% {
-        stroke-dashoffset: 204;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
 }

@@ -1,15 +1,14 @@
-import { useState, useEffect } from "react"
-import { MdPhotoCamera } from "react-icons/md"
+import { useState } from "react"
 import { FaVideo } from "react-icons/fa"
-import styles from "./capturePanel.module.css"
-//import useRecorder from "../../helpers/useRecorder"
+import { MdPhotoCamera } from "react-icons/md"
 import useStore from "../../states/modelState"
 import useRecorderStore from "../../states/recorderState"
+import styles from "./capturePanel.module.css"
 
 const CapturePanel = () => {
-    const [mode, setMode] = useState("photo")
+    //const [mode, setMode] = useState("photo")
     const { gl } = useStore()
-    const { active, setActive } = useRecorderStore()
+    const { setActive, progress, mode, setMode } = useRecorderStore()
 
     // Take screenshot
     const screenshot = () => {
@@ -50,11 +49,11 @@ const CapturePanel = () => {
                         cx="34"
                         cy="34"
                         r="32.5"
-                        className={
-                            active
-                                ? styles.capture_indicator_animate
-                                : styles.capture_indicator
-                        }
+                        className={styles.capture_indicator}
+                        style={{
+                            strokeDashoffset:
+                                progress === 0 ? 204 : (100 - progress) * 2.04,
+                        }}
                     />
                     <circle
                         cx="34"

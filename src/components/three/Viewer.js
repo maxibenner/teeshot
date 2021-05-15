@@ -1,13 +1,14 @@
 import { softShadows } from "@react-three/drei"
-import { Canvas, invalidate, useFrame } from "@react-three/fiber"
-import { Suspense, useEffect, useState, useRef } from "react"
+import { Canvas, invalidate } from "@react-three/fiber"
+import { Suspense, useEffect, useState } from "react"
 import { useSpring } from "react-spring/three"
 import useStore from "../../states/modelState"
 import CanvasBackground from "./CanvasBackground"
 import DecalHelper from "./DecalHelper"
 import Model from "./Model"
 import Scenes from "./Scenes"
-import Recorder from "./Recorder"
+import RenderController from "./RenderController"
+import useRecorderStore from "../../states/recorderState"
 
 softShadows({
     near: 0.04,
@@ -25,20 +26,23 @@ const Viewer = () => {
         incrementDecalSize,
         setGl,
     } = useStore()
+    const { active, mode } = useRecorderStore()
 
     // KEYDOWN
     useEffect(() => {
         function handlekeydownEvent(event) {
-            const { key } = event
-            key === "r" && setModelFlipped((prev) => (prev ? false : true))
-            key === "ArrowUp" && incrementDecalSize(0.01)
-            key === "ArrowDown" && decrementDecalSize(0.01)
+            if (!active) {
+                const { key } = event
+                key === "r" && setModelFlipped((prev) => (prev ? false : true))
+                key === "ArrowUp" && incrementDecalSize(0.01)
+                key === "ArrowDown" && decrementDecalSize(0.01)
+            }
         }
         document.addEventListener("keydown", handlekeydownEvent)
         return () => {
             document.removeEventListener("keydown", handlekeydownEvent)
         }
-    }, [])
+    }, [active])
 
     // FLIP ANIMATION
     const flipModelAnimation = useSpring({
@@ -91,7 +95,7 @@ const Viewer = () => {
                     />
                 </Suspense>
                 <Scenes />
-                <Recorder />
+                {mode === "video" && <RenderController />}
             </Canvas>
         </CanvasBackground>
     )

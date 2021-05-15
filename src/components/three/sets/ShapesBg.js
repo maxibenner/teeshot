@@ -1,21 +1,19 @@
 import { invalidate, useFrame } from "@react-three/fiber"
-import { useRef, useMemo } from "react"
+import { useRef } from "react"
+import useRecorderStore from "../../../states/recorderState"
 
 const ShapesBg = ({ backgroundColor }) => {
+    const { duration } = useRecorderStore()
     const box = useRef()
     const sphere = useRef()
     const donut = useRef()
     const donutLarge = useRef()
 
-    // ANIMATE
-    // One degree in radians
-    const oneDeg = useMemo(() => Math.PI / 180, [])
     // Shape rotation
     useFrame((state, delta) => {
-        //const clockedRotation = oneDeg * 72 * state.clock.elapsedTime
-        box.current.rotation.y += oneDeg * (360 / 300)
-        donut.current.rotation.y += oneDeg * (360 / 300)
-        donutLarge.current.rotation.y += oneDeg * (360 / 300)
+        box.current.rotation.y += (Math.PI * 2) / (60 * duration)
+        donut.current.rotation.y += (Math.PI * 2) / (60 * duration)
+        donutLarge.current.rotation.y += (Math.PI * 2) / (60 * duration)
         invalidate()
     })
 

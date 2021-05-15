@@ -1,5 +1,5 @@
 import { useTexture } from "@react-three/drei"
-import { useLoader, useFrame, invalidate } from "@react-three/fiber"
+import { useLoader, useFrame } from "@react-three/fiber"
 import { useEffect, useRef } from "react"
 import { a } from "react-spring/three"
 import * as THREE from "three"
@@ -35,7 +35,7 @@ const Model = ({ url, rotation, setModelRayData }) => {
     const normalTexture = useTexture("/normal.jpg")
     useEffect(() => {
         normalTexture.wrapS = normalTexture.wrapT = THREE.RepeatWrapping
-        normalTexture.repeat = new THREE.Vector2(8, 8)
+        normalTexture.repeat = new THREE.Vector2(15,15)
         normalTexture.anisotropy = 16
     }, [])
 

@@ -1,5 +1,5 @@
-import { useFrame, useThree } from "@react-three/fiber"
-import { useEffect, useRef } from "react"
+import { invalidate, useFrame, useThree } from "@react-three/fiber"
+import { useEffect, useRef, useState } from "react"
 import useRecorderStore from "../../states/recorderState"
 
 // Websocket
@@ -8,11 +8,12 @@ var sessionId = "s" + Math.floor(Math.random() * 999999999),
 
 const Recorder = () => {
     // Get recorder store data
-    const { duration, fps, active, setActive } = useRecorderStore()
+    const { duration, fps, active, setActive, setProgress } = useRecorderStore()
 
-    const recording = useRef(false)
+    const [totalFrames, setTotalFrames] = useState()
+
+    const [recording, setRecording] = useState(false)
     const frameCounter = useRef(0)
-    const nameCounter = useRef(0)
 
     // Get scene and camera
     const { scene, camera } = useThree()
@@ -20,50 +21,58 @@ const Recorder = () => {
     // Start recording
     useEffect(() => {
         if (active === true) {
-            recording.current = true
-
             // Refresh session id
             sessionId = "s" + Math.floor(Math.random() * 999999999)
+            setRecording(true)
         }
+
+        // Calculate total frames
+        setTotalFrames(fps * duration)
     }, [active])
 
     // Recording process
     useFrame(
         ({ gl }) => {
-            if (recording.current) {
+            if (recording) {
                 // Progress
-                if (nameCounter.current <= duration * fps) {
+                if (frameCounter.current <= duration * 60) {
                     // Capture and send every other frame
                     if (
                         frameCounter.current % 2 == 0 ||
                         frameCounter.current == 0
                     ) {
                         const frame = gl.domElement.toDataURL()
-                        send_frame_to_server(
-                            frame,
-                            nameCounter.current + 1,
-                            sessionId
-                        ).then(() => {
-                            // Advance name counter
-                            nameCounter.current += 1
+
+                        // Advance counter
+                        frameCounter.current += 1
+
+                        send_frame_to_server(frame, sessionId).then(() => {
+                            console.log(Math.floor(frameCounter.current / 2))
+                            // Advance progress state
+                            setProgress(
+                                Math.floor(
+                                    (frameCounter.current / totalFrames) * 50
+                                )
+                            )
 
                             // Render next frame
                             gl.clearDepth()
                             gl.render(scene, camera)
+                            invalidate()
                         })
                     } else {
-                        // Render next frame
-                        gl.clearDepth()
-                        gl.render(scene, camera)
-                    }
+                        // Advance counter
+                        frameCounter.current += 1
 
-                    // Advance counter
-                    frameCounter.current += 1
+                        // Next frame
+                        invalidate()
+                    }
                 } else {
                     // Done
-                    recording.current = false
+                    setProgress(0)
                     frameCounter.current = 0
                     setActive(false)
+                    setRecording(false)
 
                     // Process frames
                     start_processing(sessionId, duration, fps).then((url) => {
@@ -75,18 +84,17 @@ const Recorder = () => {
                 }
             }
         },
-        recording.current ? 10 : 0
+        recording ? 1 : 0
     )
 
-    async function send_frame_to_server(dataUrl, frameNumber, sessionId) {
+    async function send_frame_to_server(dataUrl, sessionId) {
         // Send to server
         const object = JSON.stringify({
             action: "add_frame",
             data: dataUrl,
             sessionId: sessionId,
-            frameNumber: frameNumber,
         })
-        fetch(`http://${serverUrl}/add_frame`, {
+        await fetch(`http://${serverUrl}/add_frame`, {
             method: "POST",
             headers: new Headers({
                 Origin: window.origin,
@@ -100,8 +108,6 @@ const Recorder = () => {
             .then((data) => {
                 return data
             })
-
-        return
     }
 
     async function start_processing(sessionId, duration, fps) {
