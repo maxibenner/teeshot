@@ -3,7 +3,7 @@ import React from "react"
 import useRecorderStore from "../../states/recorderState"
 
 var sessionId = "s" + Math.floor(Math.random() * 999999999),
-    serverUrl = "https://api.fotura.co", //"https://api.fotura.co"
+    serverUrl = "https://api.fotura.co", //"http://localhost:5000"
     totalFrames,
     renderLoop
 
