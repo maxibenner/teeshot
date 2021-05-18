@@ -3,7 +3,7 @@ import React from "react"
 import useRecorderStore from "../../states/recorderState"
 
 var sessionId = "s" + Math.floor(Math.random() * 999999999),
-    serverUrl = "https://api.fotura.co",
+    serverUrl = "http://localhost:5000", //"https://api.fotura.co"
     totalFrames,
     renderLoop
 
@@ -48,10 +48,7 @@ const RenderController = () => {
                     sessionId = "s" + Math.floor(Math.random() * 999999999)
 
                     // Download processed file
-                    downloadResource(
-                        `http://${serverUrl}/${url}`,
-                        "foturaClip.mp4"
-                    )
+                    downloadResource(`${serverUrl}/${url}`, "foturaClip.mp4")
                 })
             })
         } else if (active === false) {
@@ -64,7 +61,7 @@ const RenderController = () => {
 
     async function capture_send() {
         // Calculate total frames
-        totalFrames = fps * duration * 2 // double to amtch 60fps
+        totalFrames = fps * duration * 2 // double to match 60fps
 
         // Counter
         let frameCounter = 0
@@ -77,7 +74,13 @@ const RenderController = () => {
                 const image = gl.domElement.toDataURL()
 
                 // Send to server
-                await send_frame_to_server(image, sessionId)
+                const response = await send_frame_to_server(image, sessionId)
+
+                // Stop if error
+                console.log(response)
+                if (!response) {
+                    i = totalFrames
+                }
             }
 
             // Advance frame-loop
@@ -105,9 +108,9 @@ async function send_frame_to_server(dataUrl, sessionId) {
     const object = JSON.stringify({
         action: "add_frame",
         data: dataUrl,
-        //sessionId: sessionId,
+        sessionId: sessionId,
     })
-    await fetch(`http://${serverUrl}/add_frame`, {
+    const req = await fetch(`${serverUrl}/add_frame`, {
         method: "POST",
         headers: new Headers({
             Origin: window.origin,
@@ -117,15 +120,15 @@ async function send_frame_to_server(dataUrl, sessionId) {
         mode: "cors",
         body: object,
     })
-        .then((response) => response.json())
-        .then((data) => {
-            return data
-        })
+
+    const data = await req.json()
+
+    return data
 }
 
 async function start_processing(sessionId, duration, fps) {
     const url = fetch(
-        `http://${serverUrl}/process?duration=${duration}&fps=${fps}&sessionId=${sessionId}`
+        `${serverUrl}/process?duration=${duration}&fps=${fps}&sessionId=${sessionId}`
     )
         .then((response) => response.json())
         .then((data) => {
