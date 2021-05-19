@@ -9,7 +9,7 @@ import "./globalStyles.css"
 
 export default function App() {
     // Listen to window resize
-    const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
+    const [windowWidth, setWindowWidth] = React.useState()
     React.useEffect(() => {
         function handleResize() {
             setWindowWidth(window.innerWidth)
@@ -22,7 +22,9 @@ export default function App() {
 
     return (
         <>
-            {windowWidth >= 600 ? (
+            {!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                navigator.userAgent
+            ) ? (
                 <div className={styles.wrapper}>
                     <Viewer />
                     <CapturePanel />
