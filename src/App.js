@@ -8,18 +8,6 @@ import NoteBox from "./components/noteBox/Notebox"
 import "./globalStyles.css"
 
 export default function App() {
-    // Listen to window resize
-    const [windowWidth, setWindowWidth] = React.useState()
-    React.useEffect(() => {
-        function handleResize() {
-            setWindowWidth(window.innerWidth)
-        }
-        const resizeListener = window.addEventListener("resize", handleResize)
-        return () => {
-            window.removeEventListener("resize", resizeListener)
-        }
-    }, [])
-
     return (
         <>
             {!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
