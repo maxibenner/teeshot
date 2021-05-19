@@ -1,0 +1,11 @@
+.container {
+    color: rgb(189, 189, 189);
+    text-align: center;
+    line-height: 1.4rem;
+    width: 600px;
+    max-width: 80vw;
+    background: rgb(19, 19, 19);
+    border-radius: 7px;
+    border: 2px solid rgb(36, 36, 36);
+    padding: 15px;
+}
