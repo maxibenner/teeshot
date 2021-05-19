@@ -3,7 +3,7 @@ import { Canvas, invalidate } from "@react-three/fiber"
 import { Suspense, useEffect, useState } from "react"
 import { useSpring } from "react-spring/three"
 import useStore from "../../states/modelState"
-import CanvasBackground from "./CanvasBackground"
+import CanvasBackground from "./canvasBackground/CanvasBackground"
 import DecalHelper from "./DecalHelper"
 import Model from "./Model"
 import Scenes from "./Scenes"
@@ -52,7 +52,7 @@ const Viewer = () => {
     })
 
     return (
-        <CanvasBackground>
+        <CanvasBackground >
             <Canvas
 <<<<<<< HEAD
                 style={decalPath && { cursor: "none" }}
@@ -78,7 +78,7 @@ const Viewer = () => {
 =======
 >>>>>>> 8b7aaea (working build with interval capture)
                 camera={{ position: [0, 0, 2.2], fov: 50 }}
-                dpr={[0.5, 1.5]}
+                dpr={[0.5, 2]}
                 frameloop="demand"
                 gl={{ preserveDrawingBuffer: true }}
                 raycaster={{ far: 3.5 }}

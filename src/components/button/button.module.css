@@ -1,8 +1,8 @@
 .container {
     height: 40px;
     font-weight: bold;
-    background: black;
-    color: white;
+    background: white;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;

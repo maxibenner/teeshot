@@ -70,7 +70,7 @@ export default function ControlPanel() {
     }
 
     // EXPAND PANEL
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(true)
     const togglePanel = () => {
         setOpen((state) => !state)
     }

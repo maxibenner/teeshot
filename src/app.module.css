@@ -1,0 +1,11 @@
+.wrapper {
+    width: 100%;
+    box-sizing: border-box;
+    top: 0;
+}
+.logo {
+    position: absolute;
+    top: 0;
+    width: 120px;
+    margin: 30px;
+}

@@ -19,16 +19,15 @@
     max-width: 270px;
 }
 .containerInner {
-    max-height: calc(85vh - 15px);
     overflow: scroll;
     padding-top: 15px;
 }
 .handle_open {
     width: 30px;
     height: 50px;
-    background: black;
+    background: white;
     border-radius: 5px;
-    color: white;
+    color: black;
     font-size: 1.8rem;
     display: flex;
     align-items: center;
@@ -41,9 +40,9 @@
 .handle_closed {
     width: 30px;
     height: 50px;
-    background: black;
+    background: white;
     border-radius: 5px;
-    color: white;
+    color: black;
     font-size: 1.8rem;
     display: flex;
     align-items: center;

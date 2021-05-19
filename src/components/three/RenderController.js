@@ -20,13 +20,12 @@ const RenderController = () => {
         }, 16)
 
         const clearAll = () => {
-            console.log("test")
             clearInterval(renderLoop)
             set({ frameloop: "demand" })
         }
 
         return () => clearAll()
-    }, [])
+    }, [active])
 
     // Start/stop manual render
     React.useEffect(() => {
@@ -35,7 +34,7 @@ const RenderController = () => {
             clearInterval(renderLoop)
 
             // Capture => send => stop
-            capture_send(clock, fps, duration, gl, frameDelay).then(() => {
+            capture_send().then(() => {
                 // Deactivate manual render-loop
                 setActive(false)
 
@@ -51,11 +50,6 @@ const RenderController = () => {
                     downloadResource(`${serverUrl}/${url}`, "foturaClip.mp4")
                 })
             })
-        } else if (active === false) {
-            // Reinstate auto render
-            renderLoop = setInterval(() => {
-                advance()
-            }, 16)
         }
     }, [active])
 
@@ -77,7 +71,7 @@ const RenderController = () => {
                 const response = await send_frame_to_server(image, sessionId)
 
                 // Stop if error
-                console.log(response)
+                console.log(/*response*/)
                 if (!response) {
                     i = totalFrames
                 }

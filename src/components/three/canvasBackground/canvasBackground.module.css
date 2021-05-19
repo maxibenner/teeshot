@@ -1,0 +1,23 @@
+.white_backgdrop {
+    background: white;
+    margin: 0 auto;
+    height: fit-content;
+    width: fit-content;
+    margin-top: 70px;
+}
+.inner {
+    overflow: hidden;
+    position: relative;
+    height: 600px;
+    width: 600px;
+    background-image: linear-gradient(
+            45deg,
+            rgb(220, 220, 220) 25%,
+            transparent 25%
+        ),
+        linear-gradient(-45deg, rgb(220, 220, 220) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgb(220, 220, 220) 75%),
+        linear-gradient(-45deg, transparent 75%, rgb(220, 220, 220) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}

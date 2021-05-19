@@ -1,9 +1,9 @@
 .wrapper {
-    height: 15vh;
-    min-height: 100px;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: black;
 }
 .container {
     display: flex;
@@ -15,9 +15,18 @@
     font-size: 1.5rem;
     width: 25px;
     height: 25px;
-    color: rgb(230, 230, 230);
+    color: white;
     margin-left: 25px;
     cursor: pointer;
+}
+.mode_switch_inactive {
+    font-size: 1.5rem;
+    width: 25px;
+    height: 25px;
+    color: white;
+    opacity: 0.5;
+    margin-left: 25px;
+    cursor: default;
 }
 .svg {
     height: 68px;
@@ -37,7 +46,7 @@
     transform-origin: 50% 50%;
     fill: transparent;
     pointer-events: none;
-    transition: .2s;
+    transition: 0.2s;
 }
 .capture_fill {
     stroke: black;
