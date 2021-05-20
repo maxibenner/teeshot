@@ -34,7 +34,7 @@ const Viewer = () => {
     useEffect(() => {
         function handlekeydownEvent(event) {
             const { key } = event
-            if (!animation) {
+            if (!animation && !active) {
                 console.log(animation)
                 key === "r" && setModelFlipped((prev) => (prev ? false : true))
             }

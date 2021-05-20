@@ -44,6 +44,9 @@ export default function ControlPanel() {
     const loadDecal = () => {
         const path = URL.createObjectURL(inputRef.current.files[0])
         setDecalPath(path)
+
+        // Clear decal
+        inputRef.current.value = ""
     }
 
     // KEYDOWN
