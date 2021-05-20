@@ -1,13 +1,13 @@
 .visible {
     overflow: hidden;
-    background: white;
+    border: 2px solid black;
     padding: 10px;
     border-radius: 7px;
     margin: 14px;
+    /*box-shadow: 0 3px 7px rgba(0, 0, 0, 0.342);*/
 }
 .invisible {
     overflow: hidden;
-    border-radius: 7px;
     margin: 14px;
 }
 .inner_flex {
@@ -19,6 +19,7 @@
     display: block;
 }
 .h3 {
+    font-size: 1.3rem;
     margin: 5px 0;
-    color: grey;
+    color: black;
 }

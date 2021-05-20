@@ -3,6 +3,7 @@ import create from "zustand"
 const initialDecalSize = 0.2
 
 const useStore = create((set) => ({
+    animation: null,
     backgroundColor: "#ffffff",
     decalImages: [],
     decalPath: null,
@@ -13,6 +14,7 @@ const useStore = create((set) => ({
     modelColor: "#ffffff",
     set: "ShapesBg",
     text: "PLACEHOLDER",
+    setAnimation: (animation) => set((state) => (state.animation = animation)),
     addDecal: (decalObject) =>
         set((state) => (state.decals = [...state.decals, decalObject])),
     addDecalImages: (decal) =>

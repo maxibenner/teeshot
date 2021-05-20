@@ -3,5 +3,5 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Helvetica Neue, Ubuntu, sans-serif;
     -webkit-font-smoothing: antialiased;
-    background: black;
+    background: rgb(285, 285, 84, 1);
 }

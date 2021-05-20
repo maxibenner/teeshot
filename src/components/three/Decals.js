@@ -45,7 +45,6 @@ export const createDecal = (mesh, position, normal, activeDecal, maxSize) => {
 
     // COUNTER POSITION
     posHelper.setFromVector3(mesh.localToWorld(mesh.position))
-    console.log(posHelper)
 
     // KEY
     const key = Math.floor(Math.random() * 999999)

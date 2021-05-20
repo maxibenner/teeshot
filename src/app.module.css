@@ -1,13 +1,32 @@
 .wrapper {
-    width: 100%;
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+    width: fit-content;
     box-sizing: border-box;
     top: 0;
+    margin-top: 70px;
 }
-.logo {
+/*.logo {
     position: absolute;
     top: 0;
     width: 120px;
     margin: 30px;
+}*/
+.main {
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.342);
+    overflow: hidden;
+}
+.controlPanelWrapper {
+    margin-left: 15px;
+}
+.logo {
+    position: absolute;
+    top: -10px;
+    width: 120px;
+    margin: 30px;
+    font-size: 1.7rem;
+    font-weight: 900;
 }
 .noteBoxWrapper {
     position: absolute;

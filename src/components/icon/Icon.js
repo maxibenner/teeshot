@@ -1,4 +1,5 @@
 import s from "./icon.module.css"
+import { useState } from "react"
 
 export default function Icon({
     imgSrc,
@@ -7,9 +8,25 @@ export default function Icon({
     onClick,
     ...rest
 }) {
+    const [clicked, setClicked] = useState(false)
+
+    const handleClick = () => {
+        // External
+        onClick()
+
+        // Internal styles
+        //setClicked(prev => !prev)
+    }
+
     return (
-        <div className={s.wrapper} onClick={onClick} {...rest}>
-            <img className={s.img} src={imgSrc} alt={imgAlt} />
+        <div
+            onClick={handleClick}
+            className={s.wrapper}
+            style={{
+                backgroundImage: `url(${imgSrc})`,
+            }}
+            {...rest}
+        >
             {textContent && <p className={s.text}>{textContent}</p>}
         </div>
     )

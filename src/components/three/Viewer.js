@@ -28,21 +28,22 @@ const Viewer = () => {
     } = useStore()
     const { active, mode } = useRecorderStore()
 
+    useEffect(() => console.log(decalPath), [decalPath])
     // KEYDOWN
     useEffect(() => {
         function handlekeydownEvent(event) {
-            if (!active) {
-                const { key } = event
-                key === "r" && setModelFlipped((prev) => (prev ? false : true))
+            const { key } = event
+            if (!active && decalPath) {
                 key === "ArrowUp" && incrementDecalSize(0.01)
                 key === "ArrowDown" && decrementDecalSize(0.01)
+                key === "r" && setModelFlipped((prev) => (prev ? false : true))
             }
         }
         document.addEventListener("keydown", handlekeydownEvent)
         return () => {
             document.removeEventListener("keydown", handlekeydownEvent)
         }
-    }, [active])
+    }, [active, decalPath])
 
     // FLIP ANIMATION
     const flipModelAnimation = useSpring({
@@ -52,7 +53,7 @@ const Viewer = () => {
     })
 
     return (
-        <CanvasBackground >
+        <CanvasBackground>
             <Canvas
 <<<<<<< HEAD
                 style={decalPath && { cursor: "none" }}

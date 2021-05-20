@@ -1,12 +1,16 @@
 .container {
     height: 40px;
     font-weight: bold;
-    background: white;
-    color: black;
+    background: black;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 2px solid black;
+}
+.container:hover {
+    background: transparent;
+    color: black;
 }

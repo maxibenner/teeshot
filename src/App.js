@@ -14,9 +14,13 @@ export default function App() {
                 navigator.userAgent
             ) ? (
                 <div className={styles.wrapper}>
-                    <Viewer />
-                    <CapturePanel />
-                    <ControlPanel />
+                    <div className={styles.main}>
+                        <Viewer />
+                        <CapturePanel />
+                    </div>
+                    <div className={styles.controlPanelWrapper}>
+                        <ControlPanel />
+                    </div>
                 </div>
             ) : (
                 <div className={styles.noteBoxWrapper}>
@@ -28,7 +32,8 @@ export default function App() {
                     </NoteBox>
                 </div>
             )}
-            <img src={logo} alt="Logo" className={styles.logo} />
+            {/*<img src={logo} alt="Logo" className={styles.logo} />*/}
+            <h2 className={styles.logo}>Fotura</h2>
         </>
     )
 }
