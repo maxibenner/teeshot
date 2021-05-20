@@ -2,7 +2,7 @@ import create from "zustand"
 
 const useRecorderStore = create((set) => ({
     active: null,
-    duration: 5,
+    duration: 7,
     fps: 30,
     mode: "photo",
     progress: 0, // as stroke-dashoffset max = 204

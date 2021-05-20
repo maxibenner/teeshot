@@ -1,6 +1,7 @@
 .wrapper {
     box-sizing: border-box;
-    max-width: 270px;
+    width: fit-content;
+    max-width: 277px;
 }
 .containerInner {
     overflow: scroll;

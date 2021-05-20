@@ -10,7 +10,7 @@ const ShapesBg = ({ backgroundColor }) => {
     const donutLarge = useRef()
 
     // Shape rotation
-    useFrame((state, delta) => {
+    useFrame(() => {
         box.current.rotation.y += (Math.PI * 2) / (60 * duration)
         donut.current.rotation.y += (Math.PI * 2) / (60 * duration)
         donutLarge.current.rotation.y += (Math.PI * 2) / (60 * duration)

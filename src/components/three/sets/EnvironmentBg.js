@@ -3,9 +3,6 @@ import { invalidate, useFrame } from "@react-three/fiber"
 
 const EnvironmentBg = () => {
     const texture = useTexture("/envBg1.jpg")
-    useFrame(() => {
-        invalidate()
-    })
     return (
         <>
             <Environment background={false} path="/" files="env.hdr" />

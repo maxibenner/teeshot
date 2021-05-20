@@ -1,21 +1,17 @@
 import s from "./icon.module.css"
-import { useState } from "react"
 
 export default function Icon({
     imgSrc,
     imgAlt,
     textContent,
     onClick,
+    id,
+    match,
     ...rest
 }) {
-    const [clicked, setClicked] = useState(false)
-
     const handleClick = () => {
         // External
         onClick()
-
-        // Internal styles
-        //setClicked(prev => !prev)
     }
 
     return (
@@ -27,6 +23,7 @@ export default function Icon({
             }}
             {...rest}
         >
+            {id === match && <div className={s.flag} />}
             {textContent && <p className={s.text}>{textContent}</p>}
         </div>
     )

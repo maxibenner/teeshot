@@ -1,10 +1,11 @@
 import { useTexture } from "@react-three/drei"
-import { useLoader } from "@react-three/fiber"
+import { invalidate, useFrame, useLoader } from "@react-three/fiber"
 import { useEffect, useRef } from "react"
 import { a } from "react-spring/three"
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import useStore from "../../states/modelState"
+import useRecorderStore from "../../states/recorderState"
 import Decals, { createDecal } from "./Decals"
 
 const Model = ({ url, rotation, setModelRayData }) => {
@@ -25,9 +26,20 @@ const Model = ({ url, rotation, setModelRayData }) => {
         addDecalImages,
         setDecalSize,
     } = useStore()
+    const { duration } = useRecorderStore()
 
     // STATE
     const timestamp = useRef(window.performance.now())
+
+    // ANIMATE
+    useFrame(() => {
+        if (animation === "animation_360") {
+            groupRef.current.rotation.y += (Math.PI * 2) / (60 * duration)
+        }
+    })
+    useEffect(() => {
+        if (!animation) groupRef.current.rotation.y = 0
+    }, [animation])
 
     // LOAD MODEL
     const gltf = useLoader(GLTFLoader, url)

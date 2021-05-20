@@ -3,7 +3,20 @@
     color: black;
     margin: 0 10px;
 }
+.flag {
+    background: black;
+    font-size: 4rem;
+    width: 30px;
+    height: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform-origin: bottom right;
+    transform: rotate(45deg);
+}
 .wrapper {
+    overflow: hidden;
+    position: relative;
     display: flex;
     align-items: center;
     background-size: cover;
@@ -13,7 +26,6 @@
     border-radius: 5px;
     box-sizing: border-box;
     cursor: pointer;
-    overflow: hidden;
     border: 2px solid black;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     transition: 0.2s;

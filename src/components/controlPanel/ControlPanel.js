@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from "react"
-import { RiArrowDropLeftLine } from "react-icons/ri"
+import { useEffect, useRef } from "react"
 import keyDown from "../../assets/keys/keyDown.svg"
 import keyEscRed from "../../assets/keys/keyEscRed.svg"
 import keyR from "../../assets/keys/keyR.svg"
 import keyUp from "../../assets/keys/keyUp.svg"
-import environmentBgThumb from "../../assets/thumbs/environmentBg.png"
-import plainBgThumb from "../../assets/thumbs/plainBg.svg"
-import shapesBgThumb from "../../assets/thumbs/shapesBg.png"
-import textBgThumb from "../../assets/thumbs/textBg.png"
-import transparentBgThumb from "../../assets/thumbs/transparentBg.svg"
+import environmentBgThumb from "../../assets/thumbs/bg_environment.png"
+import plainBgThumb from "../../assets/thumbs/bg_plain.svg"
 import rotateAnimThumb from "../../assets/thumbs/rotate.svg"
+import shapesBgThumb from "../../assets/thumbs/bg_shapes.png"
+import textBgThumb from "../../assets/thumbs/bg_text.png"
+import transparentBgThumb from "../../assets/thumbs/bg_transparent.svg"
 import useStore from "../../states/modelState"
+import useRecorderStore from "../../states/recorderState"
 import Button from "../button/Button"
 import Card from "../card/Card"
 import ColorPicker from "../colorPicker/ColorPicker"
@@ -19,10 +19,12 @@ import Icon from "../icon/Icon"
 import IconWithText from "../iconWithText/IconWithText"
 import InputText from "../inputText/InputText"
 import s from "./controlPanel.module.css"
+import { invalidate } from "@react-three/fiber"
 
 export default function ControlPanel() {
     const inputRef = useRef()
     const {
+        animation,
         backgroundColor,
         decals,
         decalPath,
@@ -36,6 +38,7 @@ export default function ControlPanel() {
         setSet,
         setText,
     } = useStore()
+    const { mode } = useRecorderStore()
 
     // SET ACTIVE DECAL PATH
     const loadDecal = () => {
@@ -63,6 +66,17 @@ export default function ControlPanel() {
         setText(fieldValue)
     }
 
+    // HANDLE ANIMATION
+    const handleAnimation = (mode) => {
+        if (animation) {
+            setAnimation(null)
+        } else {
+            setAnimation(mode)
+        }
+        // Jumpstart animation
+        invalidate()
+    }
+
     return (
         <div className={s.wrapper}>
             <div className={s.containerInner}>
@@ -75,44 +89,52 @@ export default function ControlPanel() {
                         type="file"
                     />
                 </Card>
-                <Card title="Background" flex>
-                    <Icon
-                        imgSrc={transparentBgThumb}
-                        onClick={() => {
-                            setSet("TransparentBg")
-                        }}
-                        id="bg_transparent"
-                    />
+                <Card title="Background" grid>
+                    {mode === "photo" && (
+                        <Icon
+                            imgSrc={transparentBgThumb}
+                            onClick={() => {
+                                setSet("bg_transparent")
+                            }}
+                            match={set}
+                            id="bg_transparent"
+                        />
+                    )}
+
                     <Icon
                         imgSrc={plainBgThumb}
                         onClick={() => {
-                            setSet("PlainBg")
+                            setSet("bg_plain")
                         }}
+                        match={set}
                         id="bg_plain"
                     />
                     <Icon
                         imgSrc={shapesBgThumb}
                         onClick={() => {
-                            setSet("ShapesBg")
+                            setSet("bg_shapes")
                         }}
+                        match={set}
                         id="bg_shapes"
                     />
                     <Icon
                         imgSrc={environmentBgThumb}
                         onClick={() => {
-                            setSet("EnvironmentBg")
+                            setSet("bg_environment")
                         }}
+                        match={set}
                         id="bg_environment"
                     />
                     <Icon
                         imgSrc={textBgThumb}
                         onClick={() => {
-                            setSet("TextBg")
+                            setSet("bg_text")
                         }}
+                        match={set}
                         id="bg_text"
                     />
                 </Card>
-                {set === "TextBg" && (
+                {set === "bg_text" && (
                     <Card title="Text">
                         <InputText
                             placeholder={text}
@@ -124,9 +146,9 @@ export default function ControlPanel() {
                 <Card title="Animate">
                     <Icon
                         imgSrc={rotateAnimThumb}
-                        onClick={() => {
-                            setAnimation("360")
-                        }}
+                        onClick={() => handleAnimation("animation_360")}
+                        match={animation}
+                        id="animation_360"
                     />
                 </Card>
                 <Card title="Color">

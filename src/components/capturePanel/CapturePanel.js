@@ -5,7 +5,7 @@ import useRecorderStore from "../../states/recorderState"
 import styles from "./capturePanel.module.css"
 
 const CapturePanel = () => {
-    const { gl } = useStore()
+    const { gl, set, setSet } = useStore()
     const { active, setActive, progress, mode, setMode } = useRecorderStore()
 
     // Take screenshot
@@ -25,8 +25,14 @@ const CapturePanel = () => {
 
     // Change capture mode
     const handleMode = () => {
-        if (mode === "photo") setMode("video")
-        else setMode("photo")
+        if (!active) {
+            if (mode === "photo") {
+                setMode("video")
+                if (set === "bg_transparent") {
+                    setSet("bg_plain")
+                }
+            } else setMode("photo")
+        }
     }
 
     return (
@@ -62,8 +68,12 @@ const CapturePanel = () => {
                     />
                 </svg>
                 <div
-                    className={active ? styles.mode_switch_inactive : styles.mode_switch}
-                    onClick={!active && handleMode}
+                    className={
+                        active
+                            ? styles.mode_switch_inactive
+                            : styles.mode_switch
+                    }
+                    onClick={handleMode}
                 >
                     {mode !== "photo" ? <MdPhotoCamera /> : <FaVideo />}
                 </div>

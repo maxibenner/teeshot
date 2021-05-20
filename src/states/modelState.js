@@ -12,7 +12,7 @@ const useStore = create((set) => ({
     gl: null,
     initialDecalSize: initialDecalSize,
     modelColor: "#ffffff",
-    set: "ShapesBg",
+    set: "bg_shapes",
     text: "PLACEHOLDER",
     setAnimation: (animation) => set((state) => (state.animation = animation)),
     addDecal: (decalObject) =>

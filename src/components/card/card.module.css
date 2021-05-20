@@ -10,9 +10,11 @@
     overflow: hidden;
     margin: 14px;
 }
-.inner_flex {
+.inner_grid {
     box-sizing: border-box;
-    display: flex;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 .inner_block {
     box-sizing: border-box;

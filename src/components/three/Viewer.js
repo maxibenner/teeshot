@@ -3,12 +3,12 @@ import { Canvas, invalidate } from "@react-three/fiber"
 import { Suspense, useEffect, useState } from "react"
 import { useSpring } from "react-spring/three"
 import useStore from "../../states/modelState"
+import useRecorderStore from "../../states/recorderState"
 import CanvasBackground from "./canvasBackground/CanvasBackground"
 import DecalHelper from "./DecalHelper"
 import Model from "./Model"
-import Scenes from "./Scenes"
 import RenderController from "./RenderController"
-import useRecorderStore from "../../states/recorderState"
+import Scenes from "./Scenes"
 
 softShadows({
     near: 0.04,
@@ -20,6 +20,7 @@ const Viewer = () => {
     const [modelRayData, setModelRayData] = useState(null)
     const modelUrl = "/tshirt.glb"
     const {
+        animation,
         decalPath,
         decalSize,
         decrementDecalSize,
@@ -33,17 +34,20 @@ const Viewer = () => {
     useEffect(() => {
         function handlekeydownEvent(event) {
             const { key } = event
+            if (!animation) {
+                console.log(animation)
+                key === "r" && setModelFlipped((prev) => (prev ? false : true))
+            }
             if (!active && decalPath) {
                 key === "ArrowUp" && incrementDecalSize(0.01)
                 key === "ArrowDown" && decrementDecalSize(0.01)
-                key === "r" && setModelFlipped((prev) => (prev ? false : true))
             }
         }
         document.addEventListener("keydown", handlekeydownEvent)
         return () => {
             document.removeEventListener("keydown", handlekeydownEvent)
         }
-    }, [active, decalPath])
+    }, [active, decalPath, animation])
 
     // FLIP ANIMATION
     const flipModelAnimation = useSpring({

@@ -5,29 +5,36 @@ import ShapesBg from "./sets/ShapesBg"
 import EnvironmentBg from "./sets/EnvironmentBg"
 import TextBg from "./sets/TextBg"
 import useStore from "../../states/modelState"
+import { invalidate, useFrame } from "@react-three/fiber"
 
 const Scenes = () => {
     const { backgroundColor, set } = useStore()
+    const { animation } = useStore()
+
+    useFrame(() => {
+        if (animation) invalidate()
+    })
+
     return (
         <>
-            {set === "TransparentBg" && (
+            {set === "bg_transparent" && (
                 <group>
                     <Lights />
                 </group>
             )}
-            {set === "PlainBg" && (
+            {set === "bg_plain" && (
                 <group>
                     <PlainBg backgroundColor={backgroundColor} />
                     <Lights />
                 </group>
             )}
-            {set === "ShapesBg" && (
+            {set === "bg_shapes" && (
                 <group>
                     <ShapesBg backgroundColor={backgroundColor} />
                     <Lights />
                 </group>
             )}
-            {set === "EnvironmentBg" && (
+            {set === "bg_environment" && (
                 <Suspense
                     fallback={
                         <>
@@ -39,7 +46,7 @@ const Scenes = () => {
                     <EnvironmentBg />
                 </Suspense>
             )}
-            {set === "TextBg" && (
+            {set === "bg_text" && (
                 <group>
                     <TextBg backgroundColor={backgroundColor} />
                     <Lights />
