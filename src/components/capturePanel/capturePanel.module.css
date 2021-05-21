@@ -6,12 +6,14 @@
     background: black;
 }
 .container {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateX(25px);
 }
 .mode_switch {
+    position: absolute;
+    right: -55px;
     font-size: 1.5rem;
     width: 25px;
     height: 25px;
@@ -20,6 +22,8 @@
     cursor: pointer;
 }
 .mode_switch_inactive {
+    position: absolute;
+    right: -55px;
     font-size: 1.5rem;
     width: 25px;
     height: 25px;
@@ -27,6 +31,19 @@
     opacity: 0.5;
     margin-left: 25px;
     cursor: default;
+}
+.processing_flag {
+    position: absolute;
+    left: -165px;
+    height: fit-content;
+    width: 130px;
+    margin-right: 25px;
+}
+.processing_flag_inner {
+    border-radius: 15px;
+    text-align: center;
+    background-color: yellow;
+    padding: 5px;
 }
 .svg {
     height: 68px;
@@ -46,7 +63,6 @@
     transform-origin: 50% 50%;
     fill: transparent;
     pointer-events: none;
-    transition: 0.2s;
 }
 .capture_fill {
     stroke: black;

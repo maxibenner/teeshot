@@ -38,6 +38,14 @@ const CapturePanel = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.container}>
+                {progress === 100 && (
+                    <div className={styles.processing_flag}>
+                        <p className={styles.processing_flag_inner}>
+                            Processing...
+                        </p>
+                    </div>
+                )}
+
                 <svg
                     id="capture-button"
                     onClick={mode === "photo" ? screenshot : video}
