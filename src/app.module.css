@@ -16,6 +16,7 @@
 .main {
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.342);
     overflow: hidden;
+    height: fit-content;
 }
 .controlPanelWrapper {
     margin-left: 15px;

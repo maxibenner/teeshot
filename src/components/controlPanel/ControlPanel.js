@@ -166,32 +166,13 @@ export default function ControlPanel() {
                         setColor={setBackgroundColor}
                     />
                 </Card>
-                {decalPath && (
-                    <Card title="Hotkeys">
-                        <IconWithText
-                            imgSrc={keyR}
-                            imgAlt="rotate"
-                            textContent="Rotate"
-                        />
-                        <>
-                            <IconWithText
-                                imgSrc={keyUp}
-                                imgAlt="up"
-                                textContent="Scale up"
-                            />
-                            <IconWithText
-                                imgSrc={keyDown}
-                                imgAlt="down"
-                                textContent="Scale down"
-                            />
-                            <IconWithText
-                                imgSrc={keyEscRed}
-                                imgAlt="Esc"
-                                textContent="Cancel"
-                            />
-                        </>
-                    </Card>
-                )}
+                <Card title="Hotkeys">
+                    <IconWithText
+                        imgSrc={keyR}
+                        imgAlt="rotate"
+                        textContent="Rotate"
+                    />
+                </Card>
                 {decals.length > 0 && (
                     <Card title="Decals">
                         <DecalManager />

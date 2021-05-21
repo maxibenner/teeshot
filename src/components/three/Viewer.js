@@ -7,6 +7,7 @@ import useRecorderStore from "../../states/recorderState"
 import CanvasBackground from "./canvasBackground/CanvasBackground"
 import DecalHelper from "./DecalHelper"
 import Model from "./Model"
+import Overlay from "../overlay/Overlay"
 import RenderController from "./RenderController"
 import Scenes from "./Scenes"
 
@@ -32,13 +33,13 @@ const Viewer = () => {
     useEffect(() => console.log(decalPath), [decalPath])
     // KEYDOWN
     useEffect(() => {
-        function handlekeydownEvent(event) {
-            const { key } = event
+        function handlekeydownEvent(e) {
+            const { key } = e
             if (!animation && !active) {
-                console.log(animation)
                 key === "r" && setModelFlipped((prev) => (prev ? false : true))
             }
             if (!active && decalPath) {
+                e.preventDefault() // prevent arrow scrolling
                 key === "ArrowUp" && incrementDecalSize(0.01)
                 key === "ArrowDown" && decrementDecalSize(0.01)
             }
@@ -58,6 +59,7 @@ const Viewer = () => {
 
     return (
         <CanvasBackground>
+            <Overlay />
             <Canvas
 <<<<<<< HEAD
                 style={decalPath && { cursor: "none" }}
