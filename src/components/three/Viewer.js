@@ -1,4 +1,4 @@
-import { softShadows } from "@react-three/drei"
+import { Html, softShadows } from "@react-three/drei"
 import { Canvas, invalidate } from "@react-three/fiber"
 import { Suspense, useEffect, useState } from "react"
 import { useSpring } from "react-spring/three"
@@ -10,9 +10,10 @@ import Model from "./Model"
 import Overlay from "../overlay/Overlay"
 import RenderController from "./RenderController"
 import Scenes from "./Scenes"
+import Credit from "../credit/Credit"
 
 softShadows({
-    near: 0.04,
+    near: 0.03,
     samples: 20,
 })
 
@@ -27,6 +28,8 @@ const Viewer = () => {
         decrementDecalSize,
         incrementDecalSize,
         setGl,
+        set,
+        backgroundImage,
     } = useStore()
     const { active, mode } = useRecorderStore()
 
@@ -56,6 +59,10 @@ const Viewer = () => {
         rotation: modelFlipped ? [0, Math.PI / 1, 0] : [0, 0, 0],
         onChange: () => invalidate(),
     })
+
+    useEffect(() => {
+        console.log(backgroundImage.author)
+    }, [backgroundImage])
 
     return (
         <CanvasBackground>
@@ -104,6 +111,12 @@ const Viewer = () => {
                 <Scenes />
                 {mode === "video" && <RenderController />}
             </Canvas>
+            {backgroundImage.author?.name && set === "bg_image" && (
+                <Credit
+                    name={backgroundImage.author.name}
+                    link={backgroundImage.author.link}
+                />
+            )}
         </CanvasBackground>
     )
 }

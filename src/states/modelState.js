@@ -5,6 +5,12 @@ const initialDecalSize = 0.2
 const useStore = create((set) => ({
     animation: null,
     backgroundColor: "#ffffff",
+    backgroundImage: {
+        data: null,
+        name: null,
+        path: null,
+        author: { name: null, link: null },
+    },
     decalImages: [],
     decalPath: null,
     decals: [],
@@ -12,8 +18,9 @@ const useStore = create((set) => ({
     gl: null,
     initialDecalSize: initialDecalSize,
     modelColor: "#ffffff",
-    set: "bg_shapes",
-    text: "PLACEHOLDER",
+    props: null,
+    set: "bg_color",
+    text: "TEXT",
     setAnimation: (animation) => set((state) => (state.animation = animation)),
     addDecal: (decalObject) =>
         set((state) => (state.decals = [...state.decals, decalObject])),
@@ -28,6 +35,21 @@ const useStore = create((set) => ({
             (state) =>
                 (state.decals = state.decals.filter((el) => el.key != decalKey))
         ),
+    setBackgroundImage: ({
+        data = null,
+        name = null,
+        path = null,
+        author = null,
+    }) =>
+        set(
+            (state) =>
+                (state.backgroundImage = {
+                    data: data,
+                    name: name,
+                    path: path,
+                    author: author,
+                })
+        ),
     setBackgroundColor: (color) =>
         set((state) => (state.backgroundColor = color)),
     setDecalImages: (array) => set((state) => (state.decalImages = array)),
@@ -35,6 +57,7 @@ const useStore = create((set) => ({
     setDecalSize: (size) => set((state) => (state.decalSize = size)),
     setGl: (gl) => set((state) => (state.gl = gl)),
     setModelColor: (color) => set((state) => (state.modelColor = color)),
+    setProps: (name) => set((state) => (state.props = name)),
     setSet: (componentName) => set((state) => (state.set = componentName)),
     setText: (text) => set((state) => (state.text = `${text}`)),
 }))

@@ -29,7 +29,7 @@ const CapturePanel = () => {
             if (mode === "photo") {
                 setMode("video")
                 if (set === "bg_transparent") {
-                    setSet("bg_plain")
+                    setSet("bg_color")
                 }
             } else setMode("photo")
         }

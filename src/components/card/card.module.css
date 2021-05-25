@@ -1,10 +1,8 @@
 .visible {
-    overflow: hidden;
     border: 2px solid black;
     padding: 10px;
     border-radius: 7px;
     margin: 14px;
-    /*box-shadow: 0 3px 7px rgba(0, 0, 0, 0.342);*/
 }
 .invisible {
     overflow: hidden;

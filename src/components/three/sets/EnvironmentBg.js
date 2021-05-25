@@ -1,5 +1,4 @@
 import { Environment, useTexture } from "@react-three/drei"
-import { invalidate, useFrame } from "@react-three/fiber"
 
 const EnvironmentBg = () => {
     const texture = useTexture("/envBg1.jpg")

@@ -17,7 +17,17 @@ const ColorPicker = ({ title, color, setColor }) => {
                 />
                 <p className={s.text}>{title}</p>
             </div>
-            {active && <HexColorPicker style={{width: "100%"}} color={color} onChange={setColor} />}
+            {active && (
+                <HexColorPicker
+                    style={{
+                        marginTop: "10px",
+                        width: "100%",
+                        height: "150px",
+                    }}
+                    color={color}
+                    onChange={setColor}
+                />
+            )}
         </>
     )
 }

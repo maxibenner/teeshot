@@ -21,28 +21,19 @@ const TextBg = ({ backgroundColor }) => {
     }
 
     return (
-        <group>
-            <mesh position={[0, 0, -5]}>
-                <planeBufferGeometry args={[100, 100]} />
-                <meshStandardMaterial color={backgroundColor} />
+        <Center>
+            <mesh rotation={[0, 0, Math.PI / 10]} position={[.1, 0, -.3]} scale={.7}>
+                <textBufferGeometry
+                    attach="geometry"
+                    args={[text, textOptions]}
+                />
+                <meshStandardMaterial
+                    emissive={backgroundColor}
+                    emissiveIntensity={0.7}
+                    color={backgroundColor}
+                />
             </mesh>
-            <Center>
-                <mesh
-                    position={[0.3, 0, -2]}
-                    rotation={[0, Math.PI / 20, Math.PI / 10]}
-                >
-                    <textBufferGeometry
-                        attach="geometry"
-                        args={[text, textOptions]}
-                    />
-                    <meshStandardMaterial
-                        emissive={backgroundColor}
-                        emissiveIntensity={0.7}
-                        color={backgroundColor}
-                    />
-                </mesh>
-            </Center>
-        </group>
+        </Center>
     )
 }
 

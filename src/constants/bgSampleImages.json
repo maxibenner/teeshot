@@ -1,0 +1,38 @@
+[
+    {
+        "name": "red_clouds",
+        "path": "/images/red_clouds.jpg",
+        "data": null,
+        "author": {
+            "name": "Robert Katzki",
+            "link": "https://robert.katzki.de/photos/2021"
+        }
+    },
+    {
+        "name": "misty_jungle",
+        "path": "/images/misty_jungle.jpg",
+        "data": null,
+        "author": {
+            "name": "Rajeev C",
+            "link": "https://www.instagram.com/zeroin.in/?utm_medium=referral&utm_source=unsplash"
+        }
+    },
+    {
+        "name": "desert",
+        "path": "/images/desert.jpg",
+        "data": null,
+        "author": {
+            "name": "Max Di Capua",
+            "link": "https://www.instagram.com/maxdicapua/?utm_medium=referral&utm_source=unsplash"
+        }
+    },
+    {
+        "name": "new_york",
+        "path": "/images/new_york.jpg",
+        "data": null,
+        "author": {
+            "name": "Ian Dooley",
+            "link": "http://sadswim.com/?utm_medium=referral&utm_source=unsplash"
+        }
+    }
+]

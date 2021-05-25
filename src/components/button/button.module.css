@@ -1,3 +1,15 @@
+.container_ghost {
+    height: 40px;
+    font-weight: bold;
+    background: transparent;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid black;
+}
 .container {
     height: 40px;
     font-weight: bold;

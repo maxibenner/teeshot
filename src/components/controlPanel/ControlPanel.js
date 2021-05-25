@@ -1,39 +1,37 @@
+import { invalidate } from "@react-three/fiber"
 import { useEffect, useRef } from "react"
-import keyDown from "../../assets/keys/keyDown.svg"
-import keyEscRed from "../../assets/keys/keyEscRed.svg"
-import keyR from "../../assets/keys/keyR.svg"
-import keyUp from "../../assets/keys/keyUp.svg"
-import environmentBgThumb from "../../assets/thumbs/bg_environment.png"
-import plainBgThumb from "../../assets/thumbs/bg_plain.svg"
-import rotateAnimThumb from "../../assets/thumbs/rotate.svg"
-import shapesBgThumb from "../../assets/thumbs/bg_shapes.png"
-import textBgThumb from "../../assets/thumbs/bg_text.png"
-import transparentBgThumb from "../../assets/thumbs/bg_transparent.svg"
+import { HexColorPicker } from "react-colorful"
 import useStore from "../../states/modelState"
 import useRecorderStore from "../../states/recorderState"
 import Button from "../button/Button"
 import Card from "../card/Card"
 import ColorPicker from "../colorPicker/ColorPicker"
 import DecalManager from "../decalManager/DecalManager"
+import Divider from "../divider/Divider"
 import Icon from "../icon/Icon"
-import IconWithText from "../iconWithText/IconWithText"
 import InputText from "../inputText/InputText"
 import s from "./controlPanel.module.css"
-import { invalidate } from "@react-three/fiber"
+var bgData = require("../../constants/bg.json")
+var bgSampleImages = require("../../constants/bgSampleImages.json")
+var propData = require("../../constants/props.json")
 
 export default function ControlPanel() {
     const inputRef = useRef()
+    const customBgRef = useRef()
     const {
         animation,
         backgroundColor,
+        backgroundImage,
         decals,
-        decalPath,
         modelColor,
+        props,
         text,
         setAnimation,
         setBackgroundColor,
+        setBackgroundImage,
         setDecalPath,
         setModelColor,
+        setProps,
         set,
         setSet,
         setText,
@@ -64,11 +62,6 @@ export default function ControlPanel() {
     // BUTTON CLICK
     const handleButtonClick = () => inputRef.current.click()
 
-    // TEXT INPUT
-    const handleText = (fieldValue) => {
-        setText(fieldValue)
-    }
-
     // HANDLE ANIMATION
     const handleAnimation = (mode) => {
         if (animation) {
@@ -78,6 +71,15 @@ export default function ControlPanel() {
         }
         // Jumpstart animation
         invalidate()
+    }
+
+    // HANDLE PROP CHANGE
+    const handlePropChange = (name) => {
+        if (props === name) {
+            setProps(null)
+        } else {
+            setProps(name)
+        }
     }
 
     return (
@@ -92,85 +94,115 @@ export default function ControlPanel() {
                         type="file"
                     />
                 </Card>
-                <Card title="Background" grid>
-                    {mode === "photo" && (
-                        <Icon
-                            imgSrc={transparentBgThumb}
-                            onClick={() => {
-                                setSet("bg_transparent")
+                <Card title="Background">
+                    <div className={s.gridContainer}>
+                        {bgData.map((bg) => {
+                            return (
+                                <Icon
+                                    imgSrc={bg.thumb}
+                                    onClick={() => {
+                                        setSet(bg.name)
+                                    }}
+                                    match={set}
+                                    id={bg.name}
+                                    key={bg.name}
+                                    inactive={mode in bg.modes ? false : true}
+                                />
+                            )
+                        })}
+                    </div>
+                    {set != "bg_transparent" && <Divider />}
+                    {set === "bg_color" && (
+                        <HexColorPicker
+                            style={{
+                                marginTop: "10px",
+                                width: "100%",
+                                height: "150px",
                             }}
-                            match={set}
-                            id="bg_transparent"
+                            color={backgroundColor}
+                            onChange={setBackgroundColor}
                         />
                     )}
-
-                    <Icon
-                        imgSrc={plainBgThumb}
-                        onClick={() => {
-                            setSet("bg_plain")
-                        }}
-                        match={set}
-                        id="bg_plain"
-                    />
-                    <Icon
-                        imgSrc={shapesBgThumb}
-                        onClick={() => {
-                            setSet("bg_shapes")
-                        }}
-                        match={set}
-                        id="bg_shapes"
-                    />
-                    <Icon
-                        imgSrc={environmentBgThumb}
-                        onClick={() => {
-                            setSet("bg_environment")
-                        }}
-                        match={set}
-                        id="bg_environment"
-                    />
-                    <Icon
-                        imgSrc={textBgThumb}
-                        onClick={() => {
-                            setSet("bg_text")
-                        }}
-                        match={set}
-                        id="bg_text"
-                    />
+                    {set === "bg_image" && (
+                        <>
+                            <div className={s.gridContainer}>
+                                <Icon
+                                    imgSrc={"/thumbs/upload.svg"}
+                                    key={"custom"}
+                                    id={"custom"}
+                                    match={backgroundImage.name}
+                                    onClick={() => customBgRef.current.click()}
+                                />
+                                <input
+                                    ref={customBgRef}
+                                    style={{ display: "none" }}
+                                    type="file"
+                                    onChange={(data) =>
+                                        setBackgroundImage({
+                                            data: data.target.files[0],
+                                            name: "custom",
+                                        })
+                                    }
+                                />
+                                {bgSampleImages.map((img) => {
+                                    return (
+                                        <Icon
+                                            imgSrc={img.path}
+                                            key={img.name}
+                                            id={img.name}
+                                            match={backgroundImage.name}
+                                            onClick={() => {
+                                                setBackgroundImage({
+                                                    path: img.path,
+                                                    name: img.name,
+                                                    author: img.author,
+                                                })
+                                            }}
+                                        />
+                                    )
+                                })}
+                            </div>
+                        </>
+                    )}
                 </Card>
-                {set === "bg_text" && (
-                    <Card title="Text">
-                        <InputText
-                            placeholder={text}
-                            onChange={handleText}
-                            maxLength={14}
-                        />
-                    </Card>
-                )}
+                <Card title="Props">
+                    <div className={s.gridContainer}>
+                        {propData.map((prop) => {
+                            return (
+                                <Icon
+                                    imgSrc={prop.thumb}
+                                    onClick={() => handlePropChange(prop.name)}
+                                    match={props}
+                                    id={prop.name}
+                                    key={prop.name}
+                                />
+                            )
+                        })}
+                    </div>
+                    {props === "prop_text" && (
+                        <>
+                            <Divider style={{ marginBottom: "10px" }} />
+                            <InputText
+                                placeholder={text}
+                                onChange={(value) => setText(value)}
+                                maxLength={14}
+                            />
+                        </>
+                    )}
+                </Card>
                 <Card title="Animate">
                     <Icon
-                        imgSrc={rotateAnimThumb}
+                        imgSrc="/thumbs/rotate.svg"
                         onClick={() => handleAnimation("animation_360")}
                         match={animation}
                         id="animation_360"
                     />
                 </Card>
-                <Card title="Color">
+                <Card title="Product">
                     <ColorPicker
-                        title="Model"
+                        title="Color"
                         color={modelColor}
                         setColor={setModelColor}
-                    />
-                    <ColorPicker
-                        title="Background"
-                        color={backgroundColor}
-                        setColor={setBackgroundColor}
-                    />
-                </Card>
-                <Card title="Hotkeys">
-                    <IconWithText
-                        imgSrc={keyR}
-                        imgAlt="rotate"
-                        textContent="Rotate"
                     />
                 </Card>
                 {decals.length > 0 && (

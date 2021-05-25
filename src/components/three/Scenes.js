@@ -1,14 +1,16 @@
-import { Suspense } from "react"
-import PlainBg from "./sets/PlainBg"
-import Lights from "./Lights"
-import ShapesBg from "./sets/ShapesBg"
-import EnvironmentBg from "./sets/EnvironmentBg"
-import TextBg from "./sets/TextBg"
-import useStore from "../../states/modelState"
 import { invalidate, useFrame } from "@react-three/fiber"
+import { Suspense } from "react"
+import useStore from "../../states/modelState"
+import Lights from "./Lights"
+import LightsHarsh from "./LightsHarsh"
+import EnvironmentBg from "./sets/EnvironmentBg"
+import ColorBg from "./sets/ColorBg"
+import ImageBg from "./sets/ImageBg"
+import ShapesBg from "./sets/ShapesBg"
+import TextBg from "./sets/TextBg"
 
 const Scenes = () => {
-    const { backgroundColor, set } = useStore()
+    const { backgroundColor, set, props } = useStore()
     const { animation } = useStore()
 
     useFrame(() => {
@@ -17,40 +19,28 @@ const Scenes = () => {
 
     return (
         <>
+            {set === "bg_color" && (
+                <group>
+                    <ColorBg backgroundColor={backgroundColor} />
+                    <LightsHarsh />
+                </group>
+            )}
             {set === "bg_transparent" && (
                 <group>
-                    <Lights />
+                    <LightsHarsh />
                 </group>
             )}
-            {set === "bg_plain" && (
-                <group>
-                    <PlainBg backgroundColor={backgroundColor} />
-                    <Lights />
-                </group>
-            )}
-            {set === "bg_shapes" && (
-                <group>
-                    <ShapesBg backgroundColor={backgroundColor} />
-                    <Lights />
-                </group>
-            )}
-            {set === "bg_environment" && (
-                <Suspense
-                    fallback={
-                        <>
-                            <PlainBg backgroundColor={backgroundColor} />
-                            <Lights />
-                        </>
-                    }
-                >
-                    <EnvironmentBg />
+            {set === "bg_image" && (
+                <Suspense fallback={<LightsHarsh />}>
+                    <ImageBg />
+                    <LightsHarsh />
                 </Suspense>
             )}
-            {set === "bg_text" && (
-                <group>
-                    <TextBg backgroundColor={backgroundColor} />
-                    <Lights />
-                </group>
+            {props === "prop_shapes" && (
+                <ShapesBg backgroundColor={backgroundColor} />
+            )}
+            {props === "prop_text" && (
+                <TextBg backgroundColor={backgroundColor} />
             )}
         </>
     )

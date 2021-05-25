@@ -1,0 +1,17 @@
+[
+    {
+        "name": "bg_color",
+        "thumb": "/thumbs/bg_color.png",
+        "modes": { "photo": true, "video": true }
+    },
+    {
+        "name": "bg_image",
+        "thumb": "/thumbs/bg_image.png",
+        "modes": { "photo": true, "video": true }
+    },
+    {
+        "name": "bg_transparent",
+        "thumb": "/thumbs/bg_transparent.svg",
+        "modes": { "photo": true }
+    }
+]

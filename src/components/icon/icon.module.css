@@ -14,6 +14,21 @@
     transform-origin: bottom right;
     transform: rotate(45deg);
 }
+.wrapper_inactive {
+    opacity: .3;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    margin: 5px 5px 5px 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 2px solid black;
+    transition: 0.2s;
+}
 .wrapper {
     overflow: hidden;
     position: relative;

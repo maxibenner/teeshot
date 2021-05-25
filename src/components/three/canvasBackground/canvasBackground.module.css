@@ -5,7 +5,6 @@
     width: fit-content;
 }
 .inner {
-    overflow: hidden;
     position: relative;
     height: 600px;
     width: 600px;

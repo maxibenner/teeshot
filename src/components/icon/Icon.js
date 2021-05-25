@@ -7,6 +7,7 @@ export default function Icon({
     onClick,
     id,
     match,
+    inactive,
     ...rest
 }) {
     const handleClick = () => {
@@ -16,8 +17,8 @@ export default function Icon({
 
     return (
         <div
-            onClick={handleClick}
-            className={s.wrapper}
+            onClick={inactive ? null : handleClick}
+            className={inactive ? s.wrapper_inactive : s.wrapper}
             style={{
                 backgroundImage: `url(${imgSrc})`,
             }}

@@ -14,7 +14,7 @@ export default function InputText({ onChange, placeholder, maxLength }) {
                 className={s.input}
                 maxLength={maxLength}
             />
-            <label className={s.label}>Background Text</label>
+            {/*<label className={s.label}>Text</label>*/}
         </>
     )
 }

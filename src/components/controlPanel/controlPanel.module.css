@@ -1,7 +1,13 @@
 .wrapper {
     box-sizing: border-box;
     width: fit-content;
-    max-width: 277px;
+    width: 273px;
+}
+.gridContainer {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 .containerInner {
     overflow: scroll;
