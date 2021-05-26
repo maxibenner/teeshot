@@ -9,16 +9,20 @@ import useStore from "../../states/modelState"
 import s from "./overlay.module.css"
 
 const Overlay = () => {
-    const { decalPath } = useStore()
+    const { decalPath, animation } = useStore()
     return (
         <div className={s.wrapper}>
-            <Card bg narrow>
-                <IconWithText
-                    imgSrc={keyR}
-                    imgAlt="rotate"
-                    textContent="Rotate"
-                />
-                {decalPath && (
+            {!animation && (
+                <div className={s.inner}>
+                    <IconWithText
+                        imgSrc={keyR}
+                        imgAlt="rotate"
+                        textContent="Rotate"
+                    />
+                </div>
+            )}
+            {decalPath && (
+                <div className={s.inner}>
                     <>
                         <IconWithText
                             imgSrc={keyUp}
@@ -36,8 +40,8 @@ const Overlay = () => {
                             textContent="Cancel"
                         />
                     </>
-                )}
-            </Card>
+                </div>
+            )}
         </div>
     )
 }
