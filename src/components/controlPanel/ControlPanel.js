@@ -92,6 +92,7 @@ export default function ControlPanel() {
                         onInput={() => loadDecal()}
                         ref={inputRef}
                         type="file"
+                        accept="image/*"
                     />
                 </Card>
                 <Card title="Background">
@@ -137,6 +138,7 @@ export default function ControlPanel() {
                                     ref={customBgRef}
                                     style={{ display: "none" }}
                                     type="file"
+                                    accept="image/*"
                                     onChange={(data) =>
                                         setBackgroundImage({
                                             data: data.target.files[0],
