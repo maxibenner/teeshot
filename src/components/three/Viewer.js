@@ -42,8 +42,9 @@ const Viewer = () => {
         function handlekeydownEvent(e) {
             const { key } = e
             if (!animation && !active) {
-                if(key === "r"){}
-                key === "r" && setAnimPos(prev => prev += 90) //setModelFlipped((prev) => (prev ? false : true))
+                if (key === "r") {
+                }
+                key === "r" && setAnimPos((prev) => (prev += 90)) //setModelFlipped((prev) => (prev ? false : true))
             }
             if (!active && decalPath) {
                 e.preventDefault() // prevent arrow scrolling
@@ -60,15 +61,9 @@ const Viewer = () => {
     // FLIP ANIMATION
     const flipModelAnimation = useSpring({
         config: { tension: 300, mass: 1.3 },
-        //from: { rotation: [0, 0, 0] },
-        rotation: [0, /*Math.PI / */ THREE.MathUtils.degToRad(animPos), 0],
+        rotation: [0, THREE.MathUtils.degToRad(animPos), 0],
         onChange: () => invalidate(),
     })
-    //useSpring({ width: `${value}%`, from: { width: '0%' } })
-
-    useEffect(() => {
-        console.log(backgroundImage.author)
-    }, [backgroundImage])
 
     return (
         <CanvasBackground>

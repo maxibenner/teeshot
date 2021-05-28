@@ -1,9 +1,9 @@
 import { useThree, advance } from "@react-three/fiber"
 import React from "react"
 import useRecorderStore from "../../states/recorderState"
+import { serverUrl } from "../../constants/env"
 
 var sessionId = "s" + Math.floor(Math.random() * 999999999),
-    serverUrl = "https://api.fotura.co", //"http://localhost:5000"
     totalFrames,
     renderLoop
 
@@ -54,6 +54,7 @@ const RenderController = () => {
     }, [active])
 
     async function capture_send() {
+        console.log(serverUrl)
         // Calculate total frames
         totalFrames = fps * duration * 2 // double to match 60fps
 
