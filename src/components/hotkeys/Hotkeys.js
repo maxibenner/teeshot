@@ -1,14 +1,13 @@
 import React from "react"
-import Card from "../card/Card"
 import IconWithText from "../iconWithText/IconWithText"
 import keyR from "../../assets/keys/keyR.svg"
 import keyDown from "../../assets/keys/keyDown.svg"
 import keyEscRed from "../../assets/keys/keyEscRed.svg"
 import keyUp from "../../assets/keys/keyUp.svg"
 import useStore from "../../states/modelState"
-import s from "./overlay.module.css"
+import s from "./hotkeys.module.css"
 
-const Overlay = () => {
+const Hotkeys = () => {
     const { decalPath, animation } = useStore()
     return (
         <div className={s.wrapper}>
@@ -46,4 +45,4 @@ const Overlay = () => {
     )
 }
 
-export default Overlay
+export default Hotkeys

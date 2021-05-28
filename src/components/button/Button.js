@@ -1,10 +1,10 @@
 import styles from "./button.module.css"
 
-const Button = ({ onClick, children, ghost }) => {
+const Button = ({ onClick, children, inactive }) => {
     return (
         <div
-            onClick={onClick}
-            className={ghost ? styles.container_ghost : styles.container}
+            onClick={!inactive && onClick}
+            className={inactive ? styles.container_inactive : styles.container}
         >
             {children}
         </div>

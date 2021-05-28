@@ -1,4 +1,4 @@
-.container_ghost {
+.container_inactive {
     height: 40px;
     font-weight: bold;
     background: transparent;
@@ -9,6 +9,8 @@
     border-radius: 5px;
     cursor: pointer;
     border: 2px solid black;
+    opacity: .3;
+    cursor: default;
 }
 .container {
     height: 40px;

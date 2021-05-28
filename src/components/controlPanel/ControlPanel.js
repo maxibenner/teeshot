@@ -86,7 +86,11 @@ export default function ControlPanel() {
         <div className={s.wrapper}>
             <div className={s.containerInner}>
                 <Card invisible>
-                    <Button onClick={handleButtonClick}>Upload Design</Button>
+                    <Button
+                        onClick={handleButtonClick}
+                    >
+                        Upload Design
+                    </Button>
                     <input
                         className={s.input}
                         onInput={() => loadDecal()}

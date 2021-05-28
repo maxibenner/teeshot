@@ -1,4 +1,5 @@
 import { Html, softShadows } from "@react-three/drei"
+import * as THREE from "three"
 import { Canvas, invalidate } from "@react-three/fiber"
 import { Suspense, useEffect, useState } from "react"
 import { useSpring } from "react-spring/three"
@@ -7,10 +8,11 @@ import useRecorderStore from "../../states/recorderState"
 import CanvasBackground from "./canvasBackground/CanvasBackground"
 import DecalHelper from "./DecalHelper"
 import Model from "./Model"
-import Overlay from "../overlay/Overlay"
+import Hotkeys from "../hotkeys/Hotkeys"
 import RenderController from "./RenderController"
 import Scenes from "./Scenes"
 import Credit from "../credit/Credit"
+import Grid from "../grid/Grid"
 
 softShadows({
     near: 0.03,
@@ -20,6 +22,7 @@ softShadows({
 const Viewer = () => {
     const [modelFlipped, setModelFlipped] = useState(false)
     const [modelRayData, setModelRayData] = useState(null)
+    const [animPos, setAnimPos] = useState(0)
     const modelUrl = "/tshirt.glb"
     const {
         animation,
@@ -39,7 +42,8 @@ const Viewer = () => {
         function handlekeydownEvent(e) {
             const { key } = e
             if (!animation && !active) {
-                key === "r" && setModelFlipped((prev) => (prev ? false : true))
+                if(key === "r"){}
+                key === "r" && setAnimPos(prev => prev += 90) //setModelFlipped((prev) => (prev ? false : true))
             }
             if (!active && decalPath) {
                 e.preventDefault() // prevent arrow scrolling
@@ -51,14 +55,16 @@ const Viewer = () => {
         return () => {
             document.removeEventListener("keydown", handlekeydownEvent)
         }
-    }, [active, decalPath, animation])
+    }, [active, decalPath, animation, animPos])
 
     // FLIP ANIMATION
     const flipModelAnimation = useSpring({
         config: { tension: 300, mass: 1.3 },
-        rotation: modelFlipped ? [0, Math.PI / 1, 0] : [0, 0, 0],
+        //from: { rotation: [0, 0, 0] },
+        rotation: [0, /*Math.PI / */ THREE.MathUtils.degToRad(animPos), 0],
         onChange: () => invalidate(),
     })
+    //useSpring({ width: `${value}%`, from: { width: '0%' } })
 
     useEffect(() => {
         console.log(backgroundImage.author)
@@ -66,7 +72,8 @@ const Viewer = () => {
 
     return (
         <CanvasBackground>
-            <Overlay />
+            <Hotkeys />
+            {decalPath && <Grid />}
             <Canvas
 <<<<<<< HEAD
                 style={decalPath && { cursor: "none" }}
