@@ -38,7 +38,7 @@ const ImageBg = () => {
                             ? normalize(
                                   texture.image.width,
                                   texture.image.height,
-                                  4.2
+                                  3
                               )
                             : [3, 3]
                     }
