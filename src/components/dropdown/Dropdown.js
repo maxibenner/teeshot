@@ -21,7 +21,7 @@ const Dropdown = ({ children, title, style }) => {
 
     // Open and close dropdown
     const closeMenu = () => {
-        
+        setOpen(false)
     }
 
     return (

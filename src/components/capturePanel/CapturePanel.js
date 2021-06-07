@@ -106,6 +106,11 @@ const CapturePanel = () => {
                                         className={styles.dropdown_item}
                                         data_id={format.name}
                                         key={format.name}
+                                        style={{
+                                            background:
+                                                canvasSize.name === format.name &&
+                                                "rgb(238, 238, 238)",
+                                        }}
                                         onClick={() =>
                                             setCanvasSize({
                                                 name: format.name,

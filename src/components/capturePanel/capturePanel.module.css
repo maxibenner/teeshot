@@ -85,6 +85,6 @@
     color: black;
 }
 .dropdown_item:hover {
-    background: black;
+    background: black!important;
     color: white;
 }
