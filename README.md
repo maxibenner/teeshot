@@ -1,10 +1,21 @@
 # Merch :shirt:
 
+[![Twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fmaxibenner%2Fmerch)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fmaxibenner%2Fmerch)
+
 Merch is a tool to create CG images and animations of t-shirt designs.
+
 
 [Live Demo](https://merch.fotura.co)
 
 <img src="./readme_preview.jpg">
 
-### Can I use the output on my PoD store / social
-Yes
+## FAQ
+
+**Can I use the output files for my PoD store or social?**
+<br />
+Yes. Let me know if you do, I'm curious to see them!
+<br />
+<br />
+**Do you take feature requests?**
+<br />
+No, this project is in maintenance mode.
