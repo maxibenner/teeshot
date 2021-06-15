@@ -9,7 +9,7 @@ const Navbar = ({ children, absolute }) => {
                 to="/"
                 className={s.homeLink}
             >
-                <h2 className={s.logo}>Merch</h2>
+                <h2 className={s.logo}>Teeshot</h2>
             </Link>
             <nav className={s.menuContainer}>{children}</nav>
         </div>
