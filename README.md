@@ -2,7 +2,7 @@
 
 [![Twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fmaxibenner%2Fmerch)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fmaxibenner%2Fmerch)
 
-Merch is a tool to create CG images and animations of t-shirt designs.
+Teeshot is a tool to create CG images and animations of t-shirt designs.
 
 
 [Live Demo](https://merch.fotura.co)
