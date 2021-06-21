@@ -7,9 +7,9 @@ import Divider from "../../components/divider/Divider"
 import InputText from "../../components/inputText/InputText"
 import Navbar from "../../components/navbar/Navbar"
 import styles from "./signup.module.css"
-import app from "../../constants/firebase"
-import firebase from "firebase/app"
-import useAuth from "../../constants/useAuth"
+// import app from "../../constants/firebase"
+// import firebase from "firebase/app"
+// import useAuth from "../../constants/useAuth"
 
 const SignUp = () => {
     const [email, setEmail] = useState("")

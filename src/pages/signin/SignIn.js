@@ -7,8 +7,8 @@ import Divider from "../../components/divider/Divider"
 import InputText from "../../components/inputText/InputText"
 import Navbar from "../../components/navbar/Navbar"
 import styles from "./signin.module.css"
-import app from "../../constants/firebase"
-import firebase from "firebase/app"
+// import app from "../../constants/firebase"
+// import firebase from "firebase/app"
 
 const SignIn = () => {
     const [email, setEmail] = useState("")

@@ -1,4 +1,4 @@
-import { softShadows } from "@react-three/drei"
+import { softShadows, useProgress } from "@react-three/drei"
 import { Canvas, invalidate } from "@react-three/fiber"
 import { Suspense, useEffect, useState } from "react"
 import { useSpring } from "react-spring/three"
@@ -33,12 +33,22 @@ const Viewer = () => {
         decrementDecalSize,
         incrementDecalSize,
         setGl,
+        setLoadingFinished,
         set,
         backgroundImage,
     } = useStore()
     const { active, mode } = useRecorderStore()
+    const progress = useProgress()
 
-    useEffect(() => console.log(decalPath), [decalPath])
+    // Set load progress
+    useEffect(() => {
+        if (progress.progress === 100) {
+            setTimeout(() => {
+                setLoadingFinished(true)
+            }, 500)
+        }
+    }, [progress])
+
     // KEYDOWN
     useEffect(() => {
         function handlekeydownEvent(e) {
