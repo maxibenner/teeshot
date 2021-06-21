@@ -15,11 +15,11 @@ export default function Studio() {
     return (
         <>
             <Navbar>
-                <Button
+                {/* <Button
                     text="Donate"
                     type="filled"
                     style={{ width: "150px" }}
-                />
+                /> */}
             </Navbar>
             <div className={styles.wrapper}>
                 <div className={styles.main}>
@@ -31,6 +31,15 @@ export default function Studio() {
                     <ControlPanel />
                 </div>
             </div>
+            <footer className={styles.footer}>
+                <img
+                    src="/fotura_logo.jpg"
+                    alt="Fotura Logo"
+                />
+                <div style={{ marginLeft: "10px" }}>
+                    Copyright © 2021 Fotura, Inc. All rights reserved.
+                </div>
+            </footer>
         </>
     )
 }

@@ -21,7 +21,6 @@ const useStore = create((set) => ({
     modelColor: "#ffffff",
     props: null,
     modelRotation: 0,
-    loadingFinished: false,
     set: "bg_color",
     text: "TEXT",
     setAnimation: (animation) => set((state) => (state.animation = animation)),
@@ -72,8 +71,6 @@ const useStore = create((set) => ({
     setProps: (name) => set((state) => (state.props = name)),
     setModelRotation: (rotation) =>
         set((state) => (state.modelRotation = rotation)),
-    setLoadingFinished: (bool) =>
-        set((state) => (state.loadingFinished = bool)),
     setSet: (componentName) => set((state) => (state.set = componentName)),
     setText: (text) => set((state) => (state.text = `${text}`)),
 }))
