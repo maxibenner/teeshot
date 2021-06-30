@@ -16,6 +16,9 @@
     background: transparent;
     color: black;
 }
+.container > p {
+    margin: 0;
+}
 .container_filled {
     background: black;
 }
