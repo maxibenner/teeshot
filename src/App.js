@@ -9,7 +9,7 @@ export default function App() {
         <div style={styles.wrapper}>
             <Viewer />
             <img src={logo} alt="Logo" style={styles.logo} />
-            <CapturePanel style={styles.logo} />
+            <CapturePanel />
             <ControlPanel />
         </div>
     )

@@ -1,8 +1,8 @@
-import { Environment, useTexture, MeshWobbleMaterial } from "@react-three/drei"
+import { Environment, useTexture } from "@react-three/drei"
 import { invalidate, useFrame } from "@react-three/fiber"
 
 const EnvironmentBg = () => {
-    const texture = useTexture("/envBg.jpg")
+    const texture = useTexture("/envBg1.jpg")
     useFrame(() => {
         invalidate()
     })
@@ -11,7 +11,7 @@ const EnvironmentBg = () => {
             <Environment background={false} path="/" files="env.hdr" />
             <mesh position={[0, 0, -0.5]}>
                 <planeBufferGeometry args={[7, 5]} />
-                <MeshWobbleMaterial map={texture} factor={0.1} speed={.3} />
+                <meshStandardMaterial map={texture} />
             </mesh>
         </>
     )

@@ -1,59 +1,72 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
-export default function useRecorder(element) {
-    var stream
-    const [mediaRecorder, setMediaRecorder] = useState()
+export default function useRecorder(gl) {
+    // Websocket
+    var ws
+
+    // Capture state
     const [isRecording, setIsRecording] = useState(false)
 
-    // Init
-    useEffect(() => {
-        if (element) {
-            // Get stream from element
-            stream = element.captureStream(30)
+    // Url
+    const socketUrl = "localhost:3001"
 
-            // Create media recorder with stream
-            const recorder = new MediaRecorder(stream)
+    // Start captureing
+    function capture(durationInSeconds = 1, framerate = 30) {
 
-            // Save to file
-            recorder.ondataavailable = ({ data }) => {
-                
-                const formData = new FormData()
-                formData.append("file", data)
+        // Take over render loop
+        console.log(gl)
+        gl.autoClear = true
 
-                const options = {
-                    method: "POST",
-                    body: formData,
-                }
+        // Calculate timeout in ms for given {framerate}
+        const timeout = 1000 / framerate
 
-                fetch("http://localhost:3001/api/blob_to_mp4", options).then(
-                    (res) => {
-                        console.log(res)
-                    }
-                )
-            }
+        // Websocket init
+        ws = new WebSocket(`ws://${socketUrl}`)
 
-            // Set state
-            setMediaRecorder(recorder)
+        ws.onopen = () => {
+            // Set recording tracker
+            setIsRecording(true)
+
+            // Capture first frame and send to server
+            const f = gl.domElement.toDataURL()
+            send_frame_to_server(f)
+
+            // Set capture interval
+            var interval = setInterval(() => {
+                const f = gl.domElement.toDataURL()
+                send_frame_to_server(f)
+            }, timeout)
+
+            // Remove interval after {durationInSeconds}
+            setTimeout(() => {
+                setIsRecording(false)
+                start_processing(framerate)
+                clearInterval(interval)
+            }, durationInSeconds * 1000)
         }
-    }, [element])
 
-    function capture(durationInSeconds = 1) {
-        mediaRecorder.start()
-
-        setIsRecording(true)
-
-        setTimeout(() => {
-            mediaRecorder.stop()
-            setIsRecording(false)
-        }, durationInSeconds * 1000)
+        ws.onmessage = (res) => {
+            //console.log(res.data)
+        }
     }
 
-    function saveFile(blob) {
-        var blobUrl = URL.createObjectURL(blob.data)
-        var link = document.createElement("a")
-        link.href = blobUrl
-        link.download = "aDefaultFileName.webm"
-        link.click()
+    function send_frame_to_server(dataUrl) {
+        // Send to server
+        const object = JSON.stringify({
+            action: "add_frame",
+            data: dataUrl,
+        })
+        ws.send(object)
+    }
+
+    function start_processing(framerate) {
+        // Send to server
+        const object = JSON.stringify({
+            action: "process",
+            data: null,
+            fps: framerate,
+        })
+        ws.send(object)
     }
 
     return { capture, isRecording }

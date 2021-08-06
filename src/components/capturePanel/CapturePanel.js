@@ -8,7 +8,7 @@ import useStore from "../../states/modelState"
 const CapturePanel = () => {
     const [mode, setMode] = useState("photo")
     const { gl } = useStore()
-    const { capture, isRecording } = useRecorder(gl?.domElement)
+    const { capture, isRecording } = useRecorder(gl)
 
     // Take screenshot
     const screenshot = () => {
@@ -22,7 +22,7 @@ const CapturePanel = () => {
 
     // Record video
     const video = () => {
-        capture(1)
+        capture(1, 30)
     }
 
     // Change capture mode
