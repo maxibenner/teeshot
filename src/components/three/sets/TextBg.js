@@ -20,16 +20,15 @@ const TextBg = ({ backgroundColor }) => {
         bevelSize: 0.005,
     }
 
-
     return (
         <group>
-            <mesh position={[0, 0, -4]}>
+            <mesh position={[0, 0, -5]}>
                 <planeBufferGeometry args={[100, 100]} />
                 <meshStandardMaterial color={backgroundColor} />
             </mesh>
             <Center>
                 <mesh
-                    position={[.3, 0, -2]}
+                    position={[0.3, 0, -2]}
                     rotation={[0, Math.PI / 20, Math.PI / 10]}
                 >
                     <textBufferGeometry
@@ -38,7 +37,7 @@ const TextBg = ({ backgroundColor }) => {
                     />
                     <meshStandardMaterial
                         emissive={backgroundColor}
-                        emissiveIntensity={.7}
+                        emissiveIntensity={0.7}
                         color={backgroundColor}
                     />
                 </mesh>

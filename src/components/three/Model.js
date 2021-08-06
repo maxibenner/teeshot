@@ -1,5 +1,5 @@
 import { useTexture } from "@react-three/drei"
-import { useLoader, useFrame } from "@react-three/fiber"
+import { useLoader, useFrame, useThree } from "@react-three/fiber"
 import { useEffect, useRef } from "react"
 import { a } from "react-spring/three"
 import * as THREE from "three"
@@ -10,6 +10,8 @@ import Decals, { createDecal } from "./Decals"
 const Model = ({ url, rotation, setModelRayData }) => {
     // REF
     const modelRef = useRef()
+
+    const { gl } = useThree()
 
     // GLOBAL STATE
     const {
@@ -40,6 +42,7 @@ const Model = ({ url, rotation, setModelRayData }) => {
 
     // ADD DECAL TO ARRAY
     const handleDecal = (e) => {
+        console.log(gl.getPixelRatio())
         // Get texture
         new THREE.TextureLoader().load(decalPath, (decalTexture) => {
             // Check for active decal

@@ -17,7 +17,7 @@ const ShapesBg = ({ backgroundColor }) => {
 
     return (
         <group>
-            <mesh position={[0, 0, -0.5]} receiveShadow>
+            <mesh position={[0, 0, -.5]} receiveShadow>
                 <planeBufferGeometry args={[10, 10]} />
                 <meshStandardMaterial color={backgroundColor} />
             </mesh>

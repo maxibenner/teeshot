@@ -1,19 +1,30 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export default function useRecorder(element) {
-    var mediaRecorder, stream
+    //var mediaRecorder
+    const [mediaRecorder, setMediaRecorder] = useState()
 
+    // Init
     useEffect(() => {
         if (element) {
-            stream = element.captureStream(25)
-            mediaRecorder = new MediaRecorder(stream)
+            // Get stream from element
+            const stream = element.captureStream(30)
+
+            // Create media recorder with stream
+            const mediaRecorder = new MediaRecorder(stream)
+
+            // Save to file
             mediaRecorder.ondataavailable = (blob) => {
                 saveFile(blob)
             }
+
+            // Set state
+            setMediaRecorder(mediaRecorder)
         }
     }, [element])
 
     function capture(durationInSeconds = 1) {
+        console.log(mediaRecorder)
         mediaRecorder.start()
 
         setTimeout(() => {

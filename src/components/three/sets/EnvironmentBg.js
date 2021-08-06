@@ -11,7 +11,6 @@ const EnvironmentBg = () => {
             <Environment background={false} path="/" files="env.hdr" />
             <mesh position={[0, 0, -0.5]}>
                 <planeBufferGeometry args={[7, 5]} />
-                {/*<meshBasicMaterial map={texture} />*/}
                 <MeshWobbleMaterial map={texture} factor={0.1} speed={.3} />
             </mesh>
         </>

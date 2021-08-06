@@ -4,8 +4,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transform: translateX(25px);
 }
 .container {
+    flex-shrink: 0;
     width: 60px;
     height: 60px;
     border-radius: 32px;
@@ -15,7 +17,7 @@
     align-items: center;
     justify-content: center;
 }
-.inner {
+.capture_inner_photo {
     pointer-events: none;
     display: flex;
     align-items: center;
@@ -27,6 +29,23 @@
     height: 54px;
     border-radius: 25px;
 }
-.inner:hover {
-    background: rgb(250, 250, 250);
+.capture_inner_video {
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: rgb(230, 230, 230);
+    background: rgb(255, 61, 61);
+    width: 54px;
+    height: 54px;
+    border-radius: 25px;
+}
+.mode_switch {
+    font-size: 1.5rem;
+    width: 25px;
+    height: 25px;
+    color: rgb(230, 230, 230);
+    margin-left: 25px;
+    cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import { softShadows } from "@react-three/drei"
+import { softShadows, AdaptiveDpr } from "@react-three/drei"
 import { Canvas, invalidate } from "@react-three/fiber"
 import { Suspense, useEffect, useState } from "react"
 import { useSpring } from "react-spring/three"
@@ -51,9 +51,16 @@ const Viewer = () => {
                 style={decalPath && { cursor: "none" }}
                 gl={{
                     preserveDrawingBuffer: true,
+<<<<<<< HEAD
                 }}
                 dpr={
                     window.devicePixelRatio >= 1.5
+=======
+                    //antialias: false,
+                }}
+                dpr={
+                    window.devicePixelRatio === 2
+>>>>>>> 73da064 (high resolution and video)
                         ? 1.5
                         : window.devicePixelRatio
                 }
@@ -71,6 +78,7 @@ const Viewer = () => {
                     />
                 </Suspense>
                 <Scenes />
+                <AdaptiveDpr pixelated />
             </Canvas>
         </CanvasBackground>
     )
