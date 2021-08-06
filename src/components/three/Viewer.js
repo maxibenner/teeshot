@@ -49,6 +49,7 @@ const Viewer = () => {
         <CanvasBackground>
             <Canvas
                 style={decalPath && { cursor: "none" }}
+<<<<<<< HEAD
                 gl={{
                     preserveDrawingBuffer: true,
 <<<<<<< HEAD
@@ -58,6 +59,9 @@ const Viewer = () => {
 =======
                     //antialias: false,
                 }}
+=======
+                gl={{ preserveDrawingBuffer: true }}
+>>>>>>> acb6f32 (added record animation)
                 dpr={
                     window.devicePixelRatio === 2
 >>>>>>> 73da064 (high resolution and video)

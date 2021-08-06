@@ -8,7 +8,7 @@ import useStore from "../../states/modelState"
 const CapturePanel = () => {
     const [mode, setMode] = useState("photo")
     const { gl } = useStore()
-    const recorder = useRecorder(gl?.domElement)
+    const { capture, isRecording } = useRecorder(gl?.domElement)
 
     // Take screenshot
     const screenshot = () => {
@@ -22,7 +22,7 @@ const CapturePanel = () => {
 
     // Record video
     const video = () => {
-        recorder.capture(4)
+        capture(5)
     }
 
     // Change capture mode
@@ -33,21 +33,39 @@ const CapturePanel = () => {
 
     return (
         <div className={styles.wrapper}>
-            <div
-                id="capture-button"
-                onClick={mode === "photo" ? screenshot : video}
-                className={styles.container}
-            >
-                <div
-                    className={
-                        mode === "photo"
-                            ? styles.capture_inner_photo
-                            : styles.capture_inner_video
-                    }
-                />
-            </div>
-            <div className={styles.mode_switch} onClick={handleMode}>
-                {mode !== "photo" ? <MdPhotoCamera /> : <FaVideo />}
+            <div className={styles.container}>
+                <svg
+                    id="capture-button"
+                    onClick={mode === "photo" ? screenshot : video}
+                    className={styles.svg}
+                >
+                    <circle
+                        cx="34"
+                        cy="34"
+                        r="33.5"
+                        className={styles.capture_outline}
+                    />
+                    <circle
+                        cx="34"
+                        cy="34"
+                        r="32.5"
+                        className={
+                            isRecording
+                                ? styles.capture_indicator_animate
+                                : styles.capture_indicator
+                        }
+                    />
+                    <circle
+                        cx="34"
+                        cy="34"
+                        r="30"
+                        className={styles.capture_fill}
+                        fill={mode === "photo" ? "white" : "rgb(255, 61, 61)"}
+                    />
+                </svg>
+                <div className={styles.mode_switch} onClick={handleMode}>
+                    {mode !== "photo" ? <MdPhotoCamera /> : <FaVideo />}
+                </div>
             </div>
         </div>
     )

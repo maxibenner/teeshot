@@ -4,42 +4,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transform: translateX(25px);
 }
 .container {
-    flex-shrink: 0;
-    width: 60px;
-    height: 60px;
-    border-radius: 32px;
-    border: 3px solid white;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.capture_inner_photo {
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    color: rgb(230, 230, 230);
-    background: white;
-    width: 54px;
-    height: 54px;
-    border-radius: 25px;
-}
-.capture_inner_video {
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    color: rgb(230, 230, 230);
-    background: rgb(255, 61, 61);
-    width: 54px;
-    height: 54px;
-    border-radius: 25px;
+    transform: translateX(25px);
 }
 .mode_switch {
     font-size: 1.5rem;
@@ -48,4 +18,47 @@
     color: rgb(230, 230, 230);
     margin-left: 25px;
     cursor: pointer;
+}
+.svg {
+    height: 68px;
+    width: 68px;
+    transform: rotate(-90deg);
+    cursor: pointer;
+}
+.capture_outline {
+    fill: white;
+    pointer-events: none;
+}
+.capture_indicator {
+    stroke: red;
+    stroke-width: 2.5;
+    stroke-dasharray: 204;
+    stroke-dashoffset: 204;
+    transform-origin: 50% 50%;
+    fill: transparent;
+    pointer-events: none;
+}
+.capture_indicator_animate {
+    stroke: red;
+    stroke-width: 2.5;
+    stroke-dasharray: 204;
+    stroke-dashoffset: 0;
+    transform-origin: 50% 50%;
+    fill: transparent;
+    animation: fill-animation 5s linear;
+    pointer-events: none;
+}
+.capture_fill {
+    stroke: black;
+    stroke-width: 2.5;
+    pointer-events: none;
+}
+
+@keyframes fill-animation {
+    0% {
+        stroke-dashoffset: 204;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
 }

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 export default function useRecorder(element) {
     //var mediaRecorder
     const [mediaRecorder, setMediaRecorder] = useState()
+    const [isRecording, setIsRecording] = useState(false)
 
     // Init
     useEffect(() => {
@@ -26,9 +27,11 @@ export default function useRecorder(element) {
     function capture(durationInSeconds = 1) {
         console.log(mediaRecorder)
         mediaRecorder.start()
+        setIsRecording(true)
 
         setTimeout(() => {
             mediaRecorder.stop()
+            setIsRecording(false)
         }, durationInSeconds * 1000)
     }
 
@@ -40,5 +43,5 @@ export default function useRecorder(element) {
         link.click()
     }
 
-    return { capture }
+    return { capture, isRecording }
 }
