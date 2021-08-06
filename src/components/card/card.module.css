@@ -2,11 +2,11 @@
     border: 2px solid black;
     padding: 10px;
     border-radius: 7px;
-    margin: 14px;
+    margin: 14px 0;
 }
 .invisible {
     overflow: hidden;
-    margin: 14px;
+    margin: 14px 0;
 }
 .inner_grid {
     box-sizing: border-box;

@@ -1,7 +1,8 @@
 .wrapper {
     box-sizing: border-box;
     width: fit-content;
-    width: 273px;
+    width: 245px;
+    /* padding: 25px 0; */
 }
 .gridContainer {
     box-sizing: border-box;

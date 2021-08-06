@@ -1,0 +1,14 @@
+.wrapper {
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+    width: fit-content;
+    box-sizing: border-box;
+    top: 0;
+    padding: 10px 25px 25px 25px;
+    max-width: 1300px;
+}
+.main {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    height: fit-content;
+}

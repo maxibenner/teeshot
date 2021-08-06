@@ -1,0 +1,40 @@
+.signin_wrapper {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 500px 1fr;
+}
+
+.image {
+    background-image: url("./bg.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    margin: auto;
+}
+.sub {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.sub_inner > a {
+    text-decoration: none;
+    color: #2997ff;
+    font-weight: bold;
+    margin-left: 8px;
+    justify-content: space-around;
+}
+.sub_inner > p {
+    margin-bottom: 5px;
+}
+
+@media (max-width: 900px) {
+    .signin_wrapper {
+        grid-template-columns: 1fr;
+    }
+    .image {
+        display: none;
+    }
+}

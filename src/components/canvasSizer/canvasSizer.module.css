@@ -1,0 +1,13 @@
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: grid;
+}
+.sizer {
+    height: 100%;
+    width: 100%;
+}
+.bar {
+    background: black;
+    height: 100%;
+}

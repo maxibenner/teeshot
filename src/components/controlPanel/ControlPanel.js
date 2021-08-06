@@ -11,6 +11,7 @@ import Divider from "../divider/Divider"
 import Icon from "../icon/Icon"
 import InputText from "../inputText/InputText"
 import s from "./controlPanel.module.css"
+import { FaShapes } from "react-icons/fa"
 var bgData = require("../../constants/bg.json")
 var bgSampleImages = require("../../constants/bgSampleImages.json")
 var propData = require("../../constants/props.json")
@@ -51,13 +52,13 @@ export default function ControlPanel() {
     useEffect(() => {
         function handlekeydownEvent(event) {
             const { key } = event
-            key == "Escape" && setDecalPath(null)
+            key === "Escape" && setDecalPath(null)
         }
         document.addEventListener("keydown", handlekeydownEvent)
         return () => {
             document.removeEventListener("keydown", handlekeydownEvent)
         }
-    }, [])
+    }, []) //eslint-disable-line
 
     // BUTTON CLICK
     const handleButtonClick = () => inputRef.current.click()
@@ -87,10 +88,11 @@ export default function ControlPanel() {
             <div className={s.containerInner}>
                 <Card invisible>
                     <Button
+                        type="ghost"
+                        text=" Upload Design"
+                        icon={<FaShapes />}
                         onClick={handleButtonClick}
-                    >
-                        Upload Design
-                    </Button>
+                    />
                     <input
                         className={s.input}
                         onInput={() => loadDecal()}
@@ -116,7 +118,7 @@ export default function ControlPanel() {
                             )
                         })}
                     </div>
-                    {set != "bg_transparent" && <Divider />}
+                    {set !== "bg_transparent" && <Divider />}
                     {set === "bg_color" && (
                         <HexColorPicker
                             style={{
@@ -189,7 +191,7 @@ export default function ControlPanel() {
                         <>
                             <Divider style={{ marginBottom: "10px" }} />
                             <InputText
-                                placeholder={text}
+                                value={text}
                                 onChange={(value) => setText(value)}
                                 maxLength={14}
                             />

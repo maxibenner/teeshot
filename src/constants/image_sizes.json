@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Instagram Square",
+        "size": { "width": 1080, "height": 1080 }
+    },
+    {
+        "name": "Instagram Portrait",
+        "size": {"width": 1080, "height": 1350}
+    },
+    {
+        "name": "Instagram Story",
+        "size": { "width": 1080, "height": 1920 }
+    },
+    {
+        "name": "Redbubble",
+        "size": { "width": 1000, "height": 1000 }
+    },
+    {
+        "name": "Spring",
+        "size": { "width": 800, "height": 800 }
+    }
+]

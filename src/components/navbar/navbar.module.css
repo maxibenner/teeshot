@@ -1,0 +1,32 @@
+.wrapper {
+    margin: 0 auto;
+    padding: 0 25px;
+    max-width: 1300px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.absolute {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    text-align: center;
+}
+.logo {
+    position: relative;
+    font-size: 1.7rem;
+    font-weight: 900;
+}
+.homeLink {
+    color: inherit;
+    text-decoration: none;
+}
+.menuContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

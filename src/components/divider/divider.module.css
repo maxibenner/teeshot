@@ -1,6 +1,28 @@
 .container {
-    height: 2px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
-    background: black;
     margin: 5px 0;
+    align-items: center;
+}
+.line {
+    background: black;
+    height: 1px;
+    width: 100%;
+}
+.text {
+    text-align: center;
+}
+.container_w_text {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 1fr;
+    width: 100%;
+    margin: 5px 0;
+    align-items: center;
+}
+.container_w_text > div {
+    background: rgb(206, 206, 206);
+}
+.container_w_text > p {
+    color: rgb(156, 156, 156);
 }

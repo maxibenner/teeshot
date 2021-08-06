@@ -1,0 +1,45 @@
+.wrapper {
+    width: 170px;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+}
+.button {
+    margin: 0 0 0 auto;
+    position: relative;
+    padding: 5px 10px;
+    display: flex;
+    border-radius: 5px;
+    color: rgb(179, 179, 179);
+    height: 20px;
+}
+.button > p {
+    user-select: none;
+    margin: 0;
+}
+.icon {
+    font-size: 1.2rem;
+}
+.container {
+    position: absolute;
+    bottom: 30px;
+}
+.item_container {
+    padding: 1px;
+    height: fit-content;
+    width: fit-content;
+    background: white;
+    border-radius: 5px;
+    /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); */
+}
+.triangle {
+    margin: 0 25px 0 auto;
+    padding: 0;
+    position: relative;
+    width: 0;
+    height: 0;
+    border: 10px solid white;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}

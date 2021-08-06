@@ -1,18 +1,19 @@
-import { Html, softShadows } from "@react-three/drei"
-import * as THREE from "three"
+import { softShadows } from "@react-three/drei"
 import { Canvas, invalidate } from "@react-three/fiber"
 import { Suspense, useEffect, useState } from "react"
 import { useSpring } from "react-spring/three"
+import * as THREE from "three"
 import useStore from "../../states/modelState"
 import useRecorderStore from "../../states/recorderState"
+import Credit from "../credit/Credit"
+import Grid from "../grid/Grid"
+import Hotkeys from "../hotkeys/Hotkeys"
 import CanvasBackground from "./canvasBackground/CanvasBackground"
 import DecalHelper from "./DecalHelper"
 import Model from "./Model"
-import Hotkeys from "../hotkeys/Hotkeys"
 import RenderController from "./RenderController"
 import Scenes from "./Scenes"
-import Credit from "../credit/Credit"
-import Grid from "../grid/Grid"
+import CanvasSizer from "../canvasSizer/CanvasSizer"
 
 softShadows({
     near: 0.03,
@@ -20,12 +21,13 @@ softShadows({
 })
 
 const Viewer = () => {
-    const [modelFlipped, setModelFlipped] = useState(false)
     const [modelRayData, setModelRayData] = useState(null)
     const [animPos, setAnimPos] = useState(0)
+    const [dpr, setDpr] = useState(2)
     const modelUrl = "/tshirt.glb"
     const {
         animation,
+        canvasSize,
         decalPath,
         decalSize,
         decrementDecalSize,
@@ -56,7 +58,7 @@ const Viewer = () => {
         return () => {
             document.removeEventListener("keydown", handlekeydownEvent)
         }
-    }, [active, decalPath, animation, animPos])
+    }, [active, decalPath, animation, animPos]) //eslint-disable-line
 
     // FLIP ANIMATION
     const flipModelAnimation = useSpring({
@@ -65,10 +67,16 @@ const Viewer = () => {
         onChange: () => invalidate(),
     })
 
+    // SET DPR
+    useEffect(() => {
+        setDpr(canvasSize.width / 600)
+    }, [canvasSize])
+
     return (
         <CanvasBackground>
             <Hotkeys />
             {decalPath && <Grid />}
+<<<<<<< HEAD
             <Canvas
 <<<<<<< HEAD
                 style={decalPath && { cursor: "none" }}
@@ -113,6 +121,31 @@ const Viewer = () => {
                 <Scenes />
                 {mode === "video" && <RenderController />}
             </Canvas>
+=======
+            <CanvasSizer>
+                <Canvas
+                    camera={{ position: [0, 0, 2.2], fov: 50 }}
+                    dpr={dpr}
+                    frameloop="demand"
+                    gl={{ preserveDrawingBuffer: true }}
+                    raycaster={{ far: 3.5 }}
+                    onCreated={(state) => setGl(state.gl)}
+                    shadows
+                    style={decalPath && { cursor: "none" }}
+                >
+                    <DecalHelper modelRayData={modelRayData} size={decalSize} />
+                    <Suspense fallback={null}>
+                        <Model
+                            url={modelUrl}
+                            rotation={flipModelAnimation.rotation}
+                            setModelRayData={setModelRayData}
+                        />
+                    </Suspense>
+                    <Scenes />
+                    {mode === "video" && <RenderController />}
+                </Canvas>
+            </CanvasSizer>
+>>>>>>> 58632d8 (sign in and formats)
             {backgroundImage.author?.name && set === "bg_image" && (
                 <Credit
                     name={backgroundImage.author.name}

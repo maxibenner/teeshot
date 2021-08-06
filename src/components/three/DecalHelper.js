@@ -11,7 +11,7 @@ const DecalHelper = ({ modelRayData, size }) => {
     const [decalTexture, setDecalTexture] = useState(null)
     const [decalDimensions, setdecalDimensions] = useState([0, 0])
     const [decalScale, setDecalScale] = useState(1)
-    const initialDecalSize = useMemo(() => size, [])
+    const initialDecalSize = useMemo(() => size, []) //eslint-disable-line
 
     // Global state
     const { decalPath } = useStore()
@@ -22,7 +22,7 @@ const DecalHelper = ({ modelRayData, size }) => {
     useEffect(() => {
         const newScale = size / initialDecalSize
         setDecalScale(newScale)
-    }, [size])
+    }, [size]) //eslint-disable-line
 
     // LOAD TEXTURE + SET DIMENSIONS
     useEffect(() => {
@@ -42,7 +42,7 @@ const DecalHelper = ({ modelRayData, size }) => {
         } else {
             setDecalTexture(null)
         }
-    }, [decalPath])
+    }, [decalPath]) //eslint-disable-line
 
     // SET POSITION & ORIENTATION
     const { viewport } = useThree()

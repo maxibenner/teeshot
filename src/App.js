@@ -1,39 +1,35 @@
 import React from "react"
-import styles from "./app.module.css"
-import logo from "./assets/images/logo.png"
-import CapturePanel from "./components/capturePanel/CapturePanel"
-import ControlPanel from "./components/controlPanel/ControlPanel"
-import Viewer from "./components/three/Viewer"
-import NoteBox from "./components/noteBox/Notebox"
+import { BrowserRouter, Route, Switch } from "react-router-dom"
 import "./globalStyles.css"
+import MobileNote from "./pages/mobileNote/MobileNote"
+import SignUp from "./pages/signup/SignUp"
+import SignIn from "./pages/signin/SignIn"
+import Studio from "./pages/studio/Studio"
 
 export default function App() {
+    const mobile =
+        !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+        )
     return (
         <>
-            {!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-                navigator.userAgent
-            ) ? (
-                <div className={styles.wrapper}>
-                    <div className={styles.main}>
-                        <Viewer />
-                        <CapturePanel />
-                    </div>
-                    <div className={styles.controlPanelWrapper}>
-                        <ControlPanel />
-                    </div>
-                </div>
+            {mobile ? (
+                <BrowserRouter>
+                    <Switch>
+                        <Route path={"/signup"}>
+                            <SignUp />
+                        </Route>
+                        <Route path={"/signin"}>
+                            <SignIn />
+                        </Route>
+                        <Route path={"/"}>
+                            <Studio />
+                        </Route>
+                    </Switch>
+                </BrowserRouter>
             ) : (
-                <div className={styles.noteBoxWrapper}>
-                    <NoteBox>
-                        <p>
-                            👨🏻‍💻 Limited experience on mobile devices, switch to a
-                            desktop device to start creating!
-                        </p>
-                    </NoteBox>
-                </div>
+                <MobileNote />
             )}
-            {/*<img src={logo} alt="Logo" className={styles.logo} />*/}
-            <h2 className={styles.logo}>Fotura</h2>
         </>
     )
 }

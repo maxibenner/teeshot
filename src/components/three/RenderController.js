@@ -25,7 +25,7 @@ const RenderController = () => {
         }
 
         return () => clearAll()
-    }, [active])
+    }, [active]) //eslint-disable-line
 
     // Start/stop manual render
     React.useEffect(() => {
@@ -51,7 +51,7 @@ const RenderController = () => {
                 })
             })
         }
-    }, [active])
+    }, [active]) //eslint-disable-line
 
     async function capture_send() {
         console.log(serverUrl)

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react"
-import useStore from "../../states/modelState"
+import React from "react"
 import { MdClose } from "react-icons/md"
+import useStore from "../../states/modelState"
 import s from "./decalManager.module.css"
 
 const DecalManager = () => {
@@ -12,8 +12,7 @@ const DecalManager = () => {
 
         // Remove decal image
         const newArry = [...decalImages]
-        const i = newArry.findIndex((el) => el.key == key)
-        console.log(i)
+        const i = newArry.findIndex((el) => el.key == key) //eslint-disable-line
         newArry.splice(i, 1)
         setDecalImages(newArry)
 

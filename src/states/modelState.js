@@ -16,6 +16,7 @@ const useStore = create((set) => ({
     decals: [],
     decalSize: initialDecalSize,
     gl: null,
+    canvasSize: { name: "Choose format", width: 600, height: 600 },
     initialDecalSize: initialDecalSize,
     modelColor: "#ffffff",
     props: null,
@@ -33,7 +34,7 @@ const useStore = create((set) => ({
     removeDecal: (decalKey) =>
         set(
             (state) =>
-                (state.decals = state.decals.filter((el) => el.key != decalKey))
+                (state.decals = state.decals.filter((el) => el.key != decalKey)) //eslint-disable-line
         ),
     setBackgroundImage: ({
         data = null,
@@ -56,6 +57,15 @@ const useStore = create((set) => ({
     setDecalPath: (decalPath) => set((state) => (state.decalPath = decalPath)),
     setDecalSize: (size) => set((state) => (state.decalSize = size)),
     setGl: (gl) => set((state) => (state.gl = gl)),
+    setCanvasSize: ({ name, width, height }) =>
+        set(
+            (state) =>
+                (state.canvasSize = {
+                    name: name,
+                    width: width,
+                    height: height,
+                })
+        ),
     setModelColor: (color) => set((state) => (state.modelColor = color)),
     setProps: (name) => set((state) => (state.props = name)),
     setSet: (componentName) => set((state) => (state.set = componentName)),

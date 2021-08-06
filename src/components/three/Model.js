@@ -1,5 +1,5 @@
 import { useTexture } from "@react-three/drei"
-import { invalidate, useFrame, useLoader } from "@react-three/fiber"
+import { useFrame, useLoader } from "@react-three/fiber"
 import { useEffect, useRef } from "react"
 import { a } from "react-spring/three"
 import * as THREE from "three"
@@ -50,7 +50,7 @@ const Model = ({ url, rotation, setModelRayData }) => {
         normalTexture.wrapS = normalTexture.wrapT = THREE.RepeatWrapping
         normalTexture.repeat = new THREE.Vector2(15, 15)
         normalTexture.anisotropy = 16
-    }, [])
+    }, []) //eslint-disable-line
 
     // ADD DECAL TO ARRAY
     const handleDecal = (e) => {
