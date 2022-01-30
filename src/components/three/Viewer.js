@@ -76,33 +76,6 @@ const Viewer = () => {
         <CanvasBackground>
             <Hotkeys />
             {decalPath && <Grid />}
-            <Canvas
-                style={decalPath && { cursor: "none" }}
-                gl={{ preserveDrawingBuffer: true }}
-                dpr={
-                    window.devicePixelRatio === 2
-                        ? 1.5
-                        : window.devicePixelRatio
-                }
-                camera={{ position: [0, 0, 2.2], fov: 50 }}
-                dpr={[0.5, 2]}
-                frameloop="demand"
-                raycaster={{ far: 3.5 }}
-                onCreated={(state) => setGl(state.gl)}
-                shadows
-                style={decalPath && { cursor: "none" }}
-            >
-                <DecalHelper modelRayData={modelRayData} size={decalSize} />
-                <Suspense fallback={null}>
-                    <Model
-                        url={modelUrl}
-                        rotation={flipModelAnimation.rotation}
-                        setModelRayData={setModelRayData}
-                    />
-                </Suspense>
-                <Scenes />
-                {mode === "video" && <RenderController />}
-            </Canvas>
             <CanvasSizer>
                 <Canvas
                     camera={{ position: [0, 0, 2.2], fov: 50 }}
