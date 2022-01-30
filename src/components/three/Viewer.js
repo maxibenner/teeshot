@@ -76,52 +76,6 @@ const Viewer = () => {
         <CanvasBackground>
             <Hotkeys />
             {decalPath && <Grid />}
-<<<<<<< HEAD
-            <Canvas
-<<<<<<< HEAD
-                style={decalPath && { cursor: "none" }}
-<<<<<<< HEAD
-                gl={{
-                    preserveDrawingBuffer: true,
-<<<<<<< HEAD
-                }}
-                dpr={
-                    window.devicePixelRatio >= 1.5
-=======
-                    //antialias: false,
-                }}
-=======
-                gl={{ preserveDrawingBuffer: true }}
->>>>>>> acb6f32 (added record animation)
-                dpr={
-                    window.devicePixelRatio === 2
->>>>>>> 73da064 (high resolution and video)
-                        ? 1.5
-                        : window.devicePixelRatio
-                }
-=======
->>>>>>> 8b7aaea (working build with interval capture)
-                camera={{ position: [0, 0, 2.2], fov: 50 }}
-                dpr={[0.5, 2]}
-                frameloop="demand"
-                gl={{ preserveDrawingBuffer: true }}
-                raycaster={{ far: 3.5 }}
-                onCreated={(state) => setGl(state.gl)}
-                shadows
-                style={decalPath && { cursor: "none" }}
-            >
-                <DecalHelper modelRayData={modelRayData} size={decalSize} />
-                <Suspense fallback={null}>
-                    <Model
-                        url={modelUrl}
-                        rotation={flipModelAnimation.rotation}
-                        setModelRayData={setModelRayData}
-                    />
-                </Suspense>
-                <Scenes />
-                {mode === "video" && <RenderController />}
-            </Canvas>
-=======
             <CanvasSizer>
                 <Canvas
                     camera={{ position: [0, 0, 2.2], fov: 50 }}
@@ -145,7 +99,6 @@ const Viewer = () => {
                     {mode === "video" && <RenderController />}
                 </Canvas>
             </CanvasSizer>
->>>>>>> 58632d8 (sign in and formats)
             {backgroundImage.author?.name && set === "bg_image" && (
                 <Credit
                     name={backgroundImage.author.name}
